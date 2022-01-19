@@ -15,10 +15,10 @@ stories:
 - story: user is sick start
   steps:
   - intent: user_sick
-  - action: ask_symptoms
+  - action: utter_symptoms
 
 - story: user says symptoms
   steps:
   - intent: user_symptoms
-  - action: 
+  - action: from_action_file
 

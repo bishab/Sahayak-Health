@@ -36,9 +36,6 @@ nlu:
     - I feel terrible
     - I am ill
 
-
-
-
 - intent: user_symptoms
   examples: |
     - fever
@@ -55,13 +52,3 @@ nlu:
     - I am vomiting
     - blood in cough
     - jaundice
-
-- intent: user_names
-  examples: |
-    - My name is [Bishab](name)
-    - Its [Chris](name)
-    - The name is [David Copperfield](name)
-    - [Hari Prasad](name)
-    - [Krishna Lal Yadav](name)
-    - [Mahesh Makam](name)
-    - [Johnny Sins](name)

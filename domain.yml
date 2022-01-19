@@ -3,7 +3,8 @@ version: "3.0"
 intents:
   - greet
   - identity
-  - user_names
+  - user_sick
+  - user_symptoms
 
 responses:
   utter_greet:
@@ -15,27 +16,11 @@ responses:
   utter_identity:
   - text: "I am the AI powered Health Assistant."
 
-  ask_symptoms:
+  utter_symptoms:
   - text: "What are your symptoms?"
-
-
-
-
-  utter_askname:
-  - text: "How may I call you?"
-  - text: "What is your name?"
-  - text: "Your name?"
-  - text: "How may I address you?"
-
 
 actions:
   - from_action_file
-  - utter_greet
-  - utter_identity
-  - utter_askwork
-  - utter_askname
-  - utter_remember_name
-  - utter_say_name
 
 
 session_config:
