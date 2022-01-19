@@ -11,12 +11,14 @@ stories:
   steps:
   - intent: identity
   - action: utter_identity
-  - action: utter_askwork
-  - action: from_action_file
 
-- story: name
+- story: user is sick start
   steps:
-  - action: utter_askname
-  - intent: user_names
-  - action: utter_remember_name
-  - action: utter_say_name
+  - intent: user_sick
+  - action: ask_symptoms
+
+- story: user says symptoms
+  steps:
+  - intent: user_symptoms
+  - action: 
+

@@ -26,6 +26,36 @@ nlu:
     - who is it?
 
 
+- intent: user_sick
+  examples: |
+    - I am sick.
+    - I am not well?
+    - Not feeling well
+    - I want to go to hospital
+    - Not good
+    - I feel terrible
+    - I am ill
+
+
+
+
+- intent: user_symptoms
+  examples: |
+    - fever
+    - I have headache
+    - Body pain
+    - Cough
+    - I have running nose
+    - diarrhea
+    - dysentry
+    - I am suffering from rash
+    - suffering from allergy
+    - I have Gastritis
+    - sneezing
+    - I am vomiting
+    - blood in cough
+    - jaundice
+
 - intent: user_names
   examples: |
     - My name is [Bishab](name)

@@ -5,22 +5,21 @@ intents:
   - identity
   - user_names
 
-slots:
-  name:
-    type: text
-
 responses:
   utter_greet:
   - text: "Hey! How are you?"
-
+  - text: "Hello! How may I help you?"
+  - text: "Hi! What can I do for you?"
+  - text: "Hi there! Is there any thing I can help you with?"
+  
   utter_identity:
   - text: "I am the AI powered Health Assistant."
-  
-  utter_askwork:
-  - text: "What can I do for you?"
-  - text: "How may I help you?"
-  - text: "How may I assist you?"
-  - text: "Is there any thing I can help you with?"
+
+  ask_symptoms:
+  - text: "What are your symptoms?"
+
+
+
 
   utter_askname:
   - text: "How may I call you?"
@@ -37,7 +36,6 @@ actions:
   - utter_askname
   - utter_remember_name
   - utter_say_name
-
 
 
 session_config:
