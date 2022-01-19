@@ -19,8 +19,38 @@ responses:
   utter_symptoms:
   - text: "What are your symptoms?"
 
+slots:
+  fully_vaccinated:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: fully_vaccinated
+  initial_covid_symptoms:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: initial_covid_symptoms
+  probable_covid_symptoms:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: probable_covid_symptoms
+  family_covid_history:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: family_covid_history
+
+
+entities:
+  - fully_vaccinated
+  - initial_covid_symptoms
+  - probable_covid_symptoms
+  - family_covid_history
+
 actions:
   - from_action_file
+  - action_covid_bot
 
 
 session_config:

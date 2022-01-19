@@ -20,5 +20,6 @@ stories:
 - story: user says symptoms
   steps:
   - intent: user_symptoms
-  - action: from_action_file
+  - action: action_covid_bot
+
 
