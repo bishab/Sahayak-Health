@@ -2,7 +2,7 @@ version: "3.0"
 
 rules:
 
-- rule: Greet the user when user greets back
+- rule: Greet the user back everytime user greets
   steps:
   - intent: greet
   - action: utter_greet

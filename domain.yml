@@ -2,24 +2,43 @@ version: "3.0"
 
 intents:
   - greet
-  - goodbye
-  - affirm
-  - deny
+  - identity
+  - user_names
+
+slots:
+  name:
+    type: text
 
 responses:
   utter_greet:
   - text: "Hey! How are you?"
-  - text: "Hi there!"
-  - text: "Hi. How can I help you?"
 
-  utter_did_that_help:
-  - text: "Did that help you?"
+  utter_identity:
+  - text: "I am the AI powered Health Assistant."
+  
+  utter_askwork:
+  - text: "What can I do for you?"
+  - text: "How may I help you?"
+  - text: "How may I assist you?"
+  - text: "Is there any thing I can help you with?"
 
-  utter_goodbye:
-  - text: "Bye"
+  utter_askname:
+  - text: "How may I call you?"
+  - text: "What is your name?"
+  - text: "Your name?"
+  - text: "How may I address you?"
 
-  utter_iamabot:
-  - text: "I am AI powered HealthCare bot. I can help you with diagnosis, appointments and disease prediction."
+
+actions:
+  - from_action_file
+  - utter_greet
+  - utter_identity
+  - utter_askwork
+  - utter_askname
+  - utter_remember_name
+  - utter_say_name
+
+
 
 session_config:
   session_expiration_time: 60

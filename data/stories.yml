@@ -2,7 +2,21 @@ version: "3.0"
 
 stories:
 
-- story: happy path
+- story: greet path
   steps:
   - intent: greet
   - action: utter_greet
+
+- story: identity
+  steps:
+  - intent: identity
+  - action: utter_identity
+  - action: utter_askwork
+  - action: from_action_file
+
+- story: name
+  steps:
+  - action: utter_askname
+  - intent: user_names
+  - action: utter_remember_name
+  - action: utter_say_name

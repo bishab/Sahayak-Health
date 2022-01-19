@@ -17,34 +17,21 @@ nlu:
     - goodevening
     - good afternoon
 
-- intent: goodbye
+- intent: identity
   examples: |
-    - cu
-    - good by
-    - cee you later
-    - good night
-    - bye
-    - goodbye
-    - have a nice day
-    - see you around
-    - bye bye
-    - see you later
+    - who're you?
+    - who is this?
+    - what is your name?
+    - who am i talking to?
+    - who is it?
 
-- intent: affirm
-  examples: |
-    - yes
-    - y
-    - indeed
-    - of course
-    - that sounds good
-    - correct
 
-- intent: deny
+- intent: user_names
   examples: |
-    - no
-    - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
+    - My name is [Bishab](name)
+    - Its [Chris](name)
+    - The name is [David Copperfield](name)
+    - [Hari Prasad](name)
+    - [Krishna Lal Yadav](name)
+    - [Mahesh Makam](name)
+    - [Johnny Sins](name)
