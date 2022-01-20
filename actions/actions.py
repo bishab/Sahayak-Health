@@ -82,8 +82,8 @@ class ActionCovidBot(Action):
             {"title": "Runny, congested or stuffed nose", "payload": "Runny, congested or stuffed nose"},
             {"title": "Headache", "payload": "Headache"},
             {"title": "Nausea, Vomiting or diarrhea", "payload": "Nausea, Vomiting or diarrhea"},
-            {"title": "None of these symptoms", "payload": "no above symptoms"}]
-            dispatcher.utter_message(text="Are you currently experiencing of these symptoms?", buttons=buttons)
+            {"title": "None of these symptoms", "payload": "does not match"}]
+            dispatcher.utter_message(text="Are you currently experiencing any of these symptoms?", buttons=buttons)
             return [SlotSet("initial_covid_symptoms",tracker.latest_message['text'])]
 
         if any(substring in tracker.latest_message["text"] for substring in ["fever chills symptoms",\
@@ -97,10 +97,10 @@ class ActionCovidBot(Action):
             dispatcher.utter_message("Do you want to check for other symptoms?", buttons=buttons)
             return [SlotSet("probable_covid_symptoms",tracker.latest_message['text']),SlotSet("final_covid_assessment_outcome","most probable for covid")]
         
-        if tracker.latest_message=="no above symptoms":
+        if tracker.latest_message=="does not match":
             buttons = [{"title": "been sick with symptoms like COVID-19?", "payload": "close relative with covid symptoms"},
-            {"title": "tested positive for COVIF-19?", "payload": "living with covid patient"}]
-            dispatcher.utter_message(text="In the last fifteen days, has someone live you with?", buttons=buttons)
+            {"title": "tested positive for COVID-19?", "payload": "living with covid patient"}]
+            dispatcher.utter_message(text="In the last fifteen days, has someone live you with...", buttons=buttons)
             return [SlotSet("probable_covid_symptoms",tracker.latest_message['text'])]
 
         if tracker.latest_message=="living with covid patient":
@@ -188,10 +188,10 @@ class ActionCovidBot(Action):
 
         #Taking user back to the beginning of the chat in case user inputs any strange text.
         else:
+            print(tracker.latest_message['text'])
             dispatcher.utter_message("Sorry, I didn't understand that.")
             dispatcher.utter_message("Taking you back to the beginning of the chat...")
             dispatcher.utter_message("Hello there!")
             return [SlotSet("next_question","new symptoms activated")]
-
 
         return []
