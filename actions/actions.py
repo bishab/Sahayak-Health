@@ -84,8 +84,8 @@ class ActionCovidBot(Action):
                     "Headache","Nausea, Vomiting or diarrhea"]):
             dispatcher.utter_message("Based on your answers, we recommend you to self-isolate yourself at home or at nearest isolation centre.")
             dispatcher.utter_message("Please follow the below guidelines issued by the government:")
-            dispatcher.utter_attachment("")
-            return [SlotSet("probable_covid_symptoms",tracker.latest_message['text'])]
+            print(tracker.get_slot("initial_covid_symptoms"))
+            return [SlotSet("probable_covid_symptoms",tracker.latest_message['text']),SlotSet("final_covid_assessment_outcome","most probable for covid")]
         
         if tracker.latest_message=="None of these symptoms":
             buttons = [{"title": "been sick with symptoms like COVID-19?", "payload": "close relative with covid symptoms"},
@@ -96,13 +96,58 @@ class ActionCovidBot(Action):
         if tracker.latest_message=="living with covid patient":
             dispatcher.utter_message("Based on your answers, we recommend you to self-isolate yourself at home or at nearest isolation centre.")
             dispatcher.utter_message("Please follow the below guidelines issued by the government:")
-            dispatcher.utter_attachment("")
-            return [SlotSet("family_covid_history",tracker.latest_message['text'])]
+            return [SlotSet("family_covid_history",tracker.latest_message['text']),SlotSet("final_covid_assessment_outcome","most probable for covid")]
         
-        if tracker.latest_message=="None of these symptoms":
-            buttons = [{"title": "been sick with symptoms like COVID-19?", "payload": "close relative with covid symptoms"},
-            {"title": "tested positive for COVID-19?", "payload": "living with covid patient"}]
+        if tracker.latest_message=="close relative with covid symptoms":
+            buttons = [{"title": "Yes", "payload": "tested positive on rapid antigen test"},
+            {"title": "No", "payload": "no rapid antigen positive test occured"}]
             dispatcher.utter_message(text="In the last ten days, have you tasted positive with rapid antigen test or home based self testing kit?", buttons=buttons)
-            return [SlotSet("probable_covid_symptoms",tracker.latest_message['text'])]
+            return [SlotSet("family_covid_history",tracker.latest_message['text'])]
             
+        if tracker.latest_message=="tested positive on rapid antigen test":
+            dispatcher.utter_message("Based on your answers, we recommend you to self-isolate yourself at home or at nearest isolation centre.")
+            dispatcher.utter_message("Please follow the below guidelines issued by the government:")
+            return [SlotSet("rapid_antigen_test_result",tracker.latest_message['text']),SlotSet("final_covid_assessment_outcome","most probable for covid")]
+        
+        if tracker.latest_message=="no rapid antigen positive test occured":
+            buttons = [{"title": "Yes", "payload": "visited covid exposed places"},
+            {"title": "No", "payload": "not visited covid exposed places"}]
+            dispatcher.utter_message(text="Do you remember visiting Covid-19 Exposure Alert places in recent ten days?", buttons=buttons)
+            return [SlotSet("rapid_antigen_test_result",tracker.latest_message['text'])]
+
+        if tracker.latest_message=="visited covid exposed places":
+            dispatcher.utter_message("Based on your answers, we recommend you to self-isolate yourself at home or at nearest isolation centre.")
+            dispatcher.utter_message("Please follow the below guidelines issued by the government:")
+            return [SlotSet("covid_exposed_place_visit",tracker.latest_message['text']),SlotSet("final_covid_assessment_outcome","most probable for covid")]
+        
+        if tracker.latest_message=="not visited covid exposed places":
+            buttons = [{"title": "Yes", "payload": "close contact of covid patient pos"},
+            {"title": "No", "payload": "close contact of covid patient neg"}]
+            dispatcher.utter_message(text="In the last ten days, have you been recognized as a 'Close Contact' of someone who currently has COVID-19?", buttons=buttons)
+            return [SlotSet("covid_exposed_place_visit",tracker.latest_message['text'])]
+
+        if tracker.latest_message=="close contact of covid patient pos":
+            dispatcher.utter_message("Based on your answers, we recommend you to self-isolate yourself at home or at nearest isolation centre.")
+            dispatcher.utter_message("Please follow the below guidelines issued by the government:")
+            return [SlotSet("close_contact_with_patient",tracker.latest_message['text']),SlotSet("final_covid_assessment_outcome","most probable for covid")]
+
+        if tracker.latest_message=="close contact of covid patient neg":
+            buttons = [{"title": "Yes", "payload": "travelled abroad pos"},
+            {"title": "No", "payload": "travelled abroad neg"}]
+            dispatcher.utter_message(text="Have you travelled outside of the country in the last 14 days?", buttons=buttons)
+            return [SlotSet("close_contact_with_patient",tracker.latest_message['text'])]
+        
+        if tracker.latest_message=="travelled abroad pos":
+            dispatcher.utter_message("Based on your answers, we recommend you to self-isolate yourself at home or at nearest isolation centre.")
+            dispatcher.utter_message("Please follow the below guidelines issued by the government:")
+            return [SlotSet("travelled_abroad_recently",tracker.latest_message['text']),SlotSet("final_covid_assessment_outcome","most probable for covid")]
+
+        if tracker.latest_message=="travelled abroad neg":
+            dispatcher.utter_message("Based on your answers, you do not need to self-isolate or get tested")
+            dispatcher.utter_message("If you feel sick or not well, please stay home until symptoms improve for at least 24 hours or 48 hours if you have gastrointestinal symptoms (nausea, vomiting, diarrhea). Your household members don't need to self-isolate. Talk with a doctor if necessary.")
+            dispatcher.utter_message("To protect your community and the health care system, wear a face covering or mask when required, keep a physical distance from others, and wash your hands as much as possible..")
+            dispatcher.utter_message("Please follow the below guidelines issued by the government:")
+            return [SlotSet("travelled_abroad_recently",tracker.latest_message['text']),SlotSet("final_covid_assessment_outcome","most probably safe from covid")]
+
+        
         return []

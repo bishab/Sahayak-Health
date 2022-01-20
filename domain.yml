@@ -40,13 +40,44 @@ slots:
     mappings:
       - type: from_entity
         entity: family_covid_history
+  rapid_antigen_test_result:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: rapid_antigen_test_result
+  covid_exposed_place_visit:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: covid_exposed_place_visit
+  close_contact_with_patient:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: close_contact_with_patient
+  travelled_abroad_recently:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: travelled_abroad_recently
+
+  final_covid_assessment_outcome:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: final_covid_assessment_outcome
 
 
 entities:
-  - fully_vaccinated
-  - initial_covid_symptoms
-  - probable_covid_symptoms
-  - family_covid_history
+- fully_vaccinated
+- initial_covid_symptoms
+- probable_covid_symptoms
+- family_covid_history
+- rapid_antigen_test_result
+- covid_exposed_place_visit
+- close_contact_with_patient
+- travelled_abroad_recently
+- final_covid_assessment_outcome
 
 actions:
   - from_action_file
