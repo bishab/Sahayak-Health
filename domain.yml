@@ -67,6 +67,11 @@ slots:
       - type: from_entity
         entity: final_covid_assessment_outcome
 
+  next_question:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: next_question
 
 entities:
 - fully_vaccinated
@@ -78,6 +83,7 @@ entities:
 - close_contact_with_patient
 - travelled_abroad_recently
 - final_covid_assessment_outcome
+- next_question
 
 actions:
   - from_action_file
