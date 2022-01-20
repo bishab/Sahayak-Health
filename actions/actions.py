@@ -63,7 +63,16 @@ class ActionCovidBot(Action):
             dispatcher.utter_message(text="Are you currently struggling with any of these issues?", buttons=buttons)
             return [SlotSet("fully_vaccinated",tracker.latest_message['text'])]
 
-        if any(substring in tracker.latest_message["text"] for substring in ["Covid Symptoms Pos","Covid Symptoms Neg"]):
+        if tracker.latest_message['text']=="Covid Symptoms Pos":
+            dispatcher.utter_message("Based on your answers, we recommend you to self-isolate yourself at home or at nearest isolation centre.")
+            dispatcher.utter_message("Please follow the below guidelines issued by the government:")
+            buttons = [{"title": "Yes", "payload": "check for other symptoms pos"},
+            {"title": "No", "payload": "check for other symptoms neg"}]
+            dispatcher.utter_message("Do you want to check for other symptoms?", buttons=buttons)
+            return [SlotSet("initial_covid_symptoms",tracker.latest_message['text']),SlotSet("final_covid_assessment_outcome","most probable for covid")]
+
+
+        if tracker.latest_message['text']=="Covid Symptoms Neg":
             buttons = [{"title": "Fever and/or chills", "payload": "fever chills symptoms"},
             {"title": "Cough or barking cough", "payload": "cough or barking cough"},
             {"title": "Shortness of breath", "payload": "shortness of breath"},
@@ -149,5 +158,8 @@ class ActionCovidBot(Action):
             dispatcher.utter_message("Please follow the below guidelines issued by the government:")
             return [SlotSet("travelled_abroad_recently",tracker.latest_message['text']),SlotSet("final_covid_assessment_outcome","most probably safe from covid")]
 
-        
+                    
+
+
+
         return []
