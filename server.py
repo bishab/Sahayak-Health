@@ -2,7 +2,7 @@
 import http.server # Our http server handler for http requests
 import socketserver # Establish the TCP Socket connections
  
-PORT = 9000
+PORT = 8000
  
 class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
