@@ -1,5 +1,8 @@
 <html>
-
+    <head>
+        <title>our ai bot</title>
+    </head>
+        <body>
     <script>!(function () {
         let e = document.createElement("script"),
           t = document.head || document.getElementsByTagName("head")[0];
@@ -9,10 +12,9 @@
           (e.async = !0),
           (e.onload = () => {
             window.WebChat.default(
-              {
-                initPayload: '/user_sick',
+              { initPayload: '/greet',
                 customData: { language: "en" },
-                socketUrl: "http://13.71.80.137:5005",
+                socketUrl: "http://localhost:5005",
                 // add other props here
               },
               null
@@ -21,6 +23,5 @@
           t.insertBefore(e, t.firstChild);
       })();
       </script>
-
-
+      </body>
 </html>
