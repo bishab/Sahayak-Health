@@ -52,3 +52,43 @@ nlu:
     - I am vomiting
     - blood in cough
     - jaundice
+
+- intent: common_intent
+  examples: |
+    - Body pain
+    - Cough
+    - I have running nose
+    - diarrhea
+    - dysentry
+    - I am suffering from rash
+    - suffering from allergy
+    - I have Gastritis
+    - sneezing
+    - I am vomiting
+    - blood in cough
+    - jaundice
+
+- intent: firstnames
+  examples: |
+    - Bishan
+    - Ganesh
+    - Bigyan
+
+
+- intent: lastnames
+  examples: |
+    - Pokharel
+    - Timilsina
+    - Makam
+    - Kaur
+    - Bajaj
+
+- intent: addresses
+  examples: |
+    - Nepal
+    - India
+    - Pokhara
+    - Kathmandu
+    - Damauli
+    - Biratnagar-7, Nepal
+    - Janakpur, Madhesh

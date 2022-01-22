@@ -2,7 +2,7 @@ version: "3.0"
 
 rules:
 
-- rule: Greet the user back everytime user greets
+- rule: Give the identity
   steps:
-  - intent: greet
-  - action: utter_greet
+  - intent: identity
+  - action: utter_identity

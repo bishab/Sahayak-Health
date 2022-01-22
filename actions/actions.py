@@ -33,13 +33,49 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet 
 
-class ActionHelloWorld(Action):
+from utils.time_extractor import time_extract
+class ActionAppointment1(Action):
     def name(self) -> Text:
-        return "from_action_file"
+        return "action_appointment_bot_activate1"
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        if tracker.latest_message['text']=="hi":
+            dispatcher.utter_message(f"{time_extract()}! Please tell your first name")
+            return [SlotSet("appointment_activate","activated")]
+        if tracker.get_slot("appointment_activate")=="activated":
+            dispatcher.utter_message("Please tell your last name")
+            return [SlotSet("app_first_name",tracker.latest_message['text']),SlotSet("appointment_activate",None)]
         return []
+
+class ActionAppointment2(Action):
+    def name(self) -> Text:
+        return "action_appointment_bot_activate2"
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        if tracker.get_slot("appointment_activate") is None:
+            dispatcher.utter_message("Please give your address.")
+            return [SlotSet("app_last_name",tracker.latest_message['text']),SlotSet("appointment_activate","not none")]
+        if tracker.get_slot("appointment_activate") is not None:
+            buttons = [{"title": "Yes", "payload": "proceed further"},
+            {"title": "No","payload": "dont proceed further"}]
+            dispatcher.utter_message(text="Do you want to proceed further?", buttons=buttons)
+            return [SlotSet("app_address",tracker.latest_message['text']),SlotSet("appointment_activate",None)]
+            
+        return []
+
+
+
+class ActionHelloWorld(Action):
+    def name(self) -> Text:
+        return "action_hello_world"
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        dispatcher.utter_message(text="Hello World!")
+        return []
+
 
 class ActionCovidBot(Action):
     def name(self) -> Text:
@@ -184,7 +220,7 @@ class ActionCovidBot(Action):
         if tracker.latest_message=="check for other symptoms neg":
             dispatcher.utter_message("Thank you so much for the interaction. Taking you back to the menu.")
             dispatcher.utter_message("Hi! What can I do for you?")
-            return [SlotSet("next_question","new symptoms activated")]
+            return [SlotSet("next_question","new symptoms disactivate")]
 
         #Taking user back to the beginning of the chat in case user inputs any strange text.
         else:

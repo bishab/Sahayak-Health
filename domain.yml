@@ -5,6 +5,10 @@ intents:
   - identity
   - user_sick
   - user_symptoms
+  - common_intent
+  - lastnames
+  - firstnames
+  - addresses
 
 responses:
   utter_greet:
@@ -73,6 +77,29 @@ slots:
       - type: from_entity
         entity: next_question
 
+  appointment_activate:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: appointment_activate
+
+  app_first_name:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: app_first_name
+  app_last_name:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: app_last_name
+  app_address:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: app_address
+
+
 entities:
 - fully_vaccinated
 - initial_covid_symptoms
@@ -84,10 +111,16 @@ entities:
 - travelled_abroad_recently
 - final_covid_assessment_outcome
 - next_question
+- app_first_name
+- app_last_name
+- appointment_activate
+- app_address
 
 actions:
   - from_action_file
   - action_covid_bot
+  - action_appointment_bot_activate1
+  - action_appointment_bot_activate2
 
 
 session_config:

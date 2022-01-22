@@ -2,10 +2,23 @@ version: "3.0"
 
 stories:
 
-- story: greet path
+- story: appointment firstname
   steps:
   - intent: greet
-  - action: utter_greet
+  - action: action_appointment_bot_activate1
+  - intent: firstnames
+  - action: action_appointment_bot_activate1
+
+- story: appointment lastname
+  steps:
+  - intent: lastnames
+  - action: action_appointment_bot_activate2
+  
+- story: appointment address
+  steps:
+  - intent: addresses
+  - action: action_appointment_bot_activate2
+
 
 - story: identity
   steps:
