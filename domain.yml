@@ -12,6 +12,8 @@ intents:
   - appointment_button_proceed
   - contact_number
   - dates
+  - remove_appointment
+  - remove_appointment_numbers
 responses:
   utter_greet:
   - text: "Hey! How are you?"
@@ -136,6 +138,7 @@ actions:
   - action_appointment_bot_activate2
   - action_appointment_bot_activate3
   - action_appointment_proceed
+  - action_appointment_removal
 
 
 session_config:

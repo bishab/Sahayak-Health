@@ -36,8 +36,10 @@ from utils.time_extractor import time_extract
 from rasa_sdk.events import AllSlotsReset
 
 from utils.logging import log_setup
+from utils.database_connector import *
+
 logger=log_setup()
-#---------------------------------- APPOINTMENT SECTION START----------------------------------------------------
+#---------------------------------- APPOINTMENT ENTRY START----------------------------------------------------
 class ActionAppointment1(Action):
     def name(self) -> Text:
         return "action_appointment_bot_activate1"
@@ -107,22 +109,54 @@ class ActionAppointment4(Action):
                 dispatcher.utter_message(f"Your address: {tracker.get_slot('app_address')}")
                 dispatcher.utter_message(f"Your appointment date: {tracker.get_slot('app_date')}")
                 dispatcher.utter_message(f"Your contact number: {tracker.get_slot('app_contact_number')}")
+                logger.info("appointment data dumped")
+#                appointment_entry_dumper("bishab","pokharel","biratnagar","tomorrow","986665544")
+                appointment_entry_dumper(tracker.get_slot("app_first_name"),tracker.get_slot("app_last_name"),\
+                    tracker.get_slot("app_address"),tracker.get_slot("app_date"),tracker.get_slot("app_contact_number"))
                 logger.info(f"Slots reset done")
+                logger.info(f"--------------------------------------------------------------------------------------")
+                logger.info(f"--------------------------------------------------------------------------------------")
                 return [AllSlotsReset()]
 
                 return [SlotSet("app_first_name",None),SlotSet("app_last_name",None),\
                     SlotSet("app_address",None),SlotSet("appointment_activate",None)]
             if tracker.latest_message['text']=="dont proceed further":
                 dispatcher.utter_message("The data are reset. Please restart with registration")
+                appointment_table_creator()
+                logger.info("appointment data not dumped")
                 logger.info(f"Slots reset done")
+                logger.info(f"--------------------------------------------------------------------------------------")
+                logger.info(f"--------------------------------------------------------------------------------------")
                 return [AllSlotsReset()]
 #                return [SlotSet("app_first_name",None),SlotSet("app_last_name",None),\
 #                    SlotSet("app_address",None),SlotSet("appointment_activate",None)]
-
         return []
 
 
-#---------------------------------- APPOINTMENT SECTION END----------------------------------------------------
+#---------------------------------- APPOINTMENT ENTRY END----------------------------------------------------
+
+#---------------------------------- APPOINTMENT REMOVAL START----------------------------------------------------
+class ActionAppointmentRemoval(Action):
+    def name(self) -> Text:
+        return "action_appointment_removal"
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        if tracker.latest_message['text']=="from the appointment removal button":
+            dispatcher.utter_message(" Please write the word 'remove' with your contact number")
+            return [SlotSet("appointment_activate","activated")]
+
+        if tracker.get_slot("appointment_activate")=="activated":
+            print(tracker.latest_message['text'])
+            tracker.latest_message['text']=tracker.latest_message['text'].replace("remove ","")
+            print(tracker.latest_message['text'])
+            logger.info("data removed")
+            appointment_entry_deletor(tracker.latest_message['text'])
+            dispatcher.utter_message(f"Your data is removed")
+            return [SlotSet("appointment_activate",None)]
+        return []
+
+#---------------------------------- APPOINTMENT REMOVAL END----------------------------------------------------
 
 
 class ActionCovidBot(Action):

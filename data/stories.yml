@@ -32,11 +32,21 @@ stories:
   - intent: contact_number
   - action: action_appointment_bot_activate3
 
-
 - story: proceed further
   steps:
   - intent: appointment_button_proceed
   - action: action_appointment_proceed
+
+- story: delete appointment begin
+  steps:
+  - intent: remove_appointment
+  - action: action_appointment_removal
+
+
+- story: delete appointment proceed
+  steps:
+  - intent: remove_appointment_numbers
+  - action: action_appointment_removal
 
 - story: identity
   steps:

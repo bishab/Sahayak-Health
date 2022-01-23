@@ -10,6 +10,20 @@ nlu:
     - proceed further
     - dont proceed further
 
+- intent: remove_appointment
+  examples: |
+    - from the appointment removal button
+
+- intent: remove_appointment_numbers
+  examples: |
+    - remove 9867224121
+    - remove 9112442609
+    - remove 9779854321632
+    - remove +9779854323562
+    - remove +918215632136
+    - remove 7701235463
+    - remove 9112532198
+
 - intent: dates
   examples: |
     - 12th Jan
@@ -48,6 +62,7 @@ nlu:
     - +918215632136
     - 7701235463
     - 9112532198
+
 
 - intent: greet
   examples: |
