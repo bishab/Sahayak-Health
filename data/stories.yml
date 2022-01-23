@@ -22,10 +22,16 @@ stories:
   - intent: addresses
   - action: action_appointment_bot_activate2
 
+- story: appointment date
+  steps:
+  - intent: dates
+  - action: action_appointment_bot_activate3
+
 - story: appointment contact number
   steps:
   - intent: contact_number
   - action: action_appointment_bot_activate3
+
 
 - story: proceed further
   steps:

@@ -33,6 +33,10 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet 
 from utils.time_extractor import time_extract
+from rasa_sdk.events import AllSlotsReset
+
+from utils.logging import log_setup
+logger=log_setup()
 #---------------------------------- APPOINTMENT SECTION START----------------------------------------------------
 class ActionAppointment1(Action):
     def name(self) -> Text:
@@ -42,9 +46,14 @@ class ActionAppointment1(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         if tracker.latest_message['text']=="from the appointment button":
             dispatcher.utter_message(f"{time_extract()}! Please tell your first name")
+            logger.info(f"--------------------------------------------------------------------------------------")
+            logger.info(f"--------------------------------------------------------------------------------------")
+            logger.info(f"NEW USER INITIALIZED")
+            logger.info("appointment form activated")
             return [SlotSet("appointment_activate","activated")]
         if tracker.get_slot("appointment_activate")=="activated":
             dispatcher.utter_message("Please tell your last name")
+            logger.info(f"first name {tracker.latest_message['text']} accepted")
             return [SlotSet("app_first_name",tracker.latest_message['text']),SlotSet("appointment_activate",None)]
         return []
 
@@ -56,9 +65,11 @@ class ActionAppointment2(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         if tracker.get_slot("appointment_activate") is None:
             dispatcher.utter_message("Please give your address.")
+            logger.info(f"last name {tracker.latest_message['text']} accepted")
             return [SlotSet("app_last_name",tracker.latest_message['text']),SlotSet("appointment_activate","not none")]
         if tracker.get_slot("appointment_activate") is not None:
             dispatcher.utter_message("Please write the date you want to book appointment on.")
+            logger.info(f"address {tracker.latest_message['text']} accepted")
             return [SlotSet("app_address",tracker.latest_message['text']),SlotSet("appointment_activate",None)]
         return []
 
@@ -71,13 +82,14 @@ class ActionAppointment3(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         if tracker.get_slot("appointment_activate") is None:
             dispatcher.utter_message("Please give your contact number.")
+            logger.info(f"appointment date {tracker.latest_message['text']} accepted")
             return [SlotSet("app_date",tracker.latest_message['text']),SlotSet("appointment_activate","not none")]
         if tracker.get_slot("appointment_activate")== "not none":
             buttons = [{"title": "Yes", "payload": "proceed further"},
             {"title": "No","payload": "dont proceed further"}]
             dispatcher.utter_message(text="Do you want to proceed further?", buttons=buttons)
+            logger.info(f"contact number {tracker.latest_message['text']} accepted")
             return [SlotSet("app_contact_number",tracker.latest_message['text']),SlotSet("appointment_activate",None)]
-
         return []
 
 
@@ -95,12 +107,14 @@ class ActionAppointment4(Action):
                 dispatcher.utter_message(f"Your address: {tracker.get_slot('app_address')}")
                 dispatcher.utter_message(f"Your appointment date: {tracker.get_slot('app_date')}")
                 dispatcher.utter_message(f"Your contact number: {tracker.get_slot('app_contact_number')}")
+                logger.info(f"Slots reset done")
                 return [AllSlotsReset()]
 
                 return [SlotSet("app_first_name",None),SlotSet("app_last_name",None),\
                     SlotSet("app_address",None),SlotSet("appointment_activate",None)]
             if tracker.latest_message['text']=="dont proceed further":
                 dispatcher.utter_message("The data are reset. Please restart with registration")
+                logger.info(f"Slots reset done")
                 return [AllSlotsReset()]
 #                return [SlotSet("app_first_name",None),SlotSet("app_last_name",None),\
 #                    SlotSet("app_address",None),SlotSet("appointment_activate",None)]
