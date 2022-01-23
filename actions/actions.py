@@ -32,15 +32,15 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet 
-
 from utils.time_extractor import time_extract
+#---------------------------------- APPOINTMENT SECTION START----------------------------------------------------
 class ActionAppointment1(Action):
     def name(self) -> Text:
         return "action_appointment_bot_activate1"
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        if tracker.latest_message['text']=="hi":
+        if tracker.latest_message['text']=="from the appointment button":
             dispatcher.utter_message(f"{time_extract()}! Please tell your first name")
             return [SlotSet("appointment_activate","activated")]
         if tracker.get_slot("appointment_activate")=="activated":
@@ -58,23 +58,57 @@ class ActionAppointment2(Action):
             dispatcher.utter_message("Please give your address.")
             return [SlotSet("app_last_name",tracker.latest_message['text']),SlotSet("appointment_activate","not none")]
         if tracker.get_slot("appointment_activate") is not None:
-            buttons = [{"title": "Yes", "payload": "proceed further"},
-            {"title": "No","payload": "dont proceed further"}]
-            dispatcher.utter_message(text="Do you want to proceed further?", buttons=buttons)
+            dispatcher.utter_message("Please write the date you want to book appointment on.")
             return [SlotSet("app_address",tracker.latest_message['text']),SlotSet("appointment_activate",None)]
-            
         return []
 
 
-
-class ActionHelloWorld(Action):
+class ActionAppointment3(Action):
     def name(self) -> Text:
-        return "action_hello_world"
+        return "action_appointment_bot_activate3"
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        dispatcher.utter_message(text="Hello World!")
+        if tracker.get_slot("appointment_activate") is None:
+            dispatcher.utter_message("Please give your contact number.")
+            return [SlotSet("app_date",tracker.latest_message['text']),SlotSet("appointment_activate","not none")]
+        if tracker.get_slot("appointment_activate")== "not none":
+            buttons = [{"title": "Yes", "payload": "proceed further"},
+            {"title": "No","payload": "dont proceed further"}]
+            dispatcher.utter_message(text="Do you want to proceed further?", buttons=buttons)
+            return [SlotSet("app_contact_number",tracker.latest_message['text']),SlotSet("appointment_activate",None)]
+
         return []
+
+
+
+class ActionAppointment4(Action):
+    def name(self) -> Text:
+        return "action_appointment_proceed"
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        if tracker.get_slot("appointment_activate") is None:
+            if tracker.latest_message['text']=="proceed further":
+                dispatcher.utter_message(f"Your first name: {tracker.get_slot('app_first_name')}")
+                dispatcher.utter_message(f"Your last name: {tracker.get_slot('app_last_name')}")
+                dispatcher.utter_message(f"Your address: {tracker.get_slot('app_address')}")
+                dispatcher.utter_message(f"Your appointment date: {tracker.get_slot('app_date')}")
+                dispatcher.utter_message(f"Your contact number: {tracker.get_slot('app_contact_number')}")
+                return [AllSlotsReset()]
+
+                return [SlotSet("app_first_name",None),SlotSet("app_last_name",None),\
+                    SlotSet("app_address",None),SlotSet("appointment_activate",None)]
+            if tracker.latest_message['text']=="dont proceed further":
+                dispatcher.utter_message("The data are reset. Please restart with registration")
+                return [AllSlotsReset()]
+#                return [SlotSet("app_first_name",None),SlotSet("app_last_name",None),\
+#                    SlotSet("app_address",None),SlotSet("appointment_activate",None)]
+
+        return []
+
+
+#---------------------------------- APPOINTMENT SECTION END----------------------------------------------------
 
 
 class ActionCovidBot(Action):

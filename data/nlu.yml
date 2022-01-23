@@ -1,6 +1,54 @@
 version: "3.0"
 
 nlu:
+- intent: from_appointment
+  examples: |
+    - from the appointment button
+
+- intent: appointment_button_proceed
+  examples: |
+    - proceed further
+    - dont proceed further
+
+- intent: dates
+  examples: |
+    - 12th Jan
+    - Tomorrow
+    - Next Week
+    - Coming Sunday
+    - This friday
+    - March
+    - April
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
+    - January
+    - February
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
+    - Yesterday
+    - Before 27th March
+
+- intent: contact_number
+  examples: |
+    - 9867224121
+    - 9112442609
+    - 9779854321632
+    - +9779854323562
+    - +918215632136
+    - 7701235463
+    - 9112532198
+
 - intent: greet
   examples: |
     - hey
@@ -40,21 +88,6 @@ nlu:
   examples: |
     - fever
     - I have headache
-    - Body pain
-    - Cough
-    - I have running nose
-    - diarrhea
-    - dysentry
-    - I am suffering from rash
-    - suffering from allergy
-    - I have Gastritis
-    - sneezing
-    - I am vomiting
-    - blood in cough
-    - jaundice
-
-- intent: common_intent
-  examples: |
     - Body pain
     - Cough
     - I have running nose

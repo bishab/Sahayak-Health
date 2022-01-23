@@ -4,5 +4,5 @@ rules:
 
 - rule: Give the identity
   steps:
-  - intent: identity
-  - action: utter_identity
+  - intent: greet
+  - action: utter_greet

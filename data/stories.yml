@@ -2,10 +2,13 @@ version: "3.0"
 
 stories:
 
+- story: appointment begin
+  steps:
+  - intent: from_appointment
+  - action: action_appointment_bot_activate1
+
 - story: appointment firstname
   steps:
-  - intent: greet
-  - action: action_appointment_bot_activate1
   - intent: firstnames
   - action: action_appointment_bot_activate1
 
@@ -19,6 +22,15 @@ stories:
   - intent: addresses
   - action: action_appointment_bot_activate2
 
+- story: appointment contact number
+  steps:
+  - intent: contact_number
+  - action: action_appointment_bot_activate3
+
+- story: proceed further
+  steps:
+  - intent: appointment_button_proceed
+  - action: action_appointment_proceed
 
 - story: identity
   steps:

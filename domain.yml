@@ -5,11 +5,13 @@ intents:
   - identity
   - user_sick
   - user_symptoms
-  - common_intent
   - lastnames
   - firstnames
   - addresses
-
+  - from_appointment
+  - appointment_button_proceed
+  - contact_number
+  - dates
 responses:
   utter_greet:
   - text: "Hey! How are you?"
@@ -98,7 +100,16 @@ slots:
     mappings:
       - type: from_entity
         entity: app_address
-
+  app_date:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: app_date
+  app_contact_number:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: app_contact_number
 
 entities:
 - fully_vaccinated
@@ -115,12 +126,16 @@ entities:
 - app_last_name
 - appointment_activate
 - app_address
+- app_date
+- app_contact_number
 
 actions:
   - from_action_file
   - action_covid_bot
   - action_appointment_bot_activate1
   - action_appointment_bot_activate2
+  - action_appointment_bot_activate3
+  - action_appointment_proceed
 
 
 session_config:
