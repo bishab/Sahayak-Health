@@ -3,7 +3,7 @@ A sophisticated implementation of RASA Conversational AI on a HealthCare Bot wri
 <br>
 <i> Initiated on Mon, 3 Jan, 2022</i>
 <br>
-![](https://github.com/bishab/readme/bot.gif)
+![](https://github.com/bishab/Capstone_KRGC0137/blob/backend/readme/bot.gif)
 
 # Quickstart
 To run the chatbot on your system, you can perform either of the following options:
