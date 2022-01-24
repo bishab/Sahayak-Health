@@ -86,7 +86,7 @@ class ActionAppointment3(Action):
             dispatcher.utter_message("Please give your contact number.")
             logger.info(f"appointment date {tracker.latest_message['text']} accepted")
             return [SlotSet("app_date",tracker.latest_message['text']),SlotSet("appointment_activate","not none")]
-        if tracker.get_slot("appointment_activate")== "not none":
+        if tracker.get_slot("appointment_activate") is None:
             buttons = [{"title": "Yes", "payload": "proceed further"},
             {"title": "No","payload": "dont proceed further"}]
             dispatcher.utter_message(text="Do you want to proceed further?", buttons=buttons)
@@ -117,9 +117,6 @@ class ActionAppointment4(Action):
                 logger.info(f"--------------------------------------------------------------------------------------")
                 logger.info(f"--------------------------------------------------------------------------------------")
                 return [AllSlotsReset()]
-
-                return [SlotSet("app_first_name",None),SlotSet("app_last_name",None),\
-                    SlotSet("app_address",None),SlotSet("appointment_activate",None)]
             if tracker.latest_message['text']=="dont proceed further":
                 dispatcher.utter_message("The data are reset. Please restart with registration")
                 appointment_table_creator()
@@ -144,14 +141,12 @@ class ActionAppointmentRemoval(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         if tracker.latest_message['text']=="from the appointment removal button":
             dispatcher.utter_message(" Please write the word 'remove' with your contact number")
+            logger.info("Appointment removal option triggered")
             return [SlotSet("appointment_activate","activated")]
-
         if tracker.get_slot("appointment_activate")=="activated":
-            print(tracker.latest_message['text'])
             tracker.latest_message['text']=tracker.latest_message['text'].replace("remove ","")
-            print(tracker.latest_message['text'])
-            logger.info("data removed")
             appointment_entry_deletor(tracker.latest_message['text'])
+            logger.info("Appointment data removed from the database")
             dispatcher.utter_message(f"Your data is removed")
             return [SlotSet("appointment_activate",None)]
         return []
