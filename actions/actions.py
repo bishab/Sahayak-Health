@@ -310,7 +310,8 @@ class ActionCovidBot(Action):
         return []
 
 
-#Blood Section
+#---------------------------------- BLOOD BOT START----------------------------------------------------
+
 class ActionAskBlood(Action):
 
     def name(self) -> Text:
@@ -404,3 +405,4 @@ class ActionAskLoc(Action):
         SlotSet("looking_for_blood",None) ]  
 
 
+#---------------------------------- BLOOD BOT END----------------------------------------------------
