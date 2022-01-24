@@ -14,6 +14,11 @@ intents:
   - dates
   - remove_appointment
   - remove_appointment_numbers
+#Blood Related Intent  
+  - blood_needed_loc
+  - ask_loc
+  - looking_for_blood_bank
+
 responses:
   utter_greet:
   - text: "Hey! How are you?"
@@ -112,6 +117,17 @@ slots:
     mappings:
       - type: from_entity
         entity: app_contact_number
+#Blood Section        
+  looking_for_blood:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: looking_for_blood
+  blood_location:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: blood_location
 
 entities:
 - fully_vaccinated
@@ -130,6 +146,11 @@ entities:
 - app_address
 - app_date
 - app_contact_number
+#For Blood
+- looking_for_blood
+- blood_location
+
+
 
 actions:
   - from_action_file
@@ -139,6 +160,10 @@ actions:
   - action_appointment_bot_activate3
   - action_appointment_proceed
   - action_appointment_removal
+#For Blood  
+  - asking_for_blood
+  - ask_location
+
 
 
 session_config:

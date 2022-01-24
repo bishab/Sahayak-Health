@@ -63,4 +63,17 @@ stories:
   - intent: user_symptoms
   - action: action_covid_bot
 
+#Stories For Blood
+- story: blood_needed
+  steps:
+  - intent: blood_needed_loc
+  - action: asking_for_blood  
+  - intent: ask_loc
+  - action: ask_location
+
+- story: blood_search  
+  steps:
+  - intent: looking_for_blood_bank
+  - action: ask_location
+
 

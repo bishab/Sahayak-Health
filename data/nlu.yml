@@ -140,3 +140,25 @@ nlu:
     - Damauli
     - Biratnagar-7, Nepal
     - Janakpur, Madhesh
+
+#Blood Related NLU  
+- intent: blood_needed_loc
+  examples: |
+    - blood needed
+    - blood
+    - blood needed in [Pokhara](blood_location)
+    - blood at [Pokhara](blood_location)
+    - blood at [Biratnagar](blood_location)
+    - blood in [Kathmandu](blood_location)
+
+- intent: ask_loc
+  examples: |
+    - [Mugling](blood_location)
+    - [Dharan](blood_locations)
+    - [Syangja](blood_location)
+
+- intent: looking_for_blood_bank
+  examples: |
+    - Looking For Blood        
+
+    

@@ -26,12 +26,12 @@
 #
 #         return []
 
-
+loc = ["Pokhara","Damauli","Biratnagar","Nepal","Ktm","Syangja"]
 
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.events import SlotSet 
+from rasa_sdk.events import SlotSet, FollowupAction
 from utils.time_extractor import time_extract
 from rasa_sdk.events import AllSlotsReset
 
@@ -308,3 +308,99 @@ class ActionCovidBot(Action):
             return [SlotSet("next_question","new symptoms activated")]
 
         return []
+
+
+#Blood Section
+class ActionAskBlood(Action):
+
+    def name(self) -> Text:
+        return "asking_for_blood"
+
+    def run(self, dispatcher: CollectingDispatcher,
+             tracker: Tracker,
+             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+             
+        logger.info(f"--------------------------------------------------------------------------------------")
+        logger.info(f"--------------------------------------------------------------------------------------")
+        logger.info(f"Blood Bank Details Activated")
+
+        if tracker.get_slot("looking_for_blood") is None:
+            if tracker.get_slot("blood_location") is None:
+                logger.info("Looking for Blood is Activated")
+                buttons = [ {"title": "Yes", "payload": "Looking For Blood"},
+                {"title": "NO", "payload": "Not looking For Blood"}]
+                dispatcher.utter_message(text = "Are you Looking For Blood Bank", buttons = buttons)        
+                return [SlotSet("looking_for_blood", "Yes")]   
+            
+            return [SlotSet("looking_for_blood", "Yes"), FollowupAction("ask_location")]
+
+
+        if tracker.latest_message['text'] == "Looking For Blood":
+            if tracker.get_slot("blood_location") is None:
+                logger.info("Looking for Blood Address")
+                dispatcher.utter_message("Please Provide your Locataion:")
+        else:
+            return [FollowupAction("ask_location")]
+        return [SlotSet("looking_for_blood", "Yes")]
+
+
+        return []
+
+    def myname(self, dispatcher: CollectingDispatcher,
+             tracker: Tracker,
+             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        return []
+            
+
+
+class ActionAskLoc(Action):
+
+    def name(self) -> Text:
+        return "ask_location"
+
+    def run(self, dispatcher: CollectingDispatcher,
+             tracker: Tracker,
+             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        SlotSet("blood_location",tracker.latest_message['text'])
+        x = tracker.get_slot("blood_location")
+        if tracker.get_slot("looking_for_blood") == "Yes" and tracker.get_slot("blood_location") is not None:
+            if x in loc:
+                #here we fetch data from Json file and put that data or share link with them
+                logger.info("Details shown")
+                dispatcher.utter_message("Ganesh Blood Bank")
+                dispatcher.utter_message("Bishab Blood Bank")
+                dispatcher.utter_message("Bigyan Blood Bank")
+                dispatcher.utter_message("Gigyan Blood Bank")
+                return [SlotSet("blood_location",None),
+                SlotSet("looking_for_blood",None) ]
+
+            else:
+                dispatcher.utter_message("Blood is not available in your Location")   
+        if tracker.get_slot("looking_for_blood") is None:
+            logger.info("Looking For Hospital or Blood Bank?")
+            buttons = [ {"title": "Blood Bank", "payload": "Looking For Blood"},
+            {"title": "Hospital", "payload": "Not looking For Blood"}]
+            dispatcher.utter_message(text = "What are you Looking For?", buttons = buttons)        
+            return [SlotSet("looking_for_blood","Maybe")]
+        if tracker.latest_message['text'] == "Looking For Blood":
+            logger.info("Looking for Blood But Address is not Provided")
+            if tracker.get_slot("blood_location") is None:
+                return [SlotSet("looking_for_blood", "Yes"), FollowupAction("asking_for_blood")]
+                    
+            else:
+                userLoc = tracker.get_slot("blood_location")
+                logger.info("User is Looking For Blood Bank at ")
+                dispatcher.utter_message(f"Ohh! You are Looking For Blood Bank at {userLoc}")
+                return [SlotSet("looking_for_blood", "Yes"), FollowupAction("ask_location")]
+
+
+        logger.info("Blood Bank Details Ended Sucessfully")
+        logger.info(f"--------------------------------------------------------------------------------------")
+        logger.info(f"--------------------------------------------------------------------------------------")
+        
+
+        return [SlotSet("blood_location",None),
+        SlotSet("looking_for_blood",None) ]  
+
+
