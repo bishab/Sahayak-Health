@@ -13,8 +13,7 @@ To run the chatbot on your system, you can perform either of the following optio
 
 <b> To proceed with setting environments for the chatbot, please make sure you've installed the following dependencies: </b>
 - python3 (preferrably the latest one)
-- rasa (version 3.x)
-<br>
+- rasa (version 3.x)<br>
 <i> Install rasa with ```pip install rasa==3.x``` </i>
 <br>
 
