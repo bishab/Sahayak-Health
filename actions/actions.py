@@ -86,7 +86,7 @@ class ActionAppointment3(Action):
             dispatcher.utter_message("Please give your contact number.")
             logger.info(f"appointment date {tracker.latest_message['text']} accepted")
             return [SlotSet("app_date",tracker.latest_message['text']),SlotSet("appointment_activate","not none")]
-        if tracker.get_slot("appointment_activate") is None:
+        if tracker.get_slot("appointment_activate") is not None:
             buttons = [{"title": "Yes", "payload": "proceed further"},
             {"title": "No","payload": "dont proceed further"}]
             dispatcher.utter_message(text="Do you want to proceed further?", buttons=buttons)
