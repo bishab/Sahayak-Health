@@ -18,6 +18,7 @@ intents:
   - blood_needed_loc
   - ask_loc
   - looking_for_blood_bank
+  - covid_cases_details
 
 responses:
   utter_greet:
@@ -163,6 +164,7 @@ actions:
 #For Blood  
   - asking_for_blood
   - ask_location
+  - showing_covid_data
 
 
 

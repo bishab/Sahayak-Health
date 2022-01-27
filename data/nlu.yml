@@ -161,4 +161,13 @@ nlu:
   examples: |
     - Looking For Blood        
 
+- intent: covid_cases_details
+  examples: |
+    - covid cases
+    - covid19 cases
+    - covid latest data
+    - covid data
+    - covid last 24hr data
+    - new cases in Nepal
+    - new covid death cases
     

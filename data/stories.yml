@@ -76,4 +76,9 @@ stories:
   - intent: looking_for_blood_bank
   - action: ask_location
 
+- story: covid cases data
+  steps:
+  - intent: covid_cases_details
+  - action: showing_covid_data
+
 

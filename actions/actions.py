@@ -39,6 +39,21 @@ from utils.logging import log_setup
 from utils.database_connector import *
 
 logger=log_setup()
+import requests
+
+response = requests.get("https://api.covid19api.com/summary")
+
+
+CountryWiseData = response.json()["Countries"][121]
+print(CountryWiseData)
+LatestUpdatedDate = response.json()["Countries"][121]["Date"][0:10]
+TotalConfirmedCases = response.json()["Countries"][121]["TotalConfirmed"]
+NewConfirmetdCases = response.json()["Countries"][121]["NewConfirmed"]
+TotalDeathCases = response.json()["Countries"][121]["TotalDeaths"]
+NewDeathCases = response.json()["Countries"][121]["NewDeaths"]
+TotalRecoveredCases = response.json()["Countries"][121]["TotalRecovered"]
+NewRecoveredCases = response.json()["Countries"][121]["NewRecovered"]
+
 #---------------------------------- APPOINTMENT ENTRY START----------------------------------------------------
 class ActionAppointment1(Action):
     def name(self) -> Text:
@@ -404,5 +419,24 @@ class ActionAskLoc(Action):
         return [SlotSet("blood_location",None),
         SlotSet("looking_for_blood",None) ]  
 
-
 #---------------------------------- BLOOD BOT END----------------------------------------------------
+
+#-----------------------------------COVID19 CASES DETAILS -------------------------------------------
+class ActionCovidData(Action):
+
+    def name(self) -> Text:
+        return "showing_covid_data"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message(text=f"According to {LatestUpdatedDate}")
+        dispatcher.utter_message(text=f"Total Confirmed Cases: {TotalConfirmedCases}")
+        dispatcher.utter_message(text=f"New Confirmed Cases: {NewConfirmetdCases}")
+        dispatcher.utter_message(text=f"Total Death: {TotalDeathCases}")
+        dispatcher.utter_message(text=f"New Death:  {NewDeathCases}")
+        dispatcher.utter_message(text=f"Total Recovered: {TotalRecoveredCases}")
+        dispatcher.utter_message(text=f"New Recovered:  {NewRecoveredCases}")
+
+        return []
