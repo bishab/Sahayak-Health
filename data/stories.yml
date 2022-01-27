@@ -81,4 +81,9 @@ stories:
   - intent: covid_cases_details
   - action: showing_covid_data
 
+- story: covid cases globally
+  steps:
+  - intent: covid_cases_global_details
+  - action: showing_covid_data_globally  
+
 

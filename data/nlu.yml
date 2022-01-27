@@ -170,4 +170,9 @@ nlu:
     - covid last 24hr data
     - new cases in Nepal
     - new covid death cases
-    
+
+- intent: covid_cases_global_details
+  examples: |
+    - global covid cases
+    - world covid cases
+    - covid cases in world    

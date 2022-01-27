@@ -19,6 +19,7 @@ intents:
   - ask_loc
   - looking_for_blood_bank
   - covid_cases_details
+  - covid_cases_global_details
 
 responses:
   utter_greet:
@@ -165,6 +166,7 @@ actions:
   - asking_for_blood
   - ask_location
   - showing_covid_data
+  - showing_covid_data_globally
 
 
 
