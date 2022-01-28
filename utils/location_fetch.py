@@ -1,3 +1,4 @@
+from gettext import find
 import geocoder
 from geopy.geocoders import Nominatim
 def find_location():
@@ -18,6 +19,4 @@ def find_location():
     city=address.get('city','')
     state=address.get('state','')
     country=address.get('country','')
-    return city,state,country
-
-print(find_location())
+    return country

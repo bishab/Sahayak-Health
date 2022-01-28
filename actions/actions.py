@@ -37,8 +37,8 @@ from rasa_sdk.events import AllSlotsReset
 
 from utils.logging import log_setup
 from utils.database_connector import *
+from utils.location_fetch import *
 from utils.api_fetch import *
-
 logger=log_setup()
 
 
@@ -418,14 +418,16 @@ class ActionCovidData(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        dispatcher.utter_message(text=f"According to {LatestUpdatedDate}")
-        dispatcher.utter_message(text=f"Total Confirmed Cases: {TotalConfirmedCases}")
-        dispatcher.utter_message(text=f"New Confirmed Cases: {NewConfirmedCases}")
-        dispatcher.utter_message(text=f"Total Death: {TotalDeathCases}")
-        dispatcher.utter_message(text=f"New Death:  {NewDeathCases}")
-        dispatcher.utter_message(text=f"Total Recovered: {TotalRecoveredCases}")
-        dispatcher.utter_message(text=f"New Recovered:  {NewRecoveredCases}")
+        
+        user_country=find_location()
+        dispatcher.utter_message(f"Your country is {user_country}. Showing covid details for {user_country}:")
+        dispatcher.utter_message(text=f"According to {finalapidata[0]['Date']}")
+        dispatcher.utter_message(text=f"Total Confirmed Cases: {finalapidata[0]['TotalConfirmed']}")
+        dispatcher.utter_message(text=f"New Confirmed Cases: {finalapidata[0]['NewConfirmed']}")
+        dispatcher.utter_message(text=f"Total Death: {finalapidata[0]['TotalDeaths']}")
+        dispatcher.utter_message(text=f"New Death:  {finalapidata[0]['NewDeaths']}")
+        dispatcher.utter_message(text=f"Total Recovered: {finalapidata[0]['TotalRecovered']}")
+        dispatcher.utter_message(text=f"New Recovered:  {finalapidata[0]['NewRecovered']}")
 
         return []
 
@@ -447,3 +449,4 @@ class ActionCovidGlobalData(Action):
         dispatcher.utter_message(text=f"New Recovered:  {NewRecoveredCasesG}")
 
         return []        
+
