@@ -61,7 +61,7 @@ stories:
 - story: user says symptoms
   steps:
   - intent: user_symptoms
-  - action: action_covid_bot
+  - action: action_covid_bot_begin
 
 #Stories For Blood
 - story: blood_needed
@@ -85,5 +85,56 @@ stories:
   steps:
   - intent: covid_cases_global_details
   - action: showing_covid_data_globally  
+
+#Story for covid self assessment
+- story: covid self assessment bot begin
+  steps:
+  - intent: covid_self_assesment
+  - action: action_covid_bot_begin
+
+- story: fully vaccinated query
+  steps:
+  - intent: fully_vaccinated_query
+  - action: action_covid_bot_begin
+
+- story: covid symptoms query
+  steps:
+  - intent: covid_symptoms_query
+  - action: action_covid_symptoms_bot
+
+- story: covid secondary symptoms query
+  steps:
+  - intent: covid_secondary_symptoms
+  - action: action_covid_symptoms_bot
+
+- story: covid contact tracing
+  steps:
+  - intent: covid_contact_tracing
+  - action: action_covid_symptoms_bot_two
+
+- story: covid antigen test
+  steps:
+  - intent: covid_antigen_test
+  - action: action_covid_symptoms_bot_two
+
+- story: covid exposed place visit
+  steps:
+  - intent: covid_exposed_place_visit
+  - action: action_covid_symptoms_bot_three
+
+- story: covid contact tracing inner
+  steps:
+  - intent: covid_contact_tracing_inner
+  - action: action_covid_symptoms_bot_three
+
+- story: covid patient travelled abroad
+  steps:
+  - intent: covid_patient_travelled_abroad
+  - action: action_covid_symptoms_bot_four
+
+- story: check for other symptoms
+  steps:
+  - intent: other_symptoms_check
+  - action: action_other_symptoms
 
 

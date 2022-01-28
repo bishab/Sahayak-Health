@@ -161,18 +161,80 @@ nlu:
   examples: |
     - Looking For Blood        
 
+#Covid Data Related NLU
 - intent: covid_cases_details
   examples: |
-    - covid cases
-    - covid19 cases
-    - covid latest data
-    - covid data
-    - covid last 24hr data
-    - new cases in Nepal
-    - new covid death cases
+    - Today covid data
+    - How many people get covid today
+    - latest covid data
+    - yesterday covid count
+    - live cases today
+    - total data covid
+    - new covid data
 
 - intent: covid_cases_global_details
   examples: |
     - global covid cases
     - world covid cases
     - covid cases in world    
+
+#COVID SELF-ASSESSMENT BOT RELATED NLU
+- intent: covid_self_assesment
+  examples: |
+    - check for covid self assessment
+
+- intent: fully_vaccinated_query
+  examples: |
+    - Fully Vaccination Pos
+    - Fully Vaccination Neg
+
+- intent: covid_symptoms_query
+  examples: |
+    - Covid Symptoms Pos
+    - Covid Symptoms Neg
+
+- intent: covid_secondary_symptoms
+  examples: |
+    - fever chills symptoms
+    - cough or barking cough
+    - shortness of breath
+    - Decrease or loss of taste or smell
+    - Muscle aches or joint pain
+    - Extreme tiredness
+    - Sore throat
+    - Runny, congested or stuffed nose
+    - Headache
+    - Nausea, Vomiting or diarrhea
+    - none of these symptoms
+
+- intent: covid_contact_tracing
+  examples: |
+    - close relative with covid symptoms
+    - living with covid patient
+
+- intent: covid_antigen_test
+  examples: |
+    - tested positive on rapid antigen test
+    - no rapid antigen positive test occured
+
+- intent: covid_exposed_place_visit
+  examples: |
+    - visited covid exposed places
+    - not visited covid exposed places
+
+- intent: covid_contact_tracing_inner
+  examples: |
+    - close contact of covid patient pos
+    - close contact of covid patient neg
+
+- intent: covid_patient_travelled_abroad
+  examples: |
+    - travelled abroad pos
+    - travelled abroad neg
+
+- intent: other_symptoms_check
+  examples: |
+    - check for other symptoms pos
+    - check for other symptoms neg
+  
+

@@ -21,6 +21,18 @@ intents:
 #Covid Data Related Intents
   - covid_cases_details
   - covid_cases_global_details
+#Covid Self Assessment Related Intents
+  - covid_self_assesment
+  - fully_vaccinated_query
+  - covid_symptoms_query
+  - covid_secondary_symptoms
+  - covid_contact_tracing
+  - covid_antigen_test
+  - covid_exposed_place_visit
+  - covid_contact_tracing_inner
+  - covid_patient_travelled_abroad
+  - other_symptoms_check
+
 
 responses:
   utter_greet:
@@ -36,6 +48,7 @@ responses:
   - text: "What are your symptoms?"
 
 slots:
+#Covid self assessment bot slots
   fully_vaccinated:
     type: text
     mappings:
@@ -157,7 +170,14 @@ entities:
 
 actions:
   - from_action_file
-  - action_covid_bot
+#For Covid Self Assessment Bot
+  - action_covid_bot_begin
+  - action_covid_symptoms_bot
+  - action_covid_symptoms_bot_two
+  - action_covid_symptoms_bot_three
+  - action_covid_symptoms_bot_four
+  - action_other_symptoms
+#For Appointment Bot
   - action_appointment_bot_activate1
   - action_appointment_bot_activate2
   - action_appointment_bot_activate3
