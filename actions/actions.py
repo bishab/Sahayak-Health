@@ -37,29 +37,10 @@ from rasa_sdk.events import AllSlotsReset
 
 from utils.logging import log_setup
 from utils.database_connector import *
+from utils.api_fetch import *
 
 logger=log_setup()
-import requests
 
-response = requests.get("https://api.covid19api.com/summary")
-
-#------------------Nepal Cases------------------------------------
-CountryWiseData = response.json()["Countries"][121]
-LatestUpdatedDate = response.json()["Countries"][121]["Date"][0:10]
-TotalConfirmedCases = response.json()["Countries"][121]["TotalConfirmed"]
-NewConfirmetdCases = response.json()["Countries"][121]["NewConfirmed"]
-TotalDeathCases = response.json()["Countries"][121]["TotalDeaths"]
-NewDeathCases = response.json()["Countries"][121]["NewDeaths"]
-TotalRecoveredCases = response.json()["Countries"][121]["TotalRecovered"]
-NewRecoveredCases = response.json()["Countries"][121]["NewRecovered"]
-
-#---------------Global Cases --------------------------------------------
-TotalConfirmedCasesG = response.json()["Global"]["TotalConfirmed"]
-NewConfirmetdCasesG = response.json()["Global"]["NewConfirmed"]
-TotalDeathCasesG = response.json()["Global"]["TotalDeaths"]
-NewDeathCasesG = response.json()["Global"]["NewDeaths"]
-TotalRecoveredCasesG = response.json()["Global"]["TotalRecovered"]
-NewRecoveredCasesG = response.json()["Global"]["NewRecovered"]
 
 #---------------------------------- APPOINTMENT ENTRY START----------------------------------------------------
 class ActionAppointment1(Action):
@@ -440,7 +421,7 @@ class ActionCovidData(Action):
 
         dispatcher.utter_message(text=f"According to {LatestUpdatedDate}")
         dispatcher.utter_message(text=f"Total Confirmed Cases: {TotalConfirmedCases}")
-        dispatcher.utter_message(text=f"New Confirmed Cases: {NewConfirmetdCases}")
+        dispatcher.utter_message(text=f"New Confirmed Cases: {NewConfirmedCases}")
         dispatcher.utter_message(text=f"Total Death: {TotalDeathCases}")
         dispatcher.utter_message(text=f"New Death:  {NewDeathCases}")
         dispatcher.utter_message(text=f"Total Recovered: {TotalRecoveredCases}")

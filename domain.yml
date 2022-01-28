@@ -18,6 +18,7 @@ intents:
   - blood_needed_loc
   - ask_loc
   - looking_for_blood_bank
+#Covid Data Related Intents
   - covid_cases_details
   - covid_cases_global_details
 
@@ -165,6 +166,7 @@ actions:
 #For Blood  
   - asking_for_blood
   - ask_location
+#For Covid Data
   - showing_covid_data
   - showing_covid_data_globally
 
