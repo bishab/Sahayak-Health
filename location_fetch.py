@@ -1,9 +1,5 @@
-from requests_toolbelt import user_agent
-from spacy import Language
 import geocoder
 from geopy.geocoders import Nominatim
-
-
 def find_location():
     """
     Returns the location of the user based on ip address.
