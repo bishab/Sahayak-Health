@@ -73,6 +73,5 @@ def appointment_data_lookup(cn):
     cur=con.cursor()
     cur.execute("select * from appointment where contact_number=?",(cn,))
     data=cur.fetchall()
-    print(data)
-
+    return data
 

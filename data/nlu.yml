@@ -3,7 +3,7 @@ version: "3.0"
 nlu:
 - intent: from_appointment
   examples: |
-    - from the appointment button
+    - from the appointment registration button
 
 - intent: appointment_button_proceed
   examples: |
@@ -14,6 +14,11 @@ nlu:
   examples: |
     - from the appointment removal button
 
+- intent: check_appointment_entry
+  examples: |
+    - from the appointment checker button
+
+
 - intent: remove_appointment_numbers
   examples: |
     - remove 9867224121
@@ -23,6 +28,17 @@ nlu:
     - remove +918215632136
     - remove 7701235463
     - remove 9112532198
+
+- intent: check_appointment_numbers
+  examples: |
+    - check 9867224121
+    - check 9112442609
+    - check 9779854321632
+    - check +9779854323562
+    - check +918215632136
+    - check 7701235463
+    - check 9112532198
+
 
 - intent: dates
   examples: |

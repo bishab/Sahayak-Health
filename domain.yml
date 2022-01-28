@@ -10,10 +10,12 @@ intents:
   - addresses
   - from_appointment
   - appointment_button_proceed
-  - contact_number
-  - dates
+  - check_appointment_entry
+  - check_appointment_numbers
   - remove_appointment
   - remove_appointment_numbers
+  - contact_number
+  - dates
 #Blood Related Intent  
   - blood_needed_loc
   - ask_loc
@@ -183,6 +185,7 @@ actions:
   - action_appointment_bot_activate3
   - action_appointment_proceed
   - action_appointment_removal
+  - action_appointment_check
 #For Blood  
   - asking_for_blood
   - ask_location

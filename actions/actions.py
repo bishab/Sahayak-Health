@@ -49,7 +49,7 @@ class ActionAppointment1(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        if tracker.latest_message['text']=="from the appointment button":
+        if tracker.latest_message['text']=="from the appointment registration button":
             dispatcher.utter_message(f"{time_extract()}! Please tell your first name")
             logger.info(f"--------------------------------------------------------------------------------------")
             logger.info(f"--------------------------------------------------------------------------------------")
@@ -107,11 +107,14 @@ class ActionAppointment4(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         if tracker.get_slot("appointment_activate") is None:
             if tracker.latest_message['text']=="proceed further":
+                dispatcher.utter_message("Thank you. Your appointment is booked with following details:")
                 dispatcher.utter_message(f"Your first name: {tracker.get_slot('app_first_name')}")
                 dispatcher.utter_message(f"Your last name: {tracker.get_slot('app_last_name')}")
                 dispatcher.utter_message(f"Your address: {tracker.get_slot('app_address')}")
                 dispatcher.utter_message(f"Your appointment date: {tracker.get_slot('app_date')}")
                 dispatcher.utter_message(f"Your contact number: {tracker.get_slot('app_contact_number')}")
+                dispatcher.utter_message("Taking you back to the menu.")
+                dispatcher.utter_message(f"{time_extract()}! How can I be of your service?")
                 logger.info("appointment data dumped")
 #                appointment_entry_dumper("bishab","pokharel","biratnagar","tomorrow","986665544")
                 appointment_entry_dumper(tracker.get_slot("app_first_name"),tracker.get_slot("app_last_name"),\
@@ -119,21 +122,58 @@ class ActionAppointment4(Action):
                 logger.info(f"Slots reset done")
                 logger.info(f"--------------------------------------------------------------------------------------")
                 logger.info(f"--------------------------------------------------------------------------------------")
+
                 return [AllSlotsReset()]
             if tracker.latest_message['text']=="dont proceed further":
-                dispatcher.utter_message("The data are reset. Please restart with registration")
+                dispatcher.utter_message("The data are reset. If you want to make an appointment, please begin with the registration.")
                 appointment_table_creator()
                 logger.info("appointment data not dumped")
                 logger.info(f"Slots reset done")
                 logger.info(f"--------------------------------------------------------------------------------------")
                 logger.info(f"--------------------------------------------------------------------------------------")
+                dispatcher.utter_message("Taking you back to the menu.")
+                dispatcher.utter_message(f"{time_extract()}! How can I help you?")
                 return [AllSlotsReset()]
-#                return [SlotSet("app_first_name",None),SlotSet("app_last_name",None),\
-#                    SlotSet("app_address",None),SlotSet("appointment_activate",None)]
         return []
 
 
 #---------------------------------- APPOINTMENT ENTRY END----------------------------------------------------
+
+#---------------------------------- APPOINTMENT CHECKER START----------------------------------------------------
+class ActionAppointmentRemoval(Action):
+    def name(self) -> Text:
+        return "action_appointment_check"
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        if tracker.latest_message['text']=="from the appointment checker button":
+            dispatcher.utter_message(" Please write the word 'check' with your contact number")
+            logger.info("Appointment checker option triggered")
+            return [SlotSet("appointment_activate","activated")]
+        if tracker.get_slot("appointment_activate")=="activated":
+            tracker.latest_message['text']=tracker.latest_message['text'].replace("check ","")
+            user_data=appointment_data_lookup(tracker.latest_message['text'])
+            print(user_data)
+            logger.info("Appointment data checked in the database")
+            if len(user_data)==0:
+                dispatcher.utter_message("You don't have any records of appointment. Please book an appointment first.")
+                dispatcher.utter_message("Taking you back to the menu...")
+                dispatcher.utter_message(f"{time_extract()}! is there anything I could help you with?")
+                return [SlotSet("appointment_activate",None)]
+            else:
+                dispatcher.utter_message(f"Your appointment data is as follows:")
+                dispatcher.utter_message(f"{user_data}")
+                dispatcher.utter_message("Taking you back to the menu...")
+                dispatcher.utter_message(f"{time_extract()}! what can I do for you?")
+                return [SlotSet("appointment_activate",None)]
+
+        return []
+
+#---------------------------------- APPOINTMENT CHECKER END----------------------------------------------------
+
+
+
+
 
 #---------------------------------- APPOINTMENT REMOVAL START----------------------------------------------------
 class ActionAppointmentRemoval(Action):
@@ -151,6 +191,8 @@ class ActionAppointmentRemoval(Action):
             appointment_entry_deletor(tracker.latest_message['text'])
             logger.info("Appointment data removed from the database")
             dispatcher.utter_message(f"Your data is removed")
+            dispatcher.utter_message("Taking you back to the menu...")
+            dispatcher.utter_message(f"{time_extract()}! what can I do for you?")
             return [SlotSet("appointment_activate",None)]
         return []
 
@@ -168,6 +210,7 @@ class ActionCovidBotOne(Action):
 #        if (tracker.get_slot("fully_vaccinated")==None) or (tracker.get_slot("next_question")=="new symptoms activated"):
             buttons = [{"title": "Yes", "payload": "Fully Vaccination Pos"},
             {"title": "No", "payload": "Fully Vaccination Neg"}]
+            dispatcher.utter_message(f"Hello there. {time_extract()}. Please help me by answering few questions I am going to ask. This is for your self-assessment of Covid-19.")
             dispatcher.utter_message(text="Are you fully vaccinated against COVID-19?", buttons=buttons)
             return [SlotSet("appointment_activate","not none")]
 #            return [SlotSet('fully_vaccinated',tracker.latest_message['text']),SlotSet("next_question",None)]
@@ -354,7 +397,7 @@ class ActionCovidSymptomsBotFour(Action):
             print(tracker.latest_message['text'])
             dispatcher.utter_message("Sorry, I didn't understand that.")
             dispatcher.utter_message("Taking you back to the beginning of the chat...")
-            dispatcher.utter_message("Hello there!")
+            dispatcher.utter_message("Hello there! What can I do for you?")
             return [SlotSet("next_question","new symptoms activated")]
 
 
@@ -381,6 +424,8 @@ class ActionAskBlood(Action):
                 buttons = [ {"title": "Yes", "payload": "Looking For Blood"},
                 {"title": "NO", "payload": "Not looking For Blood"}]
                 dispatcher.utter_message(text = "Are you Looking For Blood Bank", buttons = buttons)        
+                dispatcher.utter_message("Taking you back to the beginning of the chat...")
+                dispatcher.utter_message("Hello there! What can I do for you?")
                 return [SlotSet("looking_for_blood", "Yes")]   
             
             return [SlotSet("looking_for_blood", "Yes"), FollowupAction("ask_location")]
@@ -389,7 +434,7 @@ class ActionAskBlood(Action):
         if tracker.latest_message['text'] == "Looking For Blood":
             if tracker.get_slot("blood_location") is None:
                 logger.info("Looking for Blood Address")
-                dispatcher.utter_message("Please Provide your Locataion:")
+                dispatcher.utter_message("Please Provide your Location:")
         else:
             return [FollowupAction("ask_location")]
         return [SlotSet("looking_for_blood", "Yes")]
@@ -423,11 +468,15 @@ class ActionAskLoc(Action):
                 dispatcher.utter_message("Bishab Blood Bank")
                 dispatcher.utter_message("Bigyan Blood Bank")
                 dispatcher.utter_message("Gigyan Blood Bank")
+                dispatcher.utter_message("Taking you back to the beginning of the chat...")
+                dispatcher.utter_message("Hello there! What can I do for you?")
                 return [SlotSet("blood_location",None),
                 SlotSet("looking_for_blood",None) ]
-
             else:
                 dispatcher.utter_message("Blood is not available in your Location")   
+                dispatcher.utter_message("Taking you back to the beginning of the chat...")
+                dispatcher.utter_message("Hello there! What can I do for you?")
+
         if tracker.get_slot("looking_for_blood") is None:
             logger.info("Looking For Hospital or Blood Bank?")
             buttons = [ {"title": "Blood Bank", "payload": "Looking For Blood"},
@@ -475,6 +524,9 @@ class ActionCovidData(Action):
         dispatcher.utter_message(text=f"New Death:  {finalapidata[0]['NewDeaths']}")
         dispatcher.utter_message(text=f"Total Recovered: {finalapidata[0]['TotalRecovered']}")
         dispatcher.utter_message(text=f"New Recovered:  {finalapidata[0]['NewRecovered']}")
+        dispatcher.utter_message("Thank you for interacting with the bot.")
+        dispatcher.utter_message("Taking you back to the beginning of the chat...")
+        dispatcher.utter_message("Hello there! What can I do for you?")
 
         return []
 
@@ -494,6 +546,9 @@ class ActionCovidGlobalData(Action):
         dispatcher.utter_message(text=f"New Death:  {NewDeathCasesG}")
         dispatcher.utter_message(text=f"Total Recovered: {TotalRecoveredCasesG}")
         dispatcher.utter_message(text=f"New Recovered:  {NewRecoveredCasesG}")
+        dispatcher.utter_message("Thank you for interacting with the bot.")
+        dispatcher.utter_message("Taking you back to the beginning of the chat...")
+        dispatcher.utter_message("Hello there! What can I do for you?")
 
         return []        
 

@@ -48,6 +48,17 @@ stories:
   - intent: remove_appointment_numbers
   - action: action_appointment_removal
 
+- story: check user appointment entry
+  steps:
+  - intent: check_appointment_entry
+  - action: action_appointment_check
+
+- story: check user appointment proceed
+  steps:
+  - intent: check_appointment_numbers
+  - action: action_appointment_check
+
+
 - story: identity
   steps:
   - intent: identity
