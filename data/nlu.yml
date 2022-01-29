@@ -3,9 +3,20 @@ version: "3.0"
 nlu:
 
 #APPOINTMENT RELATED INTENTS
+- intent: book_appointment
+  examples: |
+    - book an appointment
+    - book a date for doctor
+    - make an appointment
+    - make a booking
+    - register for doctor
+    - register for appointment
+    - is doctor available?
+
 - intent: from_appointment
   examples: |
     - from the appointment registration button
+    - from the registration button
 
 - intent: appointment_button_proceed
   examples: |
@@ -15,10 +26,31 @@ nlu:
 - intent: remove_appointment
   examples: |
     - from the appointment removal button
+    - from the removal button
+
+- intent: check_appointment
+  examples: |
+    - check my appointment
+    - when is my appointment
+    - show appointment
+    - show my appointment details
+    - display my appointment info
+    - check my appointment info
+
 
 - intent: check_appointment_entry
   examples: |
     - from the appointment checker button
+    - from the checker button
+
+- intent: remove_appointment_nlu
+  examples: |
+    - remove my appointment
+    - delete my booking
+    - delete my appointment
+    - cancel booking
+    - cancel my appointment
+    - i want to cancel my booking
 
 - intent: remove_appointment_numbers
   examples: |

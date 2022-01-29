@@ -19,7 +19,12 @@ stories:
   - action: action_covid_bot_begin
 
 #Appointment registration related stories
-- story: appointment begin
+- story: appointment begin from conversation
+  steps:
+  - intent: book_appointment
+  - action: action_appointment_bot_activate1
+
+- story: appointment begin from button click
   steps:
   - intent: from_appointment
   - action: action_appointment_bot_activate1
@@ -55,7 +60,12 @@ stories:
   - action: action_appointment_proceed
 
 #Appointment removal related stories
-- story: delete appointment begin
+- story: delete appointment begin from nlu
+  steps:
+  - intent: remove_appointment_nlu
+  - action: action_appointment_removal
+
+- story: delete appointment begin from button click
   steps:
   - intent: remove_appointment
   - action: action_appointment_removal
@@ -67,7 +77,12 @@ stories:
 
 
 #Appointment check related stories
-- story: check user appointment entry
+- story: check appointment from conversation
+  steps:
+  - intent: check_appointment
+  - action: action_appointment_check
+
+- story: check user appointment entry from button click
   steps:
   - intent: check_appointment_entry
   - action: action_appointment_check

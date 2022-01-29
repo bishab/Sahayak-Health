@@ -1,18 +1,23 @@
 version: "3.0"
 
 intents:
+#General Coversation Related Intent 
   - greet
   - identity
   - user_sick
   - user_symptoms
+#Appointment Related Intent
+  - book_appointment
   - lastnames
   - firstnames
   - addresses
   - from_appointment
   - appointment_button_proceed
+  - check_appointment
   - check_appointment_entry
   - check_appointment_numbers
   - remove_appointment
+  - remove_appointment_nlu
   - remove_appointment_numbers
   - contact_number
   - dates
@@ -104,6 +109,25 @@ slots:
       - type: from_entity
         entity: next_question
 
+#Appointment bot slots
+  begin_appointment:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: begin_appointment
+
+  check_for_appointment:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: check_for_appointment
+
+  removal_of_appointment:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: removal_of_appointment
+
   appointment_activate:
     type: text
     mappings:
@@ -161,6 +185,9 @@ entities:
 - app_first_name
 - app_last_name
 - appointment_activate
+- begin_appointment
+- check_for_appointment
+- removal_of_appointment
 - app_address
 - app_date
 - app_contact_number
