@@ -20,3 +20,4 @@ def find_location():
     state=address.get('state','')
     country=address.get('country','')
     return country
+print(find_location())

@@ -2,6 +2,23 @@ version: "3.0"
 
 stories:
 
+#General conversation related stories
+- story: identity
+  steps:
+  - intent: identity
+  - action: utter_identity
+
+- story: user is sick start
+  steps:
+  - intent: user_sick
+  - action: utter_symptoms
+
+- story: user says symptoms
+  steps:
+  - intent: user_symptoms
+  - action: action_covid_bot_begin
+
+#Appointment registration related stories
 - story: appointment begin
   steps:
   - intent: from_appointment
@@ -37,17 +54,19 @@ stories:
   - intent: appointment_button_proceed
   - action: action_appointment_proceed
 
+#Appointment removal related stories
 - story: delete appointment begin
   steps:
   - intent: remove_appointment
   - action: action_appointment_removal
-
 
 - story: delete appointment proceed
   steps:
   - intent: remove_appointment_numbers
   - action: action_appointment_removal
 
+
+#Appointment check related stories
 - story: check user appointment entry
   steps:
   - intent: check_appointment_entry
@@ -59,20 +78,6 @@ stories:
   - action: action_appointment_check
 
 
-- story: identity
-  steps:
-  - intent: identity
-  - action: utter_identity
-
-- story: user is sick start
-  steps:
-  - intent: user_sick
-  - action: utter_symptoms
-
-- story: user says symptoms
-  steps:
-  - intent: user_symptoms
-  - action: action_covid_bot_begin
 
 #Stories For Blood
 - story: blood_needed

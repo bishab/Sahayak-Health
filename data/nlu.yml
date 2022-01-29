@@ -1,6 +1,8 @@
 version: "3.0"
 
 nlu:
+
+#APPOINTMENT RELATED INTENTS
 - intent: from_appointment
   examples: |
     - from the appointment registration button
@@ -17,7 +19,6 @@ nlu:
 - intent: check_appointment_entry
   examples: |
     - from the appointment checker button
-
 
 - intent: remove_appointment_numbers
   examples: |
@@ -38,7 +39,6 @@ nlu:
     - check +918215632136
     - check 7701235463
     - check 9112532198
-
 
 - intent: dates
   examples: |
@@ -79,7 +79,32 @@ nlu:
     - 7701235463
     - 9112532198
 
+- intent: firstnames
+  examples: |
+    - Bishan
+    - Ganesh
+    - Bigyan
 
+- intent: lastnames
+  examples: |
+    - Pokharel
+    - Timilsina
+    - Makam
+    - Kaur
+    - Bajaj
+
+- intent: addresses
+  examples: |
+    - Nepal
+    - India
+    - Pokhara
+    - Kathmandu
+    - Damauli
+    - Biratnagar-7, Nepal
+    - Janakpur, Madhesh
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
+# GENERAL CONVERSATION RELATED INTENTS
 - intent: greet
   examples: |
     - hey
@@ -132,32 +157,9 @@ nlu:
     - blood in cough
     - jaundice
 
-- intent: firstnames
-  examples: |
-    - Bishan
-    - Ganesh
-    - Bigyan
-
-
-- intent: lastnames
-  examples: |
-    - Pokharel
-    - Timilsina
-    - Makam
-    - Kaur
-    - Bajaj
-
-- intent: addresses
-  examples: |
-    - Nepal
-    - India
-    - Pokhara
-    - Kathmandu
-    - Damauli
-    - Biratnagar-7, Nepal
-    - Janakpur, Madhesh
-
-#Blood Related NLU  
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
+#BLOOD BANK RELATED INTENTS
 - intent: blood_needed_loc
   examples: |
     - blood needed
@@ -177,7 +179,9 @@ nlu:
   examples: |
     - Looking For Blood        
 
-#Covid Data Related NLU
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
+#COVID DATA DISPLAY RELATED INTENTS
 - intent: covid_cases_details
   examples: |
     - Today covid data
@@ -194,7 +198,9 @@ nlu:
     - world covid cases
     - covid cases in world    
 
-#COVID SELF-ASSESSMENT BOT RELATED NLU
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
+#COVID SELF-ASSESSMENT BOT RELATED INTENTS
 - intent: covid_self_assesment
   examples: |
     - check for covid self assessment
@@ -252,5 +258,3 @@ nlu:
   examples: |
     - check for other symptoms pos
     - check for other symptoms neg
-  
-
