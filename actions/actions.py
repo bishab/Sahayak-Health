@@ -433,12 +433,10 @@ class ActionAskBlood(Action):
                 buttons = [ {"title": "Yes", "payload": "Looking For Blood"},
                 {"title": "NO", "payload": "Not looking For Blood"}]
                 dispatcher.utter_message(text = "Are you Looking For Blood Bank", buttons = buttons)        
-                dispatcher.utter_message("Taking you back to the beginning of the chat...")
-                dispatcher.utter_message("Hello there! What can I do for you?")
-                return [SlotSet("looking_for_blood", "Yes")]   
+                return [SlotSet("looking_for_blood", "Looking For Blood")]   
             
-            return [SlotSet("looking_for_blood", "Yes"), FollowupAction("ask_location")]
-
+            return [SlotSet("looking_for_blood", "Looking For Blood"), FollowupAction("ask_location")]
+        print("I am invisible")
 
         if tracker.latest_message['text'] == "Looking For Blood":
             if tracker.get_slot("blood_location") is None:
@@ -446,7 +444,7 @@ class ActionAskBlood(Action):
                 dispatcher.utter_message("Please Provide your Location:")
         else:
             return [FollowupAction("ask_location")]
-        return [SlotSet("looking_for_blood", "Yes")]
+        return [SlotSet("looking_for_blood", "Looking For Blood")]
 
 
         return []
@@ -469,7 +467,7 @@ class ActionAskLoc(Action):
 
         SlotSet("blood_location",tracker.latest_message['text'])
         x = tracker.get_slot("blood_location")
-        if tracker.get_slot("looking_for_blood") == "Yes" and tracker.get_slot("blood_location") is not None:
+        if tracker.get_slot("looking_for_blood") == "Looking For Blood" and tracker.get_slot("blood_location") is not None:
             if x in loc:
                 #here we fetch data from Json file and put that data or share link with them
                 logger.info("Details shown")
@@ -495,12 +493,12 @@ class ActionAskLoc(Action):
         if tracker.latest_message['text'] == "Looking For Blood":
             logger.info("Looking for Blood But Address is not Provided")
             if tracker.get_slot("blood_location") is None:
-                return [SlotSet("looking_for_blood", "Yes"), FollowupAction("asking_for_blood")]
+                return [SlotSet("looking_for_blood", "Looking For Blood"), FollowupAction("asking_for_blood")]
             else:
                 userLoc = tracker.get_slot("blood_location")
                 logger.info("User is Looking For Blood Bank at ")
                 dispatcher.utter_message(f"Ohh! You are Looking For Blood Bank at {userLoc}")
-                return [SlotSet("looking_for_blood", "Yes"), FollowupAction("ask_location")]
+                return [SlotSet("looking_for_blood", "Looking For Blood"), FollowupAction("ask_location")]
 
 
         logger.info("Blood Bank Details Ended Sucessfully")
