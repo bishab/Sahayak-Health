@@ -173,3 +173,4 @@ stories:
   steps:
   - intent: showing_covid_symptoms
   - action: action_showing_covid_symptoms
+ # - action: action_farewall

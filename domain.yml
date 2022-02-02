@@ -229,6 +229,7 @@ actions:
   - showing_covid_data_globally
 #showing_covid_symptoms
   - action_showing_covid_symptoms  
+  - action_farewall
 
 
 

@@ -584,8 +584,9 @@ class ActionShowingSymptoms(Action):
             {"title": "Omicrom", "payload": "Show Omicrom Varient Symptoms"}
             ]
             dispatcher.utter_message(text = "Choose the varient", buttons = buttons)
-
             return[SlotSet("showing_symptoms","Activated")]  
+
+
         if tracker.latest_message['text'] =="Show Alpha Varient Symptoms":
             dispatcher.utter_message(text = "Fever or chills")
             dispatcher.utter_message(text = "Shortness of breath or difficulty breathing")
@@ -598,7 +599,7 @@ class ActionShowingSymptoms(Action):
             dispatcher.utter_message(text = "Congesstion or runny nose")
             dispatcher.utter_message(text = "Nausea or vomiting")
             dispatcher.utter_message(text = "Diarrhea")
-            return [SlotSet("showing_symptoms", None)]
+            return [SlotSet("showing_symptoms", None), FollowupAction("action_farewall")]
 
         if tracker.latest_message['text'] =="Show Beta Varient Symptoms":
             dispatcher.utter_message(text = "Fever or chills")
@@ -612,7 +613,7 @@ class ActionShowingSymptoms(Action):
             dispatcher.utter_message(text = "Congesstion or runny nose")
             dispatcher.utter_message(text = "Nausea or vomiting")
             dispatcher.utter_message(text = "Diarrhea")
-            return [SlotSet("showing_symptoms", None)]
+            return [SlotSet("showing_symptoms", None), FollowupAction("action_farewall")]
 
         if tracker.latest_message['text'] =="Show Gamma Varient Symptoms":
             dispatcher.utter_message(text = "Fever")
@@ -623,7 +624,7 @@ class ActionShowingSymptoms(Action):
             dispatcher.utter_message(text = "Shortness of breath")
             dispatcher.utter_message(text = "Gastrointestinal")
             dispatcher.utter_message(text = "Diarrhea") 
-            return [SlotSet("showing_symptoms", None)]
+            return [SlotSet("showing_symptoms", None), FollowupAction("action_farewall")]
 
         if tracker.latest_message['text'] =="Show Delta Varient Symptoms": 
             dispatcher.utter_message(text = "Fever")
@@ -632,7 +633,7 @@ class ActionShowingSymptoms(Action):
             dispatcher.utter_message(text = "Cough")
             dispatcher.utter_message(text = "Lost of smell")
             dispatcher.utter_message(text = "Diarrhea")   
-            return [SlotSet("showing_symptoms", None)]  
+            return [SlotSet("showing_symptoms", None), FollowupAction("action_farewall")]  
 
         if tracker.latest_message['text'] =="Show Omicrom Varient Symptoms": 
             dispatcher.utter_message(text = "Fever")
@@ -641,9 +642,28 @@ class ActionShowingSymptoms(Action):
             dispatcher.utter_message(text = "Fatigue(mild or severe")
             dispatcher.utter_message(text = "Sneezing")
             dispatcher.utter_message(text = "Sore throat") 
-            return [SlotSet("showing_symptoms", None)]
+            return [SlotSet("showing_symptoms", None), FollowupAction("action_farewall")]
 
             
             #return [SlotSet("showing_symptoms", "Activated")]
 
+      #  return [FollowupAction("action_farewall")]
         return []
+
+class ActionHelloWorld(Action):
+
+    def name(self) -> Text:
+        return "action_farewall"
+
+    def run(self, dispatcher: CollectingDispatcher,
+             tracker: Tracker,
+             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message(" ")
+        dispatcher.utter_message(" ")
+        dispatcher.utter_message("Thank you for interacting with the bot.")
+        dispatcher.utter_message("I Think We are able to solve your Problem")
+        dispatcher.utter_message("Taking you back to the beginning of the chat...")
+        dispatcher.utter_message("Hello there! What can I do for you?")
+
+        return []        
