@@ -39,6 +39,8 @@ intents:
   - covid_contact_tracing_inner
   - covid_patient_travelled_abroad
   - other_symptoms_check
+#corona virus Symptoms
+  - showing_covid_symptoms  
 
 
 responses:
@@ -170,6 +172,11 @@ slots:
     mappings:
     - type: from_entity
       entity: blood_location
+  showing_symptoms:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: showing_symptoms
 
 entities:
 - fully_vaccinated
@@ -194,6 +201,7 @@ entities:
 #For Blood
 - looking_for_blood
 - blood_location
+- showing_symptoms
 
 
 
@@ -219,6 +227,8 @@ actions:
 #For Covid Data
   - showing_covid_data
   - showing_covid_data_globally
+#showing_covid_symptoms
+  - action_showing_covid_symptoms  
 
 
 

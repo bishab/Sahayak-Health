@@ -290,3 +290,10 @@ nlu:
   examples: |
     - check for other symptoms pos
     - check for other symptoms neg
+
+- intent: showing_covid_symptoms
+  examples: |
+    - covid 19 symptoms
+    - corona symptoms
+    - covid19 symptoms
+    - symptoms of corona    

@@ -168,4 +168,8 @@ stories:
   - intent: other_symptoms_check
   - action: action_other_symptoms
 
-
+#showing corona symptoms
+- story: showing_corona_symptoms
+  steps:
+  - intent: showing_covid_symptoms
+  - action: action_showing_covid_symptoms

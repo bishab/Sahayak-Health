@@ -559,3 +559,91 @@ class ActionCovidGlobalData(Action):
 
         return []        
 
+class ActionShowingSymptoms(Action):
+
+    def name(self) -> Text:
+        return "action_showing_covid_symptoms"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        if tracker.get_slot("showing_symptoms") is None:
+            dispatcher.utter_message(text = "These are the commom Symptoms of COVID19")
+            dispatcher.utter_message(text = "Fever")
+            dispatcher.utter_message(text = "Cough")
+            dispatcher.utter_message(text = "Loss of Taste and Smell")
+            dispatcher.utter_message(text = "Headache")
+            dispatcher.utter_message(text = "Aches and Pain")
+            dispatcher.utter_message(text = "  ")
+            dispatcher.utter_message(text = "But, Symptoms are different for Different varient")
+            buttons = [ 
+            {"title": "Alpha", "payload": "Show Alpha Varient Symptoms"},
+            {"title": "Beta", "payload": "Show Beta Varient Symptoms"},
+            {"title": "Gamma", "payload": "Show Gamma Varient Symptoms"},
+            {"title": "Delta", "payload": "Show Delta Varient Symptoms"},
+            {"title": "Omicrom", "payload": "Show Omicrom Varient Symptoms"}
+            ]
+            dispatcher.utter_message(text = "Choose the varient", buttons = buttons)
+
+            return[SlotSet("showing_symptoms","Activated")]  
+        if tracker.latest_message['text'] =="Show Alpha Varient Symptoms":
+            dispatcher.utter_message(text = "Fever or chills")
+            dispatcher.utter_message(text = "Shortness of breath or difficulty breathing")
+            dispatcher.utter_message(text = "Cough")
+            dispatcher.utter_message(text = "Fatigue")
+            dispatcher.utter_message(text = "Muscle or body Aches")
+            dispatcher.utter_message(text = "Headache")
+            dispatcher.utter_message(text = "Sore throat")
+            dispatcher.utter_message(text = "New loss of taste or smell")
+            dispatcher.utter_message(text = "Congesstion or runny nose")
+            dispatcher.utter_message(text = "Nausea or vomiting")
+            dispatcher.utter_message(text = "Diarrhea")
+            return [SlotSet("showing_symptoms", None)]
+
+        if tracker.latest_message['text'] =="Show Beta Varient Symptoms":
+            dispatcher.utter_message(text = "Fever or chills")
+            dispatcher.utter_message(text = "Shortness of breath or difficulty breathing")
+            dispatcher.utter_message(text = "Cough")
+            dispatcher.utter_message(text = "Fatigue")
+            dispatcher.utter_message(text = "Muscle or body Aches")
+            dispatcher.utter_message(text = "Headache")
+            dispatcher.utter_message(text = "Sore throat")
+            dispatcher.utter_message(text = "New loss of taste or smell")
+            dispatcher.utter_message(text = "Congesstion or runny nose")
+            dispatcher.utter_message(text = "Nausea or vomiting")
+            dispatcher.utter_message(text = "Diarrhea")
+            return [SlotSet("showing_symptoms", None)]
+
+        if tracker.latest_message['text'] =="Show Gamma Varient Symptoms":
+            dispatcher.utter_message(text = "Fever")
+            dispatcher.utter_message(text = "Headache")
+            dispatcher.utter_message(text = "Sore throat")
+            dispatcher.utter_message(text = "Cough")
+            dispatcher.utter_message(text = "Coryza")
+            dispatcher.utter_message(text = "Shortness of breath")
+            dispatcher.utter_message(text = "Gastrointestinal")
+            dispatcher.utter_message(text = "Diarrhea") 
+            return [SlotSet("showing_symptoms", None)]
+
+        if tracker.latest_message['text'] =="Show Delta Varient Symptoms": 
+            dispatcher.utter_message(text = "Fever")
+            dispatcher.utter_message(text = "Headache")
+            dispatcher.utter_message(text = "Cold")
+            dispatcher.utter_message(text = "Cough")
+            dispatcher.utter_message(text = "Lost of smell")
+            dispatcher.utter_message(text = "Diarrhea")   
+            return [SlotSet("showing_symptoms", None)]  
+
+        if tracker.latest_message['text'] =="Show Omicrom Varient Symptoms": 
+            dispatcher.utter_message(text = "Fever")
+            dispatcher.utter_message(text = "Headache")
+            dispatcher.utter_message(text = "Running Nose")
+            dispatcher.utter_message(text = "Fatigue(mild or severe")
+            dispatcher.utter_message(text = "Sneezing")
+            dispatcher.utter_message(text = "Sore throat") 
+            return [SlotSet("showing_symptoms", None)]
+
+            
+            #return [SlotSet("showing_symptoms", "Activated")]
+
+        return []
