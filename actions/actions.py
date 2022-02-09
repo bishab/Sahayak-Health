@@ -219,7 +219,7 @@ class ActionCovidBotOne(Action):
 #        if (tracker.get_slot("fully_vaccinated")==None) or (tracker.get_slot("next_question")=="new symptoms activated"):
             buttons = [{"title": "Yes", "payload": "Fully Vaccination Pos"},
             {"title": "No", "payload": "Fully Vaccination Neg"}]
-            dispatcher.utter_message(f"Hello there. {time_extract()}. Please help me by answering few questions I am going to ask. This is for your self-assessment of Covid-19.")
+            dispatcher.utter_message(f"Hello there. {time_extract()} Please help me by answering few questions I am going to ask. This is for your self-assessment of Covid-19.")
             dispatcher.utter_message(text="Are you fully vaccinated against COVID-19?", buttons=buttons)
             return [SlotSet("appointment_activate","not none")]
 #            return [SlotSet('fully_vaccinated',tracker.latest_message['text']),SlotSet("next_question",None)]
