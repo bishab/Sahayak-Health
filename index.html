@@ -1,24 +1,115 @@
-<html>
+<!--
+<head>
+  <link rel="stylesheet" href="https://npm-scalableminds.s3.eu-central-1.amazonaws.com/@scalableminds/chatroom@master/dist/Chatroom.css" />
+</head>
 <body>
-<script>!(function () {
-  let e = document.createElement("script"),
-    t = document.head || document.getElementsByTagName("head")[0];
-  (e.src =
-    "https://cdn.jsdelivr.net/npm/rasa-webchat@1.x.x/lib/index.js"),
-    // Replace 1.x.x with the version that you want
-    (e.async = !0),
-    (e.onload = () => {
-      window.WebChat.default(
-        {
-          customData: { language: "en" },
-          socketUrl: "http://13.71.80.137:5005",
-          // add other props here
-        },
-        null
-      );
-    }),
-    t.insertBefore(e, t.firstChild);
-})();
-</script>
+  <div class="chat-container"></div>
+
+  <script src="https://npm-scalableminds.s3.eu-central-1.amazonaws.com/@scalableminds/chatroom@master/dist/Chatroom.js"/></script>
+  <script type="text/javascript">
+    var chatroom = new window.Chatroom({
+      host: "http://localhost:5005",
+      title: "AI BOT",
+      container: document.querySelector(".chat-container"),
+      speechRecognition: "en-US",
+      voiceLang: "en-US",
+      welcomeMessage: "Hello"
+    });
+    chatroom.openChat();
+  </script>
 </body>
-</html>
+-->
+
+
+<head>
+  <link rel="stylesheet"
+    href="https://npm-scalableminds.s3.eu-central-1.amazonaws.com/@scalableminds/chatroom@master/dist/Chatroom.css" />
+  <style>
+    #foo {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+    }
+  </style>
+
+  <!-- bootstrap cdn -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- <link rel="stylesheet" href="/static/style.css"> -->
+
+  <!-- fontawesome cdn -->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+    integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
+  </script>
+
+</head>
+
+<body class="bg-dark">
+
+  <header class="site-header">
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <!-- <a class="navbar-brand" href="/">
+          <img src="https://spectraltech.ai/images/logo.png" height="45" alt="SpectralTech AI">
+        </a> -->
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+          aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse">
+          <!-- Navbar-Right-Side -->
+          <div class="navbar-nav ml-auto">
+          </div>
+        </div>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <br>
+  <br>
+  <br>
+  <div class="bs-example col-md-6 mx-auto">
+
+    <div class="tab-content">
+
+      <div class="tab-pane fade show active" id="file">
+
+        <!-- Instructions -->
+        <div class=" row mt-5">
+          <div class="col-md-8 mx-auto ">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-container" id="foo"></div>
+
+  <script src="https://npm-scalableminds.s3.eu-central-1.amazonaws.com/@scalableminds/chatroom@master/dist/Chatroom.js">
+  </script>
+  <script type="text/javascript">
+    var chatroom = new window.Chatroom({
+      host: "http://13.71.80.137:5005",
+      title: "LETS TALK",
+      container: document.querySelector(".chat-container"),
+      welcomeMessage: "Hello!",
+      speechRecognition: "en-US"
+    });
+    chatroom.openChat();
+  </script>
+</body>
