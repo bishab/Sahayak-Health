@@ -12,8 +12,8 @@ class RegistrationView(APIView):
         serializer=RegistrationSerializer(data,many=True)
         return Response(serializer.data)
     
-    def postreg(self,request):
-        serializer=RegistrationSerializer(data=requests.data)
+    def post(self,request):
+        serializer=RegistrationSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
