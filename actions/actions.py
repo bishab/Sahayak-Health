@@ -531,11 +531,8 @@ class ActionCovidData(Action):
         dispatcher.utter_message(text=f"New Death:  {finalapidata[0]['NewDeaths']}")
         dispatcher.utter_message(text=f"Total Recovered: {finalapidata[0]['TotalRecovered']}")
         dispatcher.utter_message(text=f"New Recovered:  {finalapidata[0]['NewRecovered']}")
-        dispatcher.utter_message("Thank you for interacting with the bot.")
-        dispatcher.utter_message("Taking you back to the beginning of the chat...")
-        dispatcher.utter_message("Hello there! What can I do for you?")
-
-        return []
+        
+        return [FollowupAction("action_farewall")]
 
 class ActionCovidGlobalData(Action):
 
@@ -553,11 +550,8 @@ class ActionCovidGlobalData(Action):
         dispatcher.utter_message(text=f"New Death:  {NewDeathCasesG}")
         dispatcher.utter_message(text=f"Total Recovered: {TotalRecoveredCasesG}")
         dispatcher.utter_message(text=f"New Recovered:  {NewRecoveredCasesG}")
-        dispatcher.utter_message("Thank you for interacting with the bot.")
-        dispatcher.utter_message("Taking you back to the beginning of the chat...")
-        dispatcher.utter_message("Hello there! What can I do for you?")
 
-        return []        
+        return [FollowupAction("action_farewall")]        
 
 class ActionShowingSymptoms(Action):
 
