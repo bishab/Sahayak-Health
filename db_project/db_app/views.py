@@ -6,7 +6,6 @@ from rest_framework import status
 
 
 class RegistrationView(APIView):
-
     def get(self,request,pk=None):
         """
         This function does two things.
@@ -15,8 +14,7 @@ class RegistrationView(APIView):
         """
         id=pk
         if id is not None:
-            print(id)
-            singledata=RegistrationModel.objects.filter(contact_number=id)
+            singledata=RegistrationModel.objects.filter(email=id)
             serializer=RegistrationSerializer(singledata,many=True)
             return Response(serializer.data)
 
