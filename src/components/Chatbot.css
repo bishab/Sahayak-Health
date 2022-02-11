@@ -1,0 +1,20 @@
+.rcw-conversation-container > .rcw-header {
+  background-color: rgb(14, 187, 158);
+  padding: 2px 0 2px;
+}
+
+.rcw-response .rcw-message-text {
+  background-color: #e7ffee;
+}
+.rcw-messages-container {
+  background-color: rgb(255, 255, 255);
+}
+
+.rcw-message > .rcw-response {
+  background-color: rgb(243, 252, 244);
+  color: rgb(0, 0, 0);
+}
+
+.rcw-launcher {
+  background-color: rgb(32, 170, 67);
+}
