@@ -405,9 +405,7 @@ class ActionCovidSymptomsBotFour(Action):
         else:
             print(tracker.latest_message['text'])
             dispatcher.utter_message("Sorry, I didn't understand that.")
-            dispatcher.utter_message("Taking you back to the beginning of the chat...")
-            dispatcher.utter_message("Hello there! What can I do for you?")
-            return [SlotSet("next_question","new symptoms activated")]
+            return [SlotSet("next_question","new symptoms activated"), FollowupAction("action_farewall")]
 
 
 
