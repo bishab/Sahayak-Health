@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import {
   Card,
   TextInput,
@@ -9,11 +9,21 @@ import {
   Title,
 } from "@mantine/core";
 
-function LoginForm() {
+function CreateUser() {
   const theme = useMantineTheme();
 
   const secondaryColor =
     theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
+
+  const initialValues = {
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+    password2: "",
+    phone: "",
+  };
+  const [formValues, setFormValues] = useState(initialValues);
 
   return (
     <div style={{ width: 800, margin: "auto" }}>
@@ -23,27 +33,49 @@ function LoginForm() {
         <Space h="xl" />
         <Grid>
           <Grid.Col span={5}>
-            <TextInput placeholder="Your name" label="First Name" required />
+            <TextInput
+              placeholder="First Name"
+              name="firstname"
+              label="First Name"
+              required
+            />
           </Grid.Col>
           <Grid.Col span={5}>
-            <TextInput placeholder="Your name" label="Last Name" required />
+            <TextInput
+              placeholder="Last Name"
+              name="lastname"
+              label="Last Name"
+              required
+            />
           </Grid.Col>
         </Grid>
 
         <Space h="md" />
 
         {/* Email */}
-        <TextInput placeholder="Email" label="Email" type="email" required />
+        <TextInput
+          placeholder="Email"
+          name="email"
+          label="Email"
+          type="email"
+          required
+        />
         <Space h="md" />
 
         {/* Password */}
         <Grid>
           <Grid.Col span={5}>
-            <PasswordInput placeholder="Password" label="Password" required />
+            <PasswordInput
+              placeholder="Password"
+              name="password"
+              label="Password"
+              required
+            />
           </Grid.Col>
           <Grid.Col span={5}>
             <PasswordInput
               placeholder="Re- Enter Password"
+              name="password2"
               label="Password"
               required
             />
@@ -56,6 +88,7 @@ function LoginForm() {
           placeholder="Phone Number"
           label="Phone Number"
           type="tel"
+          name="phone"
           required
         />
         <Space h="md" />
@@ -64,4 +97,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default CreateUser;

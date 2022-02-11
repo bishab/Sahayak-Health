@@ -6,7 +6,7 @@ import CreateUser from "./CreateUser";
 import VerifyEmail from "./VerifyEmail";
 import UserCreateFinalStep from "./UserCreateFinalStep";
 function CreateUserSteps() {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
   const nextStep = () =>
     setActive((current) => (current < 3 ? current + 1 : current));
   const prevStep = () =>
@@ -52,5 +52,5 @@ function CreateUserSteps() {
     </div>
   );
 }
-
+//just for github
 export default CreateUserSteps;
