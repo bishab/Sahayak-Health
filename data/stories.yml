@@ -174,3 +174,16 @@ stories:
   - intent: showing_covid_symptoms
   - action: action_showing_covid_symptoms
  # - action: action_farewall
+
+#Helth insurance story
+- story: intro to heath insurance
+  steps: 
+  - intent: health_insurance_intro
+  - action: utter_introduce_insurance
+  - action: utter_contact_health_insurance
+  - intent: health_insurance_for_more_than_5
+  - action: utter_health_insurance_for_more_than_5
+  - action: utter_contact_health_insurance
+  - intent: register_for_health_insurance
+  - action: utter_register_for_health_insurance
+  - action: utter_contact_health_insurance

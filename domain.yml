@@ -41,6 +41,10 @@ intents:
   - other_symptoms_check
 #corona virus Symptoms
   - showing_covid_symptoms  
+#Helth insurance
+  - health_insurance_intro  
+  - health_insurance_for_more_than_5
+  - register_for_health_insurance
 
 
 responses:
@@ -55,6 +59,25 @@ responses:
 
   utter_symptoms:
   - text: "What are your symptoms?"
+
+  utter_introduce_insurance:
+  - text: "Under Government Health Insurance scheme, a family \nwith up to five members
+   has to pay Rs 3,500 to get medical \ntreatment, including medicines worth Rs 100,000
+    in total.\nThe service is available at health facilities fixed by the government."
+
+  utter_health_insurance_for_more_than_5:
+  - text: "A family with more than five members has to add Rs 700 per member to be 
+  entitled to the insurance coverage from Rs 20,000 to Rs 200,000."
+
+  utter_register_for_health_insurance:
+  - text: "You can register and became member at any point of time but you have to 
+  wait for the appointed time to get the service"
+    image: "https://blogger.googleusercontent.com/img/a/AVvXsEg4x4KoASWZs1o-QS0cXt8sCl91p1_2F5Dw7oVGH8UVrSRkrm3whXzJW0W3US8r6iUuRp-RmLEm1Ymyz9QQoqKEOekS-9_-4L-d5UCkIw1MvG75AjtW2WlHa8MaqwxKTJmM9rnN3iFDQcT3bjWEZQRIoJ7NSZTYcCkSW-ZvTjwq1HqlWtD7VglkWU8w=s320"
+
+
+
+  utter_contact_health_insurance:
+  - text: "\nFor more Information:\nPhone No.: 01-4100223\nToll free No. 1660-01-11224\nWebsite: www.hib.gov.np"  
 
 slots:
 #Covid self assessment bot slots

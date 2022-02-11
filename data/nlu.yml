@@ -297,3 +297,29 @@ nlu:
     - corona symptoms
     - covid19 symptoms
     - symptoms of corona    
+
+#Government Health Insurance:
+- intent: health_insurance_intro
+  examples: |
+    - what is the health insurance?
+    - health insurance policy
+    - government health insurance
+    - health insurnace
+    - health insurance in nepal
+    - government health insurance in nepal
+
+- intent: health_insurance_for_more_than_5
+  examples: |
+    - health insurance for 6 person
+    - health insurance for 7 person    
+    - health insurance for more than 5 person
+    - what if people is more than 5
+    - government health insurance for more than 5 people
+
+- intent: register_for_health_insurance
+  examples: |
+    - when we can register for health insurance
+    - when we can use health insurance
+    - when we can claim health insurance
+    - can we resiter for health insurance now?
+    
