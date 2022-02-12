@@ -11,4 +11,7 @@ class RegistrationModel(models.Model):
     def __str__(self):
         return self.first_name +" "+ self. last_name
 
-   
+class VerifyEmailModel(models.Model):
+    email=models.EmailField(max_length=50)
+    is_verified=models.BooleanField(default=False)
+    token=models.CharField(max_length=100,default=None)

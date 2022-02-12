@@ -1,10 +1,10 @@
-from .models import RegistrationModel
+from .models import RegistrationModel, VerifyEmailModel
 from .serializers import RegistrationSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-
-
+from django.core.mail import send_mail
+import random
 class RegistrationView(APIView):
     def get(self,request,pk=None):
         """
@@ -56,4 +56,25 @@ class RegistrationView(APIView):
 
 
 
+class VerifyEmailView(APIView):
+    def post(self,request,email):
+        user=VerifyEmailModel(email=email)
+        token=str(random.random()).split(".")[1]
+        user.token=token
+        current_site="http://"+ str(request.get_host()) +"/verifytoken/" + token
+        send_mail(
+            'This is an automated email',
+            f'Please click on this link {current_site}',
+            'elvisforyou45@gmail.com',
+            [email],
+            fail_silently=False
+        )
+        return Response({"msg":"Mail Sent. Please Check It Once!"})
 
+class VerifyTokenView(APIView):
+    def post(self,token):
+        user=VerifyEmailModel.objects.filter(token=token)
+        if user:
+            return Response({"msg":"Your email is verified"})
+        else:
+            return Response({"msg":"Your email is not yet verified"})
