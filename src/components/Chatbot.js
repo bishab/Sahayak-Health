@@ -17,8 +17,8 @@ const Chatbot = () => {
       message: `${newMessage}`,
     };
     const res = await axios.post(
-      "http://13.71.80.137:5005/webhooks/rest/webhook",
-      message
+      "http://20.41.221.66:5005/webhooks/rest/webhook",
+    message
     );
     addResponseMessage(res.data[0].text);
   };
