@@ -10,7 +10,7 @@ const Chatbot = () => {
   }, []);
 
   // const [data, setData] = useState([]);
-  const handleNewUserMessage = async (newMessage) => {
+  const handleNewUserMessage = async (newMessage, data) => {
     console.log(`New message incoming! ${newMessage}`);
     // Now send the message throught the backend API
     const message = {
@@ -18,9 +18,12 @@ const Chatbot = () => {
     };
     const res = await axios.post(
       "http://20.41.221.66:5005/webhooks/rest/webhook",
-    message
+      message
     );
-    addResponseMessage(res.data[0].text);
+    console.log(res.data);
+    res.data.forEach((item) => {
+      addResponseMessage(item.text);
+    });
   };
 
   return (
@@ -29,7 +32,9 @@ const Chatbot = () => {
         title={"Bigyan's covid help line"}
         subtitle={"Wassap bros"}
         handleNewUserMessage={(message) => handleNewUserMessage(message)}
-        emojis="yes"
+        emojis={false}
+        showTimeStamp={false}
+        // resizable={true}
       />
     </div>
   );
