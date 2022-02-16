@@ -5,12 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.mail import send_mail
-from django.forms.models import model_to_dict
 import random
-
-
-import cgitb 
-cgitb.enable() 
 
 class RegistrationView(APIView):
     def get(self,request,pk=None):
