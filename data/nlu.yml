@@ -28,6 +28,14 @@ nlu:
     - from the appointment removal button
     - from the removal button
 
+- intent: user_fine
+  examples: |
+    - i am fine
+    - i am good
+    - i am doing well
+    - good
+    - fine
+
 - intent: check_appointment
   examples: |
     - check my appointment

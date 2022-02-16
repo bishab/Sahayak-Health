@@ -4,6 +4,7 @@ intents:
 #General Coversation Related Intent 
   - greet
   - identity
+  - user_fine
   - user_sick
   - user_symptoms
 #Appointment Related Intent
@@ -59,6 +60,9 @@ responses:
 
   utter_symptoms:
   - text: "What are your symptoms?"
+
+  utter_user_fine:
+  - text: "Good to hear that!\nHow may i help you?"
 
   utter_introduce_insurance:
   - text: "Under Government Health Insurance scheme, a family \nwith up to five members

@@ -13,6 +13,11 @@ stories:
   - intent: user_sick
   - action: utter_symptoms
 
+- story: user_fine_activity
+  steps:
+  - intent: user_fine
+  - action: utter_user_fine
+  
 - story: user says symptoms
   steps:
   - intent: user_symptoms
