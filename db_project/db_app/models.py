@@ -15,3 +15,7 @@ class VerifyEmailModel(models.Model):
     email=models.EmailField(max_length=50)
     is_verified=models.BooleanField(default=False)
     token=models.CharField(max_length=100,default=None)
+
+    def __str__(self):
+        return self.email
+

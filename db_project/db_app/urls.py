@@ -7,6 +7,5 @@ urlpatterns = [
     path('patchreg/<int:pk>/',RegistrationView.as_view(http_method_names=['patch'])),
     path('delreg/<int:pk>/',RegistrationView.as_view(http_method_names=['delete'])),
     path('verifyemail/<str:email>',VerifyEmailView.as_view()),
-    path('verifytoken/<str:token>',VerifyTokenView.as_view()),
-
+    path('verifytoken/<str:email>/<str:token>',VerifyTokenView.as_view()),
 ]

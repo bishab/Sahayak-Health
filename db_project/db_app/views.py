@@ -1,10 +1,17 @@
+from functools import partial
 from .models import RegistrationModel, VerifyEmailModel
-from .serializers import RegistrationSerializer
+from .serializers import RegistrationSerializer, VerifyEmailSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.mail import send_mail
+from django.forms.models import model_to_dict
 import random
+
+
+import cgitb 
+cgitb.enable() 
+
 class RegistrationView(APIView):
     def get(self,request,pk=None):
         """
@@ -55,26 +62,31 @@ class RegistrationView(APIView):
         return Response({"msg":"Data Deleted"})
 
 
-
 class VerifyEmailView(APIView):
     def post(self,request,email):
-        user=VerifyEmailModel(email=email)
-        token=str(random.random()).split(".")[1]
-        user.token=token
-        current_site="http://"+ str(request.get_host()) +"/verifytoken/" + token
+        token=str(random.random()).split(".")[1][0:4]
+        data={"email":email,"is_verified":"False","token":token}
+        serializer=VerifyEmailSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
         send_mail(
-            'This is an automated email',
-            f'Please click on this link {current_site}',
-            'elvisforyou45@gmail.com',
+            'VERIFICATION',
+            f'This is your token: {token}',
+            'constant',
             [email],
             fail_silently=False
         )
         return Response({"msg":"Mail Sent. Please Check It Once!"})
 
 class VerifyTokenView(APIView):
-    def post(self,token):
-        user=VerifyEmailModel.objects.filter(token=token)
-        if user:
-            return Response({"msg":"Your email is verified"})
-        else:
-            return Response({"msg":"Your email is not yet verified"})
+    def post(self,request,email,token):
+        user=VerifyEmailModel.objects.filter(email=email)
+        serializer=VerifyEmailSerializer(user,many=True)
+        if token==serializer.data[0]['token']:
+            updated_data={"email":email,"is_verified":"True","token":token}
+            serializer=VerifyEmailSerializer(data=updated_data,partial=True)
+            if serializer.is_valid():
+                serializer.save()
+            return Response({"msg":"Email Verified"})
+        if token!=serializer.data[0]['token']:
+            return Response({"msg":"Wrong Token Provided"})
