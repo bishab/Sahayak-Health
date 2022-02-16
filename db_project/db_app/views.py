@@ -8,15 +8,14 @@ from django.core.mail import send_mail
 import random
 
 class RegistrationView(APIView):
-    def get(self,request,pk=None):
+    def get(self,request,email=None):
         """
         This function does two things.
             1. If id is given, it displays the data as per that id.
             2. If id is not given, it displays the total data we have stored.
         """
-        id=pk
-        if id is not None:
-            singledata=RegistrationModel.objects.filter(email=id)
+        if email is not None:
+            singledata=RegistrationModel.objects.filter(email=email)
             serializer=RegistrationSerializer(singledata,many=True)
             return Response(serializer.data)
 
@@ -35,11 +34,11 @@ class RegistrationView(APIView):
         else:
             return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
-    def patch(self,request,pk):
+    def patch(self,request,email):
         """
         This function updates the data partially.
         """
-        singledata=RegistrationModel.objects.filter(contact_number=pk).first()
+        singledata=RegistrationModel.objects.filter(email=email).first()
         serializer=RegistrationSerializer(singledata,data=request.data,partial=True)
         if serializer.is_valid():
             serializer.save()
@@ -47,12 +46,11 @@ class RegistrationView(APIView):
         else:
             return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self,request,pk):
+    def delete(self,request,email):
         """
         This function deletes the data based on contact number.
         """
-        id=pk
-        singledata=RegistrationModel.objects.filter(contact_number=id)
+        singledata=RegistrationModel.objects.filter(email=email)
         singledata.delete()
         return Response({"msg":"Data Deleted"})
 
