@@ -3,25 +3,25 @@ version: "3.0"
 nlu:
 
 #APPOINTMENT RELATED INTENTS
-- intent: book_appointment
-  examples: |
-    - book an appointment
-    - book a date for doctor
-    - make an appointment
-    - make a booking
-    - register for doctor
-    - register for appointment
-    - is doctor available?
+#- intent: book_appointment
+#  examples: |
+#    - book an appointment
+#    - book a date for doctor
+#    - make an appointment
+#    - make a booking
+#    - register for doctor
+#    - register for appointment
+#    - is doctor available?
 
-- intent: from_appointment
-  examples: |
-    - from the appointment registration button
-    - from the registration button
+#- intent: from_appointment
+#  examples: |
+#    - from the appointment registration button
+#    - from the registration button
 
-- intent: appointment_button_proceed
-  examples: |
-    - proceed further
-    - dont proceed further
+#- intent: appointment_button_proceed
+#  examples: |
+#    - proceed further
+#    - dont proceed further
 
 - intent: remove_appointment
   examples: |

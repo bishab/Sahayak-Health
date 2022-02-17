@@ -55,6 +55,7 @@ class ActionGreetUser(Action):
         dispatcher.utter_message(f"{time_extract()}\nHow may i help you")
 
         return []
+"""
 #---------------------------------- APPOINTMENT ENTRY START----------------------------------------------------
 class ActionAppointment1(Action):
     def name(self) -> Text:
@@ -151,6 +152,7 @@ class ActionAppointment4(Action):
 
 
 #---------------------------------- APPOINTMENT ENTRY END----------------------------------------------------
+"""
 
 #---------------------------------- APPOINTMENT CHECKER START----------------------------------------------------
 class ActionAppointmentRemoval(Action):
