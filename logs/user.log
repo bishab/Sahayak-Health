@@ -1,0 +1,106 @@
+2022/02/17 11-58 AM - INFO - Registered function for 'action_user_greet'.
+2022/02/17 11-58 AM - INFO - Registered function for 'action_appointment_bot_activate1'.
+2022/02/17 11-58 AM - INFO - Registered function for 'action_appointment_bot_activate2'.
+2022/02/17 11-58 AM - INFO - Registered function for 'action_appointment_bot_activate3'.
+2022/02/17 11-58 AM - INFO - Registered function for 'action_appointment_proceed'.
+2022/02/17 11-58 AM - INFO - Registered function for 'action_appointment_check'.
+2022/02/17 11-58 AM - INFO - Registered function for 'action_appointment_removal'.
+2022/02/17 11-58 AM - INFO - Registered function for 'action_covid_bot_begin'.
+2022/02/17 11-58 AM - INFO - Registered function for 'action_covid_symptoms_bot'.
+2022/02/17 11-58 AM - INFO - Registered function for 'action_covid_symptoms_bot_two'.
+2022/02/17 11-58 AM - INFO - Registered function for 'action_covid_symptoms_bot_three'.
+2022/02/17 11-58 AM - INFO - Registered function for 'action_covid_symptoms_bot_four'.
+2022/02/17 11-58 AM - INFO - Registered function for 'action_other_symptoms'.
+2022/02/17 11-58 AM - INFO - Registered function for 'asking_for_blood'.
+2022/02/17 11-58 AM - INFO - Registered function for 'ask_location'.
+2022/02/17 11-58 AM - INFO - Registered function for 'showing_covid_data'.
+2022/02/17 11-58 AM - INFO - Registered function for 'showing_covid_data_globally'.
+2022/02/17 11-58 AM - INFO - Registered function for 'action_showing_covid_symptoms'.
+2022/02/17 11-58 AM - INFO - Registered function for 'action_farewall'.
+2022/02/17 11-58 AM - INFO - Action endpoint is up and running on http://0.0.0.0:5055
+2022/02/17 12-10 PM - INFO - --------------------------------------------------------------------------------------
+2022/02/17 12-10 PM - INFO - --------------------------------------------------------------------------------------
+2022/02/17 12-10 PM - INFO - NEW USER INITIALIZED
+2022/02/17 12-10 PM - INFO - appointment form activated
+2022/02/17 12-10 PM - INFO - first name Bishab accepted
+2022/02/17 12-10 PM - INFO - last name Pokharel accepted
+2022/02/17 12-10 PM - INFO - address damauli accepted
+2022/02/17 12-10 PM - INFO - appointment date tomorrow accepted
+2022/02/17 12-10 PM - INFO - contact number 9812121212 accepted
+2022/02/17 12-10 PM - INFO - appointment data dumped
+2022/02/17 12-10 PM - INFO - Slots reset done
+2022/02/17 12-10 PM - INFO - --------------------------------------------------------------------------------------
+2022/02/17 12-10 PM - INFO - --------------------------------------------------------------------------------------
+2022/02/17 12-11 PM - INFO - Appointment checker option triggered
+2022/02/17 12-11 PM - INFO - Appointment data checked in the database
+2022/02/17 12-14 PM - INFO - Registered function for 'action_user_greet'.
+2022/02/17 12-14 PM - INFO - Registered function for 'action_appointment_check'.
+2022/02/17 12-14 PM - INFO - Registered function for 'action_appointment_removal'.
+2022/02/17 12-14 PM - INFO - Registered function for 'action_covid_bot_begin'.
+2022/02/17 12-14 PM - INFO - Registered function for 'action_covid_symptoms_bot'.
+2022/02/17 12-14 PM - INFO - Registered function for 'action_covid_symptoms_bot_two'.
+2022/02/17 12-14 PM - INFO - Registered function for 'action_covid_symptoms_bot_three'.
+2022/02/17 12-14 PM - INFO - Registered function for 'action_covid_symptoms_bot_four'.
+2022/02/17 12-14 PM - INFO - Registered function for 'action_other_symptoms'.
+2022/02/17 12-14 PM - INFO - Registered function for 'asking_for_blood'.
+2022/02/17 12-14 PM - INFO - Registered function for 'ask_location'.
+2022/02/17 12-14 PM - INFO - Registered function for 'showing_covid_data'.
+2022/02/17 12-14 PM - INFO - Registered function for 'showing_covid_data_globally'.
+2022/02/17 12-14 PM - INFO - Registered function for 'action_showing_covid_symptoms'.
+2022/02/17 12-14 PM - INFO - Registered function for 'action_farewall'.
+2022/02/17 12-14 PM - INFO - Action endpoint is up and running on http://0.0.0.0:5055
+2022/02/17 12-17 PM - ERROR - No registered action found for name 'action_appointment_bot_activate1'.
+2022/02/17 05-37 PM - INFO - Registered function for 'action_user_greet'.
+2022/02/17 05-37 PM - INFO - Registered function for 'action_appointment_bot_activate1'.
+2022/02/17 05-37 PM - INFO - Registered function for 'action_appointment_bot_activate2'.
+2022/02/17 05-37 PM - INFO - Registered function for 'action_appointment_bot_activate3'.
+2022/02/17 05-37 PM - INFO - Registered function for 'action_appointment_proceed'.
+2022/02/17 05-37 PM - INFO - Registered function for 'action_appointment_check'.
+2022/02/17 05-37 PM - INFO - Registered function for 'action_appointment_removal'.
+2022/02/17 05-37 PM - INFO - Registered function for 'action_covid_bot_begin'.
+2022/02/17 05-37 PM - INFO - Registered function for 'action_covid_symptoms_bot'.
+2022/02/17 05-37 PM - INFO - Registered function for 'action_covid_symptoms_bot_two'.
+2022/02/17 05-37 PM - INFO - Registered function for 'action_covid_symptoms_bot_three'.
+2022/02/17 05-37 PM - INFO - Registered function for 'action_covid_symptoms_bot_four'.
+2022/02/17 05-37 PM - INFO - Registered function for 'action_other_symptoms'.
+2022/02/17 05-37 PM - INFO - Registered function for 'asking_for_blood'.
+2022/02/17 05-37 PM - INFO - Registered function for 'ask_location'.
+2022/02/17 05-37 PM - INFO - Registered function for 'showing_covid_data'.
+2022/02/17 05-37 PM - INFO - Registered function for 'showing_covid_data_globally'.
+2022/02/17 05-37 PM - INFO - Registered function for 'action_showing_covid_symptoms'.
+2022/02/17 05-37 PM - INFO - Registered function for 'action_farewall'.
+2022/02/17 05-37 PM - INFO - Action endpoint is up and running on http://0.0.0.0:5055
+2022/02/17 05-44 PM - INFO - Registered function for 'action_user_greet'.
+2022/02/17 05-44 PM - INFO - Registered function for 'action_appointment_check'.
+2022/02/17 05-44 PM - INFO - Registered function for 'action_appointment_removal'.
+2022/02/17 05-44 PM - INFO - Registered function for 'action_covid_bot_begin'.
+2022/02/17 05-44 PM - INFO - Registered function for 'action_covid_symptoms_bot'.
+2022/02/17 05-44 PM - INFO - Registered function for 'action_covid_symptoms_bot_two'.
+2022/02/17 05-44 PM - INFO - Registered function for 'action_covid_symptoms_bot_three'.
+2022/02/17 05-44 PM - INFO - Registered function for 'action_covid_symptoms_bot_four'.
+2022/02/17 05-44 PM - INFO - Registered function for 'action_other_symptoms'.
+2022/02/17 05-44 PM - INFO - Registered function for 'asking_for_blood'.
+2022/02/17 05-44 PM - INFO - Registered function for 'ask_location'.
+2022/02/17 05-44 PM - INFO - Registered function for 'showing_covid_data'.
+2022/02/17 05-44 PM - INFO - Registered function for 'showing_covid_data_globally'.
+2022/02/17 05-44 PM - INFO - Registered function for 'action_showing_covid_symptoms'.
+2022/02/17 05-44 PM - INFO - Registered function for 'action_farewall'.
+2022/02/17 05-44 PM - INFO - Action endpoint is up and running on http://0.0.0.0:5055
+2022/02/17 05-45 PM - INFO - Appointment checker option triggered
+2022/02/17 08-22 PM - INFO - Registered function for 'action_user_greet'.
+2022/02/17 08-22 PM - INFO - Registered function for 'action_appointment_check'.
+2022/02/17 08-22 PM - INFO - Registered function for 'action_appointment_removal'.
+2022/02/17 08-22 PM - INFO - Registered function for 'action_covid_bot_begin'.
+2022/02/17 08-22 PM - INFO - Registered function for 'action_covid_symptoms_bot'.
+2022/02/17 08-22 PM - INFO - Registered function for 'action_covid_symptoms_bot_two'.
+2022/02/17 08-22 PM - INFO - Registered function for 'action_covid_symptoms_bot_three'.
+2022/02/17 08-22 PM - INFO - Registered function for 'action_covid_symptoms_bot_four'.
+2022/02/17 08-22 PM - INFO - Registered function for 'action_other_symptoms'.
+2022/02/17 08-22 PM - INFO - Registered function for 'asking_for_blood'.
+2022/02/17 08-22 PM - INFO - Registered function for 'ask_location'.
+2022/02/17 08-22 PM - INFO - Registered function for 'showing_covid_data'.
+2022/02/17 08-22 PM - INFO - Registered function for 'showing_covid_data_globally'.
+2022/02/17 08-22 PM - INFO - Registered function for 'action_showing_covid_symptoms'.
+2022/02/17 08-22 PM - INFO - Registered function for 'action_farewall'.
+2022/02/17 08-22 PM - INFO - Action endpoint is up and running on http://0.0.0.0:5055
+2022/02/17 08-26 PM - INFO - Appointment checker option triggered
