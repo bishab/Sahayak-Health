@@ -28,6 +28,7 @@
 
 loc = ["Pokhara","Damauli","Biratnagar","Nepal","Ktm","Syangja"]
 
+from datetime import time
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
@@ -42,6 +43,18 @@ from utils.api_fetch import *
 logger=log_setup()
 
 
+class ActionGreetUser(Action):
+
+    def name(self) -> Text:
+        return "action_user_greet"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message(f"{time_extract()}\nHow may i help you")
+
+        return []
 #---------------------------------- APPOINTMENT ENTRY START----------------------------------------------------
 class ActionAppointment1(Action):
     def name(self) -> Text:

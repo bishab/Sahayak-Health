@@ -3,6 +3,7 @@ version: "3.0"
 intents:
 #General Coversation Related Intent 
   - greet
+  - user_greet
   - identity
   - user_fine
   - user_sick
@@ -234,6 +235,7 @@ entities:
 
 actions:
   - from_action_file
+  - action_user_greet
 #For Covid Self Assessment Bot
   - action_covid_bot_begin
   - action_covid_symptoms_bot

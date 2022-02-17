@@ -3,6 +3,11 @@ version: "3.0"
 stories:
 
 #General conversation related stories
+- story: user greeting
+  steps:
+  - intent: user_greet
+  - action: action_user_greet
+  
 - story: identity
   steps:
   - intent: identity

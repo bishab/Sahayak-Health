@@ -147,7 +147,10 @@ nlu:
 # GENERAL CONVERSATION RELATED INTENTS
 - intent: greet
   examples: |
-    - hey
+    - h
+
+- intent: user_greet
+  examples: |
     - hello
     - hi
     - hello there
@@ -160,6 +163,7 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
+
 
 - intent: identity
   examples: |
