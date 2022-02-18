@@ -98,4 +98,4 @@ class UserLoginView(APIView):
             if password==serializer.data[0]['password']:
                 return Response({"msg":"correct password"})
             if password!=serializer.data[0]['password']:
-                return Response("msg":"incorrect password")
+                return Response({"msg":"incorrect password"})
