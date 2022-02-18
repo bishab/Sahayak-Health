@@ -54,8 +54,9 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = ('http://20.41.221.66:3000','https://sahayakhealth.netlify.app')
+CORS_ALLOWED_ORIGINS = [
+    "http://20.41.221.66:3000",
+]
 
 ROOT_URLCONF = 'db_project.urls'
 
