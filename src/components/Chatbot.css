@@ -1,6 +1,7 @@
 .rcw-conversation-container > .rcw-header {
   background-color: rgb(14, 187, 158);
   padding: 2px 0 2px;
+  box-shadow: null;
 }
 
 .rcw-response .rcw-message-text {
@@ -16,8 +17,13 @@
 }
 
 .rcw-launcher {
-  background-color: rgb(32, 170, 67);
+  background-color: rgb(45, 13, 134);
+  box-shadow: 0 0px 0px 0px;
 }
-.rcw-message {
+/* .rcw-message {
+  color: black;
+  background-color: #e7ffee;
+} */
+.rcw-widget-container {
   color: black;
 }

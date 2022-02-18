@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-
+import { useMantineColorScheme } from "@mantine/core";
 import { Widget, addResponseMessage, setQuickButtons } from "react-chat-widget";
 import "react-chat-widget/lib/styles.css";
 import axios from "axios";
 const Chatbot = () => {
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const dark = colorScheme === "dark";
   useEffect(() => {
     addResponseMessage("Ask us anything about COVID-19 ");
     //

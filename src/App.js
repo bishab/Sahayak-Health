@@ -1,10 +1,14 @@
-import { MantineProvider, ColorSchemeProvider, Navbar } from "@mantine/core";
-import { React, useState } from "react";
+import { MantineProvider, ColorSchemeProvider } from "@mantine/core";
+import { useLocalStorageValue } from "@mantine/hooks";
+import { React } from "react";
 import Chatbot from "./components/Chatbot";
-import Navbarx from "./components/Navbarx";
+import AppBody from "./components/AppBody";
 
 function App() {
-  const [colorScheme, setColorScheme] = useState("light");
+  const [colorScheme, setColorScheme] = useLocalStorageValue({
+    key: "color-scheme",
+    defaultValue: "dark",
+  });
   const toggleColorScheme = (value) =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
   return (
@@ -12,8 +16,11 @@ function App() {
       colorScheme={colorScheme}
       toggleColorScheme={toggleColorScheme}
     >
-      <MantineProvider theme={{ colorScheme }} withGlobalStyles>
-        <Navbarx />
+      <MantineProvider
+        theme={{ colorScheme, fontFamily: "Poppins" }}
+        withGlobalStyles
+      >
+        <AppBody />
         <Chatbot />
       </MantineProvider>
     </ColorSchemeProvider>
