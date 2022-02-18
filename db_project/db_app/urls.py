@@ -8,5 +8,6 @@ urlpatterns = [
     path('delreg/<str:email>/',RegistrationView.as_view(http_method_names=['delete'])),
     path('verifyemail/<str:email>',VerifyEmailView.as_view()),
     path('verifytoken/<str:email>/<str:token>',VerifyTokenView.as_view()),
-    path('userlogin/<str:email>/<str:password>',UserLoginView.as_view()),
+    path('userlogin/',UserLoginView.as_view()),
+
 ]

@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.core.mail import send_mail
 import random
+import json
 
 class RegistrationView(APIView):
     def get(self,request,email=None):
@@ -85,7 +86,10 @@ class VerifyTokenView(APIView):
             return Response({"msg":"Wrong Token Provided"})
 
 class UserLoginView(APIView):
-    def post(self,request,email,password):
+    def post(self,request):
+        userdata=request.data
+        email=userdata['email']
+        password=userdata['password']
         user=RegistrationModel.objects.filter(email=email)
         serializer=RegistrationSerializer(user,many=True)
         if len(serializer.data)==0:
