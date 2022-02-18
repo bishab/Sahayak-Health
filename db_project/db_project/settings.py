@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'db_app',
     'rest_framework',
     'corsheaders',
-#   'accounts',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +54,8 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = ('http://20.41.221.66:3000','https://sahayakhealth.netlify.app')
 
 ROOT_URLCONF = 'db_project.urls'
 
