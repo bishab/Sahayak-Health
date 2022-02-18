@@ -10,3 +10,4 @@ class VerifyEmailSerializer(serializers.ModelSerializer):
     class Meta:
         model=VerifyEmailModel
         fields='__all__'
+

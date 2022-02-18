@@ -83,3 +83,15 @@ class VerifyTokenView(APIView):
             return Response({"msg":"Email Verified"})
         if token!=serializer.data[0]['token']:
             return Response({"msg":"Wrong Token Provided"})
+
+class UserLoginView(APIView):
+    def post(self,request,email,password):
+        user=RegistrationModel.objects.filter(email=email)
+        serializer=RegistrationSerializer(user,many=True)
+        if len(serializer.data)==0:
+            return Response({"ERROR":"E-mail address does not match"})
+        else:
+            if password==serializer.data[0]['password']:
+                return Response({"correct password"})
+            if password!=serializer.data[0]['password']:
+                return Response("incorrect password")
