@@ -52,7 +52,7 @@ class ActionGreetUser(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message(f"{time_extract()}\nHow may i help you")
+        dispatcher.utter_message(f"{time_extract()} How may I help you?")
 
         return []
 """
