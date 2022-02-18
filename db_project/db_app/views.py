@@ -92,10 +92,11 @@ class UserLoginView(APIView):
         password=userdata['password']
         user=RegistrationModel.objects.filter(email=email)
         serializer=RegistrationSerializer(user,many=True)
-        if len(serializer.data)==0:
-            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
-        else:
-            if password==serializer.data[0]['password']:
-                return Response({"ERROR":"correct password"})
-            if password!=serializer.data[0]['password']:
+        if serializer.is_valid():
+            if len(serializer.data)==0:
                 return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                if password==serializer.data[0]['password']:
+                    return Response({"ERROR":"correct password"})
+                if password!=serializer.data[0]['password']:
+                    return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
