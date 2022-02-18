@@ -5,8 +5,9 @@ class RegistrationModel(models.Model):
     first_name=models.CharField(max_length=20)
     last_name=models.CharField(max_length=20)
     email=models.EmailField(max_length=50,unique=True)
-    address=models.CharField(max_length=30,default='')
     password=models.CharField(max_length=20)
+    address=models.CharField(max_length=30,default='')
+    date_of_birth=models.CharField(max_length=30,default='')
     contact_number=models.CharField(max_length=13)
 
     def __str__(self):
