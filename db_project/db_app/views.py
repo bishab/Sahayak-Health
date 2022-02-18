@@ -93,9 +93,9 @@ class UserLoginView(APIView):
         user=RegistrationModel.objects.filter(email=email)
         serializer=RegistrationSerializer(user,many=True)
         if len(serializer.data)==0:
-            return Response({"ERROR":"E-mail address does not match"})
+            return Response({"msg":"E-mail address does not match"})
         else:
             if password==serializer.data[0]['password']:
-                return Response({"correct password"})
+                return Response({"msg":"correct password"})
             if password!=serializer.data[0]['password']:
-                return Response("incorrect password")
+                return Response("msg":"incorrect password")
