@@ -244,6 +244,7 @@ actions:
   - action_covid_symptoms_bot_four
   - action_other_symptoms
 #For Appointment Bot
+  - action_appointment_delete
   - action_appointment_bot_activate1
   - action_appointment_two
   - action_appointment_bot_activate2

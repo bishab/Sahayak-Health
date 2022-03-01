@@ -67,18 +67,23 @@ class ActionAppointmentCheck(Action):
             dispatcher.utter_message("Please provide your email address")
             return [SlotSet("check_for_appointment","changed")]
         else:
-            data=viewpatient(tracker.latest_message['text'])
+            data=view_patient_reg(tracker.latest_message['text'])
             if data=="No record":
                 dispatcher.utter_message("You have not registered yet. Please register yourself first.")
                 logger.info("User has not registered yet.")
                 return [SlotSet("check_for_appointment",None)]
             else:
-                #HERE WE WILL FETCH THE APPOINTMENT DATA
-                dispatcher.utter_message("User is a registered user")
-                logger.info("Appointment data checked in the database")
-                dispatcher.utter_message("Taking you back to the menu...")
-                dispatcher.utter_message(f"{time_extract()}! what can I do for you?")
-                return [SlotSet("check_for_appointment",None)]
+                data=view_patient_appointment(tracker.latest_message['text'])
+                if data=="No record":
+                    dispatcher.utter_message("You do not have any appointments booked as of now. Please proceed to My Appointments section to book one.")
+                    logger.info("User has not booked any appointments.")
+                    return [SlotSet("check_for_appointment",None)]
+                else:
+                    dispatcher.utter_message(f"Your appointment details are:\n {data}")
+                    logger.info("Appointment data checked in the database")
+                    dispatcher.utter_message("Taking you back to the menu...")
+                    dispatcher.utter_message(f"{time_extract()}! what can I do for you?")
+                    return [SlotSet("check_for_appointment",None)]
 
 
 

@@ -34,17 +34,6 @@ stories:
   - intent: remove_appointment_nlu
   - action: action_appointment_delete
 
-- story: delete appointment begin from button click
-  steps:
-  - intent: remove_appointment
-  - action: action_appointment_removal
-
-- story: delete appointment proceed
-  steps:
-  - intent: remove_appointment_numbers
-  - action: action_appointment_removal
-
-
 #Appointment check related stories
 - story: check appointment from conversation
   steps:
