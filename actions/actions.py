@@ -155,21 +155,29 @@ class ActionAppointment4(Action):
 """
 
 #---------------------------------- APPOINTMENT CHECKER START----------------------------------------------------
-class ActionAppointmentRemoval(Action):
+class ActionAppointmentCheck(Action):
     def name(self) -> Text:
         return "action_appointment_check"
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        if tracker.get_slot("check_for_appointment") is None or tracker.latest_message['text']=="from the appointment checker button":
-            dispatcher.utter_message(" Please write the word 'check' with your contact number")
+        if tracker.get_slot("check_for_appointment") is None:
+            dispatcher.utter_message(" Please provide your registered E-mail address")
             logger.info("Appointment checker option triggered")
             return [SlotSet("appointment_activate","activated"),SlotSet("check_for_appointment","changed")]
         if tracker.get_slot("appointment_activate")=="activated":
-            tracker.latest_message['text']=tracker.latest_message['text'].replace("check ","")
-            user_data=appointment_data_lookup(tracker.latest_message['text'])
-            print(user_data)
-            logger.info("Appointment data checked in the database")
+#            tracker.latest_message['text']=tracker.latest_message['text'].replace("check ","")
+            data=viewpatient(tracker.latest_message['text'])
+            if data=="No record":
+                dispatcher.utter_message("You have not registered yet. Please register yourself first.")
+                logger.info("User has not registered yet.")
+                return []
+            else:
+                #HERE WE WILL FETCH THE APPOINTMENT DATA
+                dispatcher.utter_message(f"Your data is : {data}")
+                logger.info("Appointment data checked in the database")
+                return [SlotSet("appointment_activate",None),SlotSet("check_for_appointment",None)]
+
             if len(user_data)==0:
                 dispatcher.utter_message("You don't have any records of appointment. Please book an appointment first.")
                 dispatcher.utter_message("Taking you back to the menu...")

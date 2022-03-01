@@ -45,11 +45,14 @@ nlu:
     - display my appointment info
     - check my appointment info
 
-
-- intent: check_appointment_entry
+- intent: check_appointment_email
   examples: |
-    - from the appointment checker button
-    - from the checker button
+    - bishabpokharel@gmail.com
+    - harrry3434@gmail.com
+    - akash@hotmail.com
+    - bingewatcher@outlook.com
+    - timilsina.bikash@gmail.com
+    - abcd232@yahoo.com
 
 - intent: remove_appointment_nlu
   examples: |
@@ -69,16 +72,6 @@ nlu:
     - remove +918215632136
     - remove 7701235463
     - remove 9112532198
-
-- intent: check_appointment_numbers
-  examples: |
-    - check 9867224121
-    - check 9112442609
-    - check 9779854321632
-    - check +9779854323562
-    - check +918215632136
-    - check 7701235463
-    - check 9112532198
 
 - intent: dates
   examples: |

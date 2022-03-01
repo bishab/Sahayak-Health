@@ -93,14 +93,9 @@ stories:
   - intent: check_appointment
   - action: action_appointment_check
 
-- story: check user appointment entry from button click
-  steps:
-  - intent: check_appointment_entry
-  - action: action_appointment_check
-
 - story: check user appointment proceed
   steps:
-  - intent: check_appointment_numbers
+  - intent: check_appointment_email
   - action: action_appointment_check
 
 

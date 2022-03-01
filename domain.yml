@@ -17,7 +17,7 @@ intents:
   - appointment_button_proceed
   - check_appointment
   - check_appointment_entry
-  - check_appointment_numbers
+  - check_appointment_email
   - remove_appointment
   - remove_appointment_nlu
   - remove_appointment_numbers

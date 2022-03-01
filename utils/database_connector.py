@@ -3,16 +3,19 @@ import json
 def viewpatient(email):
     """
     Displays patient data based on a condition
-    
     Args:
         email: primary key for displaying user data
     """
-    link="http://20.41.221.66:7000/getreg/"+email
-    userdata=json.loads(requests.get(link).text)[0]
-    user_dob=userdata['date_of_birth'].split("T")[0]
-    userdata["date_of_birth"]=user_dob
-    return userdata
 
+    link="http://20.41.221.66:7000/getreg/"+email
+    userdata=json.loads(requests.get(link).text)
+    if len(userdata)==0:
+        return "No record"
+    else:
+        userdata=userdata[0]
+        user_dob=userdata['date_of_birth'].split("T")[0]
+        userdata["date_of_birth"]=user_dob
+        return userdata
 
 def delpatient(email):
     """
