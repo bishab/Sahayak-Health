@@ -1,6 +1,32 @@
-import sqlite3
-import os
+import requests
+import json
+def viewpatient(email):
+    """
+    Displays patient data based on a condition
+    
+    Args:
+        email: primary key for displaying user data
+    """
+    link="http://20.41.221.66:7000/getreg/"+email
+    userdata=json.loads(requests.get(link).text)[0]
+    user_dob=userdata['date_of_birth'].split("T")[0]
+    userdata["date_of_birth"]=user_dob
+    return userdata
 
+
+def delpatient(email):
+    """
+    Deletes patient data
+    """
+    link="http://20.41.221.66:7000/delreg/"+email
+    status=requests.delete(link)
+    if  '200' in str(status):
+        return "successful"
+    else:
+        return "unsuccessful"
+
+
+'''
 def appointment_table_creator():
     """
     Creates a table for appointment if it does not exist.
@@ -12,7 +38,7 @@ def appointment_table_creator():
     if 'db'not in os.listdir():
         os.mkdir('db') 
     con=sqlite3.connect("db/appointment_database.db")
-    con.execute('''create table if not exists appointment(first_name text, last_name text, address text, date text, contact_number text)''')
+    con.execute("""create table if not exists appointment(first_name text, last_name text, address text, date text, contact_number text)""")
     con.commit()
     con.close()
 
@@ -74,4 +100,4 @@ def appointment_data_lookup(cn):
     cur.execute("select * from appointment where contact_number=?",(cn,))
     data=cur.fetchall()
     return data
-
+'''
