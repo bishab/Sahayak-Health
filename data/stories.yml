@@ -28,11 +28,6 @@ stories:
   - intent: user_symptoms
   - action: action_covid_bot_begin
 
-#Appointment removal related stories
-- story: delete appointment begin from nlu
-  steps:
-  - intent: remove_appointment_nlu
-  - action: action_appointment_delete
 
 #Appointment check related stories
 - story: check appointment from conversation

@@ -56,6 +56,7 @@ class ActionGreetUser(Action):
 
         return []
 
+#---------------------------------- APPOINTMENT AND REGISTRATION CHECK START----------------------------------------------------
 
 class ActionAppointmentCheck(Action):
     def name(self) -> Text:
@@ -85,100 +86,9 @@ class ActionAppointmentCheck(Action):
                     dispatcher.utter_message(f"{time_extract()}! what can I do for you?")
                     return [SlotSet("check_for_appointment",None)]
 
+#---------------------------------- APPOINTMENT AND REGISTRATION CHECK END----------------------------------------------------
 
-class ActionAppointmentDelete(Action):
-    def name(self) -> Text:
-        return "action_appointment_delete"
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        if tracker.get_slot("check_for_appointment") is None:
-            dispatcher.utter_message("Please provide your login password")
-            return [SlotSet("check_for_appointment","changed")]
-        else:
-            data=viewpatient(tracker.latest_message['text'])
-            if data=="No record":
-                dispatcher.utter_message("You have not registered yet. Please register yourself first.")
-                logger.info("User has not registered yet.")
-                return [SlotSet("check_for_appointment",None)]
-            else:
-                #HERE WE WILL FETCH THE APPOINTMENT DATA
-                dispatcher.utter_message("User is a registered user")
-                logger.info("Appointment data checked in the database")
-                dispatcher.utter_message("Taking you back to the menu...")
-                dispatcher.utter_message(f"{time_extract()}! what can I do for you?")
-                return [SlotSet("check_for_appointment",None)]
-
-
-
-"""
-#---------------------------------- APPOINTMENT CHECKER START----------------------------------------------------
-class ActionAppointmentCheck(Action):
-    def name(self) -> Text:
-        return "action_appointment_check"
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        if tracker.get_slot("check_for_appointment") is None:
-            dispatcher.utter_message(" Please provide your registered E-mail address")
-            logger.info("Appointment checker option triggered")
-            return [SlotSet("appointment_activate","activated"),SlotSet("check_for_appointment","changed")]
-        if tracker.get_slot("check_for_appointment")=="changed":
-            data=viewpatient(tracker.latest_message['text'])
-            if data=="No record":
-                dispatcher.utter_message("You have not registered yet. Please register yourself first.")
-                logger.info("User has not registered yet.")
-                return [SlotSet("appointment_activate",None),SlotSet("check_for_appointment",None)]
-            else:
-                #HERE WE WILL FETCH THE APPOINTMENT DATA
-                dispatcher.utter_message(f"Your data is : {data}")
-                logger.info("Appointment data checked in the database")
-                dispatcher.utter_message("Taking you back to the menu...")
-                dispatcher.utter_message(f"{time_extract()}! what can I do for you?")
-                return [SlotSet("appointment_activate",None),SlotSet("check_for_appointment",None)]
-
-        return []
-
-#---------------------------------- APPOINTMENT CHECKER END----------------------------------------------------
-
-
-
-
-
-#---------------------------------- APPOINTMENT REMOVAL START----------------------------------------------------
-class ActionAppointmentRemoval(Action):
-    def name(self) -> Text:
-        return "action_appointment_removal"
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        if tracker.get_slot("removal_of_appointment") is None or tracker.latest_message['text']=="from the appointment removal button":
-            dispatcher.utter_message(" Please write the word 'remove' with your contact number")
-            logger.info("Appointment removal option triggered")
-            return [SlotSet("appointment_activate","activated"),SlotSet("removal_of_appointment","changed")]
-        if tracker.get_slot("appointment_activate")=="activated":
-            tracker.latest_message['text']=tracker.latest_message['text'].replace("remove ","")
-            logger.info("Checking if this data exists on the database...")
-            user_data=appointment_data_lookup(tracker.latest_message['text'])
-            if len(user_data)==0:
-                logger.warning("User's data does not exist on the database. Nothing to remove.")
-                dispatcher.utter_message("Your data doesn't exist on the database. Please book an appointment before removing one.")
-                dispatcher.utter_message("Taking you back to the menu...")
-                dispatcher.utter_message(f"{time_extract()}! what can I do for you?")
-                return [SlotSet("appointment_activate",None),SlotSet("removal_of_appointment",None)]
-            else:
-                appointment_entry_deletor(tracker.latest_message['text'])
-                logger.info("Appointment data removed from the database")
-                dispatcher.utter_message(f"Your data is removed")
-                dispatcher.utter_message("Taking you back to the menu...")
-                dispatcher.utter_message(f"{time_extract()}! what can I do for you?")
-                return [SlotSet("appointment_activate",None),SlotSet("removal_of_appointment",None)]
-        return []
-
-#---------------------------------- APPOINTMENT REMOVAL END----------------------------------------------------
-"""
 #---------------------------------- COVID SELF ASSESSMENT BOT START----------------------------------------------------
-
 class ActionCovidBotOne(Action):
     def name(self) -> Text:
         return "action_covid_bot_begin"

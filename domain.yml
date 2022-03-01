@@ -236,6 +236,9 @@ entities:
 actions:
   - from_action_file
   - action_user_greet
+  - action_farewall
+#For Appointment Bot
+  - action_appointment_check
 #For Covid Self Assessment Bot
   - action_covid_bot_begin
   - action_covid_symptoms_bot
@@ -243,24 +246,13 @@ actions:
   - action_covid_symptoms_bot_three
   - action_covid_symptoms_bot_four
   - action_other_symptoms
-#For Appointment Bot
-  - action_appointment_delete
-  - action_appointment_bot_activate1
-  - action_appointment_two
-  - action_appointment_bot_activate2
-  - action_appointment_bot_activate3
-  - action_appointment_proceed
-  - action_appointment_removal
-  - action_appointment_check
 #For Blood  
   - asking_for_blood
   - ask_location
 #For Covid Data
   - showing_covid_data
   - showing_covid_data_globally
-#showing_covid_symptoms
   - action_showing_covid_symptoms  
-  - action_farewall
 
 
 
