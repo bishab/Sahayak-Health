@@ -1,9 +1,14 @@
 from .models import *
 from rest_framework import serializers
 
-class RegistrationSerializer(serializers.ModelSerializer):
+class PatientRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
-        model=RegistrationModel
+        model=PatientRegistrationModel
+        fields='__all__'
+
+class AppointmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=AppointmentModel
         fields='__all__'
 
 class VerifyEmailSerializer(serializers.ModelSerializer):

@@ -1,6 +1,6 @@
 from functools import partial
-from .models import RegistrationModel, VerifyEmailModel
-from .serializers import RegistrationSerializer, VerifyEmailSerializer
+from .models import *
+from .serializers import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 import random
 import json
 
-class RegistrationView(APIView):
+class PatientRegistrationView(APIView):
     def get(self,request,email=None):
         """
         This function does two things.
@@ -16,19 +16,19 @@ class RegistrationView(APIView):
             2. If id is not given, it displays the total data we have stored.
         """
         if email is not None:
-            singledata=RegistrationModel.objects.filter(email=email)
-            serializer=RegistrationSerializer(singledata,many=True)
+            singledata=PatientRegistrationModel.objects.filter(email=email)
+            serializer=PatientRegistrationSerializer(singledata,many=True)
             return Response(serializer.data)
 
-        data=RegistrationModel.objects.all()
-        serializer=RegistrationSerializer(data,many=True)
+        data=PatientRegistrationModel.objects.all()
+        serializer=PatientRegistrationSerializer(data,many=True)
         return Response(serializer.data)
     
     def post(self,request):
         """
         This function stores new data into the database.
         """
-        serializer=RegistrationSerializer(data=request.data)
+        serializer=PatientRegistrationSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -39,8 +39,8 @@ class RegistrationView(APIView):
         """
         This function updates the data partially.
         """
-        singledata=RegistrationModel.objects.filter(email=email).first()
-        serializer=RegistrationSerializer(singledata,data=request.data,partial=True)
+        singledata=PatientRegistrationModel.objects.filter(email=email).first()
+        serializer=PatientRegistrationSerializer(singledata,data=request.data,partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response({"msg":"Data Partially Updated"})
@@ -49,10 +49,47 @@ class RegistrationView(APIView):
 
     def delete(self,request,email):
         """
-        This function deletes the data based on contact number.
+        This function deletes the data based on email address.
         """
-        singledata=RegistrationModel.objects.filter(email=email)
+        singledata=PatientRegistrationModel.objects.filter(email=email)
         singledata.delete()
+        return Response({"msg":"Data Deleted"})
+
+class AppointmentView(APIView):
+    def get(self,request,email=None):
+        if email is not None:
+            singledata=AppointmentModel.objects.filter(patient_email=email)
+            serializer=AppointmentSerializer(singledata,many=True)
+            return Response(serializer.data)
+        data=AppointmentModel.objects.all()
+        serializer=AppointmentSerializer(data,many=True)
+        return Response(serializer.data)
+
+    def post(self,request):
+        data=request.data
+        serializer=AppointmentSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            send_mail(
+                'Appointment Booked',
+                f'Your appointment on {data["hospital"]} is booked for {data["date"]}, {data["time"]}  with doctor {data["doctor"]}',
+                'constant',
+                [data["patient_email"]],
+                fail_silently=False)
+            return Response(serializer.data)
+        else:
+            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self,request,email):
+        data=AppointmentModel.objects.filter(patient_email=email)
+        serializer=AppointmentSerializer(data=data,many=True)
+        send_mail(
+            'Appointment Removed',
+            'Your appointment has been deleted. If you want to rebook the appointment, please visit your profile.',
+            'constant',
+            [email],
+            fail_silently=False)
+        data.delete()
         return Response({"msg":"Data Deleted"})
 
 
@@ -90,8 +127,8 @@ class UserLoginView(APIView):
         userdata=request.data
         email=userdata['email']
         password=userdata['password']
-        user=RegistrationModel.objects.filter(email=email)
-        serializer=RegistrationSerializer(user,many=True)
+        user=PatientRegistrationModel.objects.filter(email=email)
+        serializer=PatientRegistrationSerializer(user,many=True)
         if len(serializer.data)==0:
             return Response({"status": "error"}, status=status.HTTP_400_BAD_REQUEST)
         else:
