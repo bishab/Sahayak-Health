@@ -55,105 +55,59 @@ class ActionGreetUser(Action):
         dispatcher.utter_message(f"{time_extract()} How may I help you?")
 
         return []
+
+
+class ActionAppointmentCheck(Action):
+    def name(self) -> Text:
+        return "action_appointment_check"
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        if tracker.get_slot("check_for_appointment") is None:
+            dispatcher.utter_message("Please provide your email address")
+            return [SlotSet("check_for_appointment","changed")]
+        else:
+            data=viewpatient(tracker.latest_message['text'])
+            if data=="No record":
+                dispatcher.utter_message("You have not registered yet. Please register yourself first.")
+                logger.info("User has not registered yet.")
+                return [SlotSet("check_for_appointment",None)]
+            else:
+                #HERE WE WILL FETCH THE APPOINTMENT DATA
+                dispatcher.utter_message("User is a registered user")
+                logger.info("Appointment data checked in the database")
+                dispatcher.utter_message("Taking you back to the menu...")
+                dispatcher.utter_message(f"{time_extract()}! what can I do for you?")
+                return [SlotSet("check_for_appointment",None)]
+
+
+
+class ActionAppointmentDelete(Action):
+    def name(self) -> Text:
+        return "action_appointment_delete"
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        if tracker.get_slot("check_for_appointment") is None:
+            dispatcher.utter_message("Please provide your login password")
+            return [SlotSet("check_for_appointment","changed")]
+        else:
+            data=viewpatient(tracker.latest_message['text'])
+            if data=="No record":
+                dispatcher.utter_message("You have not registered yet. Please register yourself first.")
+                logger.info("User has not registered yet.")
+                return [SlotSet("check_for_appointment",None)]
+            else:
+                #HERE WE WILL FETCH THE APPOINTMENT DATA
+                dispatcher.utter_message("User is a registered user")
+                logger.info("Appointment data checked in the database")
+                dispatcher.utter_message("Taking you back to the menu...")
+                dispatcher.utter_message(f"{time_extract()}! what can I do for you?")
+                return [SlotSet("check_for_appointment",None)]
+
+
+
 """
-#---------------------------------- APPOINTMENT ENTRY START----------------------------------------------------
-class ActionAppointment1(Action):
-    def name(self) -> Text:
-        return "action_appointment_bot_activate1"
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        if tracker.get_slot("begin_appointment") is None or tracker.latest_message['text']=="from the appointment registration button":
-            dispatcher.utter_message(f"{time_extract()}! Please tell your first name")
-            logger.info(f"--------------------------------------------------------------------------------------")
-            logger.info(f"--------------------------------------------------------------------------------------")
-            logger.info(f"NEW USER INITIALIZED")
-            logger.info("appointment form activated")
-            return [SlotSet("appointment_activate","activated"),SlotSet("begin_appointment","changed")]
-        if tracker.get_slot("appointment_activate")=="activated":
-            dispatcher.utter_message("Please tell your last name")
-            logger.info(f"first name {tracker.latest_message['text']} accepted")
-            return [SlotSet("app_first_name",tracker.latest_message['text']),SlotSet("appointment_activate",None),SlotSet("begin_appointment",None)]
-        return []
-
-class ActionAppointment2(Action):
-    def name(self) -> Text:
-        return "action_appointment_bot_activate2"
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        if tracker.get_slot("appointment_activate") is None:
-            dispatcher.utter_message("Please give your address.")
-            logger.info(f"last name {tracker.latest_message['text']} accepted")
-            return [SlotSet("app_last_name",tracker.latest_message['text']),SlotSet("appointment_activate","not none")]
-        if tracker.get_slot("appointment_activate") is not None:
-            dispatcher.utter_message("Please write the date you want to book appointment on.")
-            logger.info(f"address {tracker.latest_message['text']} accepted")
-            return [SlotSet("app_address",tracker.latest_message['text']),SlotSet("appointment_activate",None)]
-        return []
-
-
-class ActionAppointment3(Action):
-    def name(self) -> Text:
-        return "action_appointment_bot_activate3"
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        if tracker.get_slot("appointment_activate") is None:
-            dispatcher.utter_message("Please give your contact number.")
-            logger.info(f"appointment date {tracker.latest_message['text']} accepted")
-            return [SlotSet("app_date",tracker.latest_message['text']),SlotSet("appointment_activate","not none")]
-        if tracker.get_slot("appointment_activate") is not None:
-            buttons = [{"title": "Yes", "payload": "proceed further"},
-            {"title": "No","payload": "dont proceed further"}]
-            dispatcher.utter_message(text="Do you want to proceed further?", buttons=buttons)
-            logger.info(f"contact number {tracker.latest_message['text']} accepted")
-            return [SlotSet("app_contact_number",tracker.latest_message['text']),SlotSet("appointment_activate",None)]
-        return []
-
-
-
-class ActionAppointment4(Action):
-    def name(self) -> Text:
-        return "action_appointment_proceed"
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        if tracker.get_slot("appointment_activate") is None:
-            if tracker.latest_message['text']=="proceed further":
-                dispatcher.utter_message("Thank you. Your appointment is booked with following details:")
-                dispatcher.utter_message(f"Your first name: {tracker.get_slot('app_first_name')}")
-                dispatcher.utter_message(f"Your last name: {tracker.get_slot('app_last_name')}")
-                dispatcher.utter_message(f"Your address: {tracker.get_slot('app_address')}")
-                dispatcher.utter_message(f"Your appointment date: {tracker.get_slot('app_date')}")
-                dispatcher.utter_message(f"Your contact number: {tracker.get_slot('app_contact_number')}")
-                dispatcher.utter_message("Taking you back to the menu.")
-                dispatcher.utter_message(f"{time_extract()}! How can I be of your service?")
-                logger.info("appointment data dumped")
-#                appointment_entry_dumper("bishab","pokharel","biratnagar","tomorrow","986665544")
-                appointment_entry_dumper(tracker.get_slot("app_first_name"),tracker.get_slot("app_last_name"),\
-                    tracker.get_slot("app_address"),tracker.get_slot("app_date"),tracker.get_slot("app_contact_number"))
-                logger.info(f"Slots reset done")
-                logger.info(f"--------------------------------------------------------------------------------------")
-                logger.info(f"--------------------------------------------------------------------------------------")
-
-                return [AllSlotsReset()]
-            if tracker.latest_message['text']=="dont proceed further":
-                dispatcher.utter_message("The data are reset. If you want to make an appointment, please begin with the registration.")
-                appointment_table_creator()
-                logger.info("appointment data not dumped")
-                logger.info(f"Slots reset done")
-                logger.info(f"--------------------------------------------------------------------------------------")
-                logger.info(f"--------------------------------------------------------------------------------------")
-                dispatcher.utter_message("Taking you back to the menu.")
-                dispatcher.utter_message(f"{time_extract()}! How can I help you?")
-                return [AllSlotsReset()]
-        return []
-
-
-#---------------------------------- APPOINTMENT ENTRY END----------------------------------------------------
-"""
-
 #---------------------------------- APPOINTMENT CHECKER START----------------------------------------------------
 class ActionAppointmentCheck(Action):
     def name(self) -> Text:
@@ -165,27 +119,16 @@ class ActionAppointmentCheck(Action):
             dispatcher.utter_message(" Please provide your registered E-mail address")
             logger.info("Appointment checker option triggered")
             return [SlotSet("appointment_activate","activated"),SlotSet("check_for_appointment","changed")]
-        if tracker.get_slot("appointment_activate")=="activated":
-#            tracker.latest_message['text']=tracker.latest_message['text'].replace("check ","")
+        if tracker.get_slot("check_for_appointment")=="changed":
             data=viewpatient(tracker.latest_message['text'])
             if data=="No record":
                 dispatcher.utter_message("You have not registered yet. Please register yourself first.")
                 logger.info("User has not registered yet.")
-                return []
+                return [SlotSet("appointment_activate",None),SlotSet("check_for_appointment",None)]
             else:
                 #HERE WE WILL FETCH THE APPOINTMENT DATA
                 dispatcher.utter_message(f"Your data is : {data}")
                 logger.info("Appointment data checked in the database")
-                return [SlotSet("appointment_activate",None),SlotSet("check_for_appointment",None)]
-
-            if len(user_data)==0:
-                dispatcher.utter_message("You don't have any records of appointment. Please book an appointment first.")
-                dispatcher.utter_message("Taking you back to the menu...")
-                dispatcher.utter_message(f"{time_extract()}! is there anything I could help you with?")
-                return [SlotSet("appointment_activate",None),SlotSet("check_for_appointment",None)]
-            else:
-                dispatcher.utter_message(f"Your appointment data is as follows:")
-                dispatcher.utter_message(f"{user_data}")
                 dispatcher.utter_message("Taking you back to the menu...")
                 dispatcher.utter_message(f"{time_extract()}! what can I do for you?")
                 return [SlotSet("appointment_activate",None),SlotSet("check_for_appointment",None)]
@@ -229,7 +172,7 @@ class ActionAppointmentRemoval(Action):
         return []
 
 #---------------------------------- APPOINTMENT REMOVAL END----------------------------------------------------
-
+"""
 #---------------------------------- COVID SELF ASSESSMENT BOT START----------------------------------------------------
 
 class ActionCovidBotOne(Action):

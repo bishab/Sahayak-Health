@@ -245,6 +245,7 @@ actions:
   - action_other_symptoms
 #For Appointment Bot
   - action_appointment_bot_activate1
+  - action_appointment_two
   - action_appointment_bot_activate2
   - action_appointment_bot_activate3
   - action_appointment_proceed

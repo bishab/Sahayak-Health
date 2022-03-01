@@ -28,53 +28,11 @@ stories:
   - intent: user_symptoms
   - action: action_covid_bot_begin
 
-#Appointment registration related stories
-#- story: appointment begin from conversation
-#  steps:
-#  - intent: book_appointment
-#  - action: action_appointment_bot_activate1
-#
-#- story: appointment begin from button click
-#  steps:
-#  - intent: from_appointment
-#  - action: action_appointment_bot_activate1
-#
-#- story: appointment firstname
-#  steps:
-#  - intent: firstnames
-#  - action: action_appointment_bot_activate1
-#
-#- story: appointment lastname
-#  steps:
-#  - intent: lastnames
-#  - action: action_appointment_bot_activate2
-#  
-#- story: appointment address
-#  steps:
-#  - intent: addresses
-#  - action: action_appointment_bot_activate2
-#
-#- story: appointment date
-#  steps:
-#  - intent: dates
-#  - action: action_appointment_bot_activate3
-#
-#- story: appointment contact number
-#  steps:
-#  - intent: contact_number
-#  - action: action_appointment_bot_activate3
-#
-#- story: proceed further
-#  steps:
-#  - intent: appointment_button_proceed
-#  - action: action_appointment_proceed
-#
-
 #Appointment removal related stories
 - story: delete appointment begin from nlu
   steps:
   - intent: remove_appointment_nlu
-  - action: action_appointment_removal
+  - action: action_appointment_delete
 
 - story: delete appointment begin from button click
   steps:

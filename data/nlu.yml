@@ -38,12 +38,12 @@ nlu:
 
 - intent: check_appointment
   examples: |
-    - check my appointment
+    - check appointment
     - when is my appointment
     - show appointment
-    - show my appointment details
+    - show appointment details
     - display my appointment info
-    - check my appointment info
+    - check my booking
 
 - intent: check_appointment_email
   examples: |
@@ -59,9 +59,9 @@ nlu:
     - remove my appointment
     - delete my booking
     - delete my appointment
-    - cancel booking
-    - cancel my appointment
-    - i want to cancel my booking
+    - remove booking
+    - remove my appointment
+    - i want to remove my booking
 
 - intent: remove_appointment_numbers
   examples: |
