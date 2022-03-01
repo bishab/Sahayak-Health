@@ -21,6 +21,8 @@ def view_patient_reg(email):
 def del_patient_reg(email):
     """
     Deletes patient registration details
+    Args:
+        email: primary key for filtering user data
     """
     link="http://20.41.221.66:7000/patient/delreg/"+email
     status=requests.delete(link)
@@ -36,7 +38,6 @@ def view_patient_appointment(email):
     Args:
         email: primary key for displaying user data
     """
-
     link="http://20.41.221.66:7000/patient/getapp/"+email
     userdata=json.loads(requests.get(link).text)
     if len(userdata)==0:
@@ -48,6 +49,8 @@ def view_patient_appointment(email):
 def del_patient_appointment(email):
     """
     Deletes patient appointment details
+    Args:
+        email: primary key for filtering user data
     """
     link="http://20.41.221.66:7000/patient/delapp/"+email
     status=requests.delete(link)

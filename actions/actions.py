@@ -86,7 +86,6 @@ class ActionAppointmentCheck(Action):
                     return [SlotSet("check_for_appointment",None)]
 
 
-
 class ActionAppointmentDelete(Action):
     def name(self) -> Text:
         return "action_appointment_delete"
