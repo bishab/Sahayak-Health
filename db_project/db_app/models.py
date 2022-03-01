@@ -4,6 +4,7 @@ from django.db import models
 class RegistrationModel(models.Model):
     first_name=models.CharField(max_length=20)
     last_name=models.CharField(max_length=20)
+    gender=models.CharField(max_length=15,default='')
     email=models.EmailField(max_length=50,unique=True)
     password=models.CharField(max_length=20)
     address=models.CharField(max_length=30,default='')
