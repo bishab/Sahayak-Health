@@ -7,3 +7,5 @@ db.sqlite3
 node_modules
 utils/
 models/
+**/license_proofs
+**/migrations
