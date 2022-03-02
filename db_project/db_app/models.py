@@ -23,7 +23,7 @@ class AppointmentModel(models.Model):
     time=models.CharField(max_length=50)
 
     def __str__(self):
-        return self.hospital +" "+ self.patient+" "+self.date
+        return self.hospital +" "+ self.patient_email+" "+self.date
 
 
 
