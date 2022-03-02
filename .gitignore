@@ -3,5 +3,4 @@ logs/
 *.pyc
 **/__pycache__
 .vscode/
-models/
 node_modules/
