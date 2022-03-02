@@ -8,6 +8,7 @@ from django.core.mail import send_mail
 import random
 import json
 
+#---------------------------------------- PATIENT REGISTRATION------------------------------------------
 class PatientRegistrationView(APIView):
     def get(self,request,email=None):
         """
@@ -55,6 +56,7 @@ class PatientRegistrationView(APIView):
         singledata.delete()
         return Response({"msg":"Data Deleted"})
 
+#---------------------------------------- PATIENT APPOINTMENT------------------------------------------
 class AppointmentView(APIView):
     def get(self,request,email=None):
         if email is not None:
@@ -91,8 +93,124 @@ class AppointmentView(APIView):
             fail_silently=False)
         data.delete()
         return Response({"msg":"Data Deleted"})
+    def patch(self,request,email):
+        """
+        This function updates the data partially.
+        """
+        singledata=PatientRegistrationModel.objects.filter(email=email).first()
+        serializer=PatientRegistrationSerializer(singledata,data=request.data,partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"msg":"Data Partially Updated"})
+        else:
+            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self,request,email):
+        """
+        This function deletes the data based on email address.
+        """
+        singledata=PatientRegistrationModel.objects.filter(email=email)
+        singledata.delete()
+        return Response({"msg":"Data Deleted"})
+
+#---------------------------------------- DOCTOR BASIC REGISTRATION------------------------------------------
+class DoctorBasicRegView(APIView):
+    def get(self,request,email=None):
+        """
+        This function does two things.
+            1. If id is given, it displays the data as per that id.
+            2. If id is not given, it displays the total data we have stored.
+        """
+        if email is not None:
+            singledata=DoctorBasicRegistrationModel.objects.filter(email=email)
+            serializer=DoctorBasicRegSerializer(singledata,many=True)
+            return Response(serializer.data)
+
+        data=DoctorBasicRegistrationModel.objects.all()
+        serializer=DoctorBasicRegSerializer(data,many=True)
+        return Response(serializer.data)
+
+    def post(self,request):
+        """
+        This function stores new data into the database.
+        """
+        serializer=DoctorBasicRegSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+    def patch(self,request,email):
+        """
+        This function updates the data partially.
+        """
+        singledata=DoctorBasicRegistrationModel.objects.filter(email=email).first()
+        serializer=DoctorBasicRegSerializer(singledata,data=request.data,partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"msg":"Data Partially Updated"})
+        else:
+            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self,request,email):
+        """
+        This function deletes the data based on email address.
+        """
+        singledata=DoctorBasicRegistrationModel.objects.filter(email=email)
+        singledata.delete()
+        return Response({"msg":"Data Deleted"})
+
+#---------------------------------------- DOCTOR SPECIAL REGISTRATION------------------------------------------
+class DoctorSpecialRegView(APIView):
+    def get(self,request,email=None):
+        """
+        This function does two things.
+            1. If id is given, it displays the data as per that id.
+            2. If id is not given, it displays the total data we have stored.
+        """
+        if email is not None:
+            singledata=DoctorSpecialRegistrationModel.objects.filter(doctor_email=email)
+            serializer=DoctorSpecialRegSerializer(singledata,many=True)
+            return Response(serializer.data)
+
+        data=DoctorSpecialRegistrationModel.objects.all()
+        serializer=DoctorSpecialRegSerializer(data,many=True)
+        return Response(serializer.data)
+
+    def post(self,request):
+        """
+        This function stores new data into the database.
+        """
+        serializer=DoctorSpecialRegSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+    def patch(self,request,email):
+        """
+        This function updates the data partially.
+        """
+        singledata=DoctorSpecialRegistrationModel.objects.filter(doctor_email=email).first()
+        serializer=DoctorSpecialRegSerializer(singledata,data=request.data,partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"msg":"Data Partially Updated"})
+        else:
+            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self,request,email):
+        """
+        This function deletes the data based on email address.
+        """
+        singledata=DoctorSpecialRegistrationModel.objects.filter(doctor_email=email)
+        singledata.delete()
+        return Response({"msg":"Data Deleted"})
 
 
+#---------------------------------------- EMAIL AND TOKEN VERIFICATION------------------------------------------
 class VerifyEmailView(APIView):
     def post(self,request,email):
         token=str(random.random()).split(".")[1][0:4]
@@ -122,6 +240,7 @@ class VerifyTokenView(APIView):
         if token!=serializer.data[0]['token']:
             return Response({"msg":"Wrong Token Provided"})
 
+#---------------------------------------- PATIENT LOGIN------------------------------------------
 class UserLoginView(APIView):
     def post(self,request):
         userdata=request.data
