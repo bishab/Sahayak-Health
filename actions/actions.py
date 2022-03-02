@@ -80,7 +80,8 @@ class ActionAppointmentCheck(Action):
                     logger.info("User has not booked any appointments.")
                     return [SlotSet("check_for_appointment",None)]
                 else:
-                    dispatcher.utter_message(f"Your appointment details are:\n {data}")
+                    dispatcher.utter_message(f"Below are your appointment details.")
+                    dispatcher.utter_message(f"Hospital: {data['hospital']}\nDepartment: {data['department']}\nDoctor: {data['doctor']}\nDate: {data['date']}\nTime: {data['time']}\n")
                     logger.info("Appointment data checked in the database")
                     dispatcher.utter_message("Taking you back to the menu...")
                     dispatcher.utter_message(f"{time_extract()}! what can I do for you?")
