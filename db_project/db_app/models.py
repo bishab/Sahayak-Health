@@ -3,9 +3,10 @@ from django.db import models
 
 #---------------------------------------- PATIENT REGISTRATION------------------------------------------
 class PatientRegistrationModel(models.Model):
+    gender_choices=(('M','Male'),('F','Female'),('O','Other'))
     first_name=models.CharField(max_length=20)
     last_name=models.CharField(max_length=20)
-    gender=models.CharField(max_length=15,default='')
+    gender=models.CharField(max_length=15,choices=gender_choices)
     email=models.EmailField(max_length=50,unique=True)
     password=models.CharField(max_length=20)
     address=models.CharField(max_length=30,default='')
@@ -33,10 +34,11 @@ class AppointmentModel(models.Model):
 #---------------------------------------- DOCTOR REGISTRATION------------------------------------------
 #Doctor's Basic Registration
 class DoctorBasicRegistrationModel(models.Model):
+    gender_choices=(('M','Male'),('F','Female'),('O','Other'))
     first_name=models.CharField(max_length=20)
     last_name=models.CharField(max_length=20)
     age=models.CharField(max_length=10)
-    gender=models.CharField(max_length=15,default='')
+    gender=models.CharField(max_length=15,choices=gender_choices)
     email=models.EmailField(max_length=50,unique=True)
     password=models.CharField(max_length=20)
     address=models.CharField(max_length=30,default='')
@@ -48,15 +50,16 @@ class DoctorBasicRegistrationModel(models.Model):
 
 #Doctor's Special Registration
 class DoctorSpecialRegistrationModel(models.Model):
+    marital_status_choices=(('M','Married'),('U','Unmarried'),('D','Divorced'))
     doctor_email=models.EmailField(max_length=50,unique=True,default='')
     highest_qualification=models.CharField(max_length=100)
     working_hospital=models.CharField(max_length=100)
     license_proof=models.FileField(upload_to='license_proofs/')
     experience_years=models.CharField(max_length=20)
-    home_visit_availability=models.CharField(max_length=50)
+    home_visit_availability=models.BooleanField(default=False)
     stay_location=models.CharField(max_length=100)
-    marital_status=models.CharField(max_length=30)
-    working_date=models.CharField(max_length=100)
+    marital_status=models.CharField(max_length=1,choices=marital_status_choices)
+    working_days=models.CharField(100,max_length=50)
 
     def __str__(self):
         return self.doctor_email +" "+ self.working_hospital
