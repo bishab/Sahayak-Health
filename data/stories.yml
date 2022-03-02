@@ -111,7 +111,6 @@ stories:
   steps:
   - intent: showing_covid_symptoms
   - action: action_showing_covid_symptoms
- # - action: action_farewall
 
 #Helth insurance story
 - story: intro to heath insurance
