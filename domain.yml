@@ -57,13 +57,7 @@ responses:
   - text: "Hi there! Is there any thing I can help you with?"
   
   utter_identity:
-  - text: "I am the AI powered Health Assistant."
-
-  utter_symptoms:
-  - text: "What are your symptoms?"
-
-  utter_user_fine:
-  - text: "Good to hear that!\nHow may i help you?"
+  - text: "I am Sahayak, an AI powered Health Assistant."
 
   utter_introduce_insurance:
   - text: "Under Government Health Insurance scheme, a family \nwith up to five members

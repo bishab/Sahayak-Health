@@ -3,25 +3,15 @@ version: "3.0"
 stories:
 
 #General conversation related stories
-- story: user greeting
+- story: greet the users back when they greet
   steps:
   - intent: user_greet
   - action: action_user_greet
-  
-- story: identity
+
+- story: tell the users that you are a bot
   steps:
   - intent: identity
   - action: utter_identity
-
-- story: user is sick start
-  steps:
-  - intent: user_sick
-  - action: utter_symptoms
-
-- story: user_fine_activity
-  steps:
-  - intent: user_fine
-  - action: utter_user_fine
   
 - story: user says symptoms
   steps:

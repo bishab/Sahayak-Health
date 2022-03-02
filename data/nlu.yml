@@ -2,40 +2,6 @@ version: "3.0"
 
 nlu:
 
-#APPOINTMENT RELATED INTENTS
-#- intent: book_appointment
-#  examples: |
-#    - book an appointment
-#    - book a date for doctor
-#    - make an appointment
-#    - make a booking
-#    - register for doctor
-#    - register for appointment
-#    - is doctor available?
-
-#- intent: from_appointment
-#  examples: |
-#    - from the appointment registration button
-#    - from the registration button
-
-#- intent: appointment_button_proceed
-#  examples: |
-#    - proceed further
-#    - dont proceed further
-
-- intent: remove_appointment
-  examples: |
-    - from the appointment removal button
-    - from the removal button
-
-- intent: user_fine
-  examples: |
-    - i am fine
-    - i am good
-    - i am doing well
-    - good
-    - fine
-
 - intent: check_appointment
   examples: |
     - check appointment
@@ -138,9 +104,6 @@ nlu:
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 # GENERAL CONVERSATION RELATED INTENTS
-- intent: greet
-  examples: |
-    - h
 
 - intent: user_greet
   examples: |
@@ -166,17 +129,6 @@ nlu:
     - who am i talking to?
     - who is it?
 
-
-- intent: user_sick
-  examples: |
-    - I am sick.
-    - I am not well?
-    - Not feeling well
-    - I want to go to hospital
-    - Not good
-    - I feel terrible
-    - I am ill
-
 - intent: user_symptoms
   examples: |
     - fever
@@ -193,6 +145,10 @@ nlu:
     - I am vomiting
     - blood in cough
     - jaundice
+    - want to check my covid
+    - do I have covid?
+    - can you check covid
+    - self assessment covid
 
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------

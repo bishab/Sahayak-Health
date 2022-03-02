@@ -95,8 +95,9 @@ class ActionCovidBotOne(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        if tracker.latest_message['text']=="check for covid self assessment":
+#        if tracker.latest_message['text']=="check for covid self assessment":
 #        if (tracker.get_slot("fully_vaccinated")==None) or (tracker.get_slot("next_question")=="new symptoms activated"):
+        if tracker.get_slot("appointment_activate") is None:
             buttons = [{"title": "Yes", "payload": "Fully Vaccination Pos"},
             {"title": "No", "payload": "Fully Vaccination Neg"}]
             dispatcher.utter_message(f"Hello there. {time_extract()} Please help me by answering few questions I am going to ask. This is for your self-assessment of Covid-19.")
