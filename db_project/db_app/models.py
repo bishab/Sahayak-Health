@@ -27,6 +27,8 @@ class AppointmentModel(models.Model):
 
     def __str__(self):
         return self.hospital +" "+ self.patient_email+" "+self.date
+    class Meta:
+        unique_together=('hospital','department','doctor','date','time')
 
 #---------------------------------------- DOCTOR REGISTRATION------------------------------------------
 #Doctor's Basic Registration
