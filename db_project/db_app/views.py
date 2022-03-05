@@ -1,4 +1,5 @@
 from functools import partial
+from pydoc import doc
 from .models import *
 from .serializers import *
 from rest_framework.views import APIView
@@ -6,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.core.mail import send_mail
 import random
-from db_app.utils.hospital_fetcher import hospital_fetcher
+from db_app.utils.misc_functions import doctors_fetcher, hospital_fetcher
 #---------------------------------------- PATIENT REGISTRATION------------------------------------------
 class PatientRegistrationView(APIView):
     def get(self,request,email=None):
@@ -261,3 +262,12 @@ class HospitalNames(APIView):
     def get(self,request):
         hospitals=hospital_fetcher()
         return Response({"hospital_names":hospitals})
+
+class DoctorNames(APIView):
+    def get(self,request,hospital):
+        hospitals=hospital_fetcher()
+        if hospital in hospitals:
+            doctors=doctors_fetcher()
+            return Response({hospital:doctors})
+        else:
+            return Response({"status": "error"}, status=status.HTTP_400_BAD_REQUEST)

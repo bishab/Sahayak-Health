@@ -17,4 +17,5 @@ def doctors_fetcher():
     """
     Returns the list of doctors
     """
-    return Response({"doctors":})
+    doctors=["Bishab","Bigyan","Ganesh"]
+    return doctors

@@ -30,4 +30,6 @@ urlpatterns = [
     path('userlogin/',UserLoginView.as_view()),
 #---------------------------------------- MISC ENDPOINTS------------------------------------------
     path('hospitals/',HospitalNames.as_view()),
+    path('doctors/<str:hospital>',DoctorNames.as_view()),
+
 ]
