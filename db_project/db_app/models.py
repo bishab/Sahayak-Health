@@ -59,7 +59,7 @@ class DoctorSpecialRegistrationModel(models.Model):
     home_visit_availability=models.BooleanField(default=False)
     stay_location=models.CharField(max_length=100)
     marital_status=models.CharField(max_length=1,choices=marital_status_choices)
-    working_days=models.CharField(100,max_length=50)
+    working_days=models.CharField(100,max_length=50,default='')
 
     def __str__(self):
         return self.doctor_email +" "+ self.working_hospital

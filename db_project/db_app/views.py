@@ -6,8 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.core.mail import send_mail
 import random
-import json
-
+from db_app.utils.hospital_fetcher import hospital_fetcher
 #---------------------------------------- PATIENT REGISTRATION------------------------------------------
 class PatientRegistrationView(APIView):
     def get(self,request,email=None):
@@ -255,3 +254,10 @@ class UserLoginView(APIView):
                 return Response({"ERROR":"correct password"})
             if password!=serializer.data[0]['password']:
                 return Response({"status": "error"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+#---------------------------------------- MISC ENDPOINTS------------------------------------------
+class HospitalNames(APIView):
+    def get(self,request):
+        hospitals=hospital_fetcher()
+        return Response({"hospital_names":hospitals})

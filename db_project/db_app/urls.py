@@ -28,5 +28,6 @@ urlpatterns = [
     path('verifyemail/<str:email>',VerifyEmailView.as_view()),
     path('verifytoken/<str:email>/<str:token>',VerifyTokenView.as_view()),
     path('userlogin/',UserLoginView.as_view()),
-
+#---------------------------------------- MISC ENDPOINTS------------------------------------------
+    path('hospitals/',HospitalNames.as_view()),
 ]
