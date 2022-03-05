@@ -3,7 +3,7 @@ import json
 
 def hospital_fetcher():
     """"
-    Returns hospital names from api
+    Returns the list of hospitals from api
     """
     details=requests.get("https://corona.askbhunte.com/api/v1/hospitals")
     details=json.loads(details.text)
@@ -13,3 +13,8 @@ def hospital_fetcher():
         hospitals.append(hosp['name'])
     return hospitals
 
+def doctors_fetcher():
+    """
+    Returns the list of doctors
+    """
+    return Response({"doctors":})
