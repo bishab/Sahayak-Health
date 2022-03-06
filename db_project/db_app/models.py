@@ -1,3 +1,4 @@
+import email
 from enum import unique
 from django.db import models
 
@@ -25,7 +26,7 @@ class AppointmentModel(models.Model):
     doctor=models.CharField(max_length=50)
     date=models.CharField(max_length=50)
     time=models.CharField(max_length=50)
-
+    previous_reports=models.FileField(upload_to="src/patient_previous_reports/",default=None)
     def __str__(self):
         return self.hospital +" "+ self.patient_email+" "+self.date
     class Meta:
@@ -54,7 +55,13 @@ class DoctorSpecialRegistrationModel(models.Model):
     doctor_email=models.EmailField(max_length=50,unique=True,default='')
     highest_qualification=models.CharField(max_length=100)
     working_hospital=models.CharField(max_length=100)
-    license_proof=models.FileField(upload_to='license_proofs/')
+    
+#    def docname(self):
+#        docfname=DoctorBasicRegistrationModel.objects.filter(email=self.doctor_email).get('first_name')
+#        doclname=DoctorBasicRegistrationModel.objects.filter(email=self.doctor_email).get('last_name')
+#        return docfname+" "+doclname
+#    docfname=DoctorBasicRegistrationModel.objects.get(email=doctor_email)
+    license_proof=models.FileField(upload_to="src/doctor_license_proofs/")
     experience_years=models.CharField(max_length=20)
     home_visit_availability=models.BooleanField(default=False)
     stay_location=models.CharField(max_length=100)
