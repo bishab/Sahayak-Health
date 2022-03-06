@@ -1,8 +1,2 @@
 version: "3.0"
-
 rules:
-
-- rule: Give the identity
-  steps:
-  - intent: greet
-  - action: utter_greet

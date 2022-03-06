@@ -2,27 +2,14 @@ version: "3.0"
 
 intents:
 #General Coversation Related Intent 
-  - greet
   - user_greet
   - identity
-  - user_fine
-  - user_sick
   - user_symptoms
+  - bot_purpose
+  - bot_creators
 #Appointment Related Intent
-  - book_appointment
-  - lastnames
-  - firstnames
-  - addresses
-  - from_appointment
-  - appointment_button_proceed
   - check_appointment
-  - check_appointment_entry
   - check_appointment_email
-  - remove_appointment
-  - remove_appointment_nlu
-  - remove_appointment_numbers
-  - contact_number
-  - dates
 #Blood Related Intent  
   - blood_needed_loc
   - ask_loc
@@ -59,6 +46,20 @@ responses:
   utter_identity:
   - text: "I am Sahayak, an AI powered Health Assistant."
 
+  utter_bot_purpose:
+  - text: "Well I can help you with a lot of things you might need in emergency or whilst booking appointments. Here are some of the commands to get my services via this conversation:\n
+  - Ask about the nearest blood bank details.\n
+  - Take a quick Covid-19 self-assessment test.\n
+  - Book an appointment to your doctor.\n
+  - Solve your query regarding Health Insurance services.\n
+  - And many more... \n
+  Just write it up!"
+
+  utter_bot_creators:
+  - text: "A group of engineers for their capstone did that."
+  - text: "Some young lads who wanted to do something in HealthCare created me."
+  - text: "I was created by a group of genius minds😉"
+
   utter_introduce_insurance:
   - text: "Under Government Health Insurance scheme, a family \nwith up to five members
    has to pay Rs 3,500 to get medical \ntreatment, including medicines worth Rs 100,000
@@ -69,11 +70,9 @@ responses:
   entitled to the insurance coverage from Rs 20,000 to Rs 200,000."
 
   utter_register_for_health_insurance:
-  - text: "You can register and became member at any point of time but you have to 
+  - text: "You can register and become a member at any point of time but you have to 
   wait for the appointed time to get the service"
     image: "https://blogger.googleusercontent.com/img/a/AVvXsEg4x4KoASWZs1o-QS0cXt8sCl91p1_2F5Dw7oVGH8UVrSRkrm3whXzJW0W3US8r6iUuRp-RmLEm1Ymyz9QQoqKEOekS-9_-4L-d5UCkIw1MvG75AjtW2WlHa8MaqwxKTJmM9rnN3iFDQcT3bjWEZQRIoJ7NSZTYcCkSW-ZvTjwq1HqlWtD7VglkWU8w=s320"
-
-
 
   utter_contact_health_insurance:
   - text: "\nFor more Information:\nPhone No.: 01-4100223\nToll free No. 1660-01-11224\nWebsite: www.hib.gov.np"  

@@ -18,6 +18,15 @@ stories:
   - intent: user_symptoms
   - action: action_covid_bot_begin
 
+- story: user asks bot's purpose
+  steps:
+  - intent: bot_purpose
+  - action: utter_bot_purpose
+
+- story: user asks bot's creators
+  steps:
+  - intent: bot_creators
+  - action: utter_bot_creators
 
 #Appointment check related stories
 - story: check appointment from conversation

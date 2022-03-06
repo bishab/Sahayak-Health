@@ -20,87 +20,6 @@ nlu:
     - timilsina.bikash@gmail.com
     - abcd232@yahoo.com
 
-- intent: remove_appointment_nlu
-  examples: |
-    - remove my appointment
-    - delete my booking
-    - delete my appointment
-    - remove booking
-    - remove my appointment
-    - i want to remove my booking
-
-- intent: remove_appointment_numbers
-  examples: |
-    - remove 9867224121
-    - remove 9112442609
-    - remove 9779854321632
-    - remove +9779854323562
-    - remove +918215632136
-    - remove 7701235463
-    - remove 9112532198
-
-- intent: dates
-  examples: |
-    - 12th Jan
-    - Tomorrow
-    - Next Week
-    - Coming Sunday
-    - This friday
-    - March
-    - April
-    - Sunday
-    - Monday
-    - Tuesday
-    - Wednesday
-    - Thursday
-    - Friday
-    - Saturday
-    - January
-    - February
-    - May
-    - June
-    - July
-    - August
-    - September
-    - October
-    - November
-    - December
-    - Yesterday
-    - Before 27th March
-
-- intent: contact_number
-  examples: |
-    - 9867224121
-    - 9112442609
-    - 9779854321632
-    - +9779854323562
-    - +918215632136
-    - 7701235463
-    - 9112532198
-
-- intent: firstnames
-  examples: |
-    - Bishan
-    - Ganesh
-    - Bigyan
-
-- intent: lastnames
-  examples: |
-    - Pokharel
-    - Timilsina
-    - Makam
-    - Kaur
-    - Bajaj
-
-- intent: addresses
-  examples: |
-    - Nepal
-    - India
-    - Pokhara
-    - Kathmandu
-    - Damauli
-    - Biratnagar-7, Nepal
-    - Janakpur, Madhesh
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 # GENERAL CONVERSATION RELATED INTENTS
@@ -150,6 +69,24 @@ nlu:
     - can you check covid
     - self assessment covid
 
+- intent: bot_purpose
+  examples: |
+    - What do you do?
+    - What can you do?
+    - What is your purpose?
+    - What are you for?
+    - What is your work?
+    - What works can you do?
+    - How can you help me?
+    - Why were you created?
+
+- intent: bot_creators
+  examples: |
+    - Who created you?
+    - Who are your creators?
+    - Who developed you?
+    - Who are your godfathers?
+    - Who are your developers?
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 #BLOOD BANK RELATED INTENTS
