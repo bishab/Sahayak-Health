@@ -55,13 +55,7 @@ class DoctorSpecialRegistrationModel(models.Model):
     doctor_email=models.EmailField(max_length=50,unique=True,default='')
     highest_qualification=models.CharField(max_length=100)
     working_hospital=models.CharField(max_length=100)
-    
-#    def docname(self):
-#        docfname=DoctorBasicRegistrationModel.objects.filter(email=self.doctor_email).get('first_name')
-#        doclname=DoctorBasicRegistrationModel.objects.filter(email=self.doctor_email).get('last_name')
-#        return docfname+" "+doclname
-#    docfname=DoctorBasicRegistrationModel.objects.get(email=doctor_email)
-    license_proof=models.FileField(upload_to="src/doctor_license_proofs/")
+    license_proof=models.FileField(upload_to=f"src/doctor_license_proofs/")
     experience_years=models.CharField(max_length=20)
     home_visit_availability=models.BooleanField(default=False)
     stay_location=models.CharField(max_length=100)
