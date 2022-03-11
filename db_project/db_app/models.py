@@ -4,7 +4,7 @@ from django.db import models
 
 #---------------------------------------- PATIENT REGISTRATION------------------------------------------
 class PatientRegistrationModel(models.Model):
-    gender_choices=(('M','Male'),('F','Female'),('O','Other'))
+    gender_choices=(('Male','Male'),('Female','Female'),('Other','Other'))
     first_name=models.CharField(max_length=20)
     last_name=models.CharField(max_length=20)
     gender=models.CharField(max_length=15,choices=gender_choices)
@@ -35,7 +35,7 @@ class AppointmentModel(models.Model):
 #---------------------------------------- DOCTOR REGISTRATION------------------------------------------
 #Doctor's Basic Registration
 class DoctorBasicRegistrationModel(models.Model):
-    gender_choices=(('M','Male'),('F','Female'),('O','Other'))
+    gender_choices=(('Male','Male'),('Female','Female'),('Other','Other'))
     first_name=models.CharField(max_length=20)
     last_name=models.CharField(max_length=20)
     age=models.CharField(max_length=10)
