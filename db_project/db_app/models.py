@@ -51,7 +51,7 @@ class DoctorBasicRegistrationModel(models.Model):
 
 #Doctor's Special Registration
 class DoctorSpecialRegistrationModel(models.Model):
-    marital_status_choices=(('M','Married'),('U','Unmarried'),('D','Divorced'))
+    marital_status_choices=(('Married','Married'),('Unmarried','Unmarried'),('Divorced','Divorced'))
     doctor_email=models.EmailField(max_length=50,unique=True,default='')
     highest_qualification=models.CharField(max_length=100)
     working_hospital=models.CharField(max_length=100)
