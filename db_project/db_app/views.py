@@ -252,7 +252,7 @@ class UserLoginView(APIView):
             return Response({"status": "error"}, status=status.HTTP_400_BAD_REQUEST)
         else:
             if password==serializer.data[0]['password']:
-                return Response({"ERROR":"correct password"})
+                return Response({"msg":"correct password"})
             if password!=serializer.data[0]['password']:
                 return Response({"status": "error"}, status=status.HTTP_400_BAD_REQUEST)
 
