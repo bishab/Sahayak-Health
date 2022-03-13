@@ -11,6 +11,11 @@
             android:title="Home"
             />
         <item
+            android:id="@+id/nav_menu_appointment"
+            android:icon="@drawable/icon_calendar"
+            android:title="Appointment"
+            />
+        <item
             android:id="@+id/nav_menu_hospitalList"
             android:icon="@drawable/icon_hospital"
             android:title="Hospital List"
@@ -20,11 +25,7 @@
             android:icon="@drawable/icon_help"
             android:title="FAQ"
             />
-        <item
-            android:id="@+id/nav_menu_appointment"
-            android:icon="@drawable/icon_calendar"
-            android:title="Appointment"
-            />
     </group>
+
 
 </menu>
