@@ -249,12 +249,14 @@ class UserLoginView(APIView):
         user=PatientRegistrationModel.objects.filter(email=email)
         serializer=PatientRegistrationSerializer(user,many=True)
         if len(serializer.data)==0:
-            return Response({"msg": "user not registered"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"msg":"user not registered"})
+#            return Response({"msg": "user not registered"}, status=status.HTTP_400_BAD_REQUEST)
         else:
             if password==serializer.data[0]['password']:
                 return Response({"msg":"correct password"})
             if password!=serializer.data[0]['password']:
-                return Response({"msg": "incorrect password"}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"msg":"password incorrect"})
+#                return Response({"msg": "incorrect password"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 #---------------------------------------- MISC ENDPOINTS------------------------------------------
