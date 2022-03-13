@@ -34,7 +34,7 @@ class PatientRegistrationView(APIView):
             serializer.save()
             return Response(serializer.data)
         else:
-            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self,request,email):
         """
@@ -46,7 +46,7 @@ class PatientRegistrationView(APIView):
             serializer.save()
             return Response({"msg":"Data Partially Updated"})
         else:
-            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self,request,email):
         """
@@ -80,7 +80,7 @@ class AppointmentView(APIView):
                 fail_silently=False)
             return Response(serializer.data)
         else:
-            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self,request,email):
         data=AppointmentModel.objects.filter(patient_email=email)
@@ -103,7 +103,7 @@ class AppointmentView(APIView):
             serializer.save()
             return Response({"msg":"Data Partially Updated"})
         else:
-            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self,request,email):
         """
@@ -139,7 +139,7 @@ class DoctorBasicRegView(APIView):
             serializer.save()
             return Response(serializer.data)
         else:
-            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self,request,email):
         """
@@ -151,7 +151,7 @@ class DoctorBasicRegView(APIView):
             serializer.save()
             return Response({"msg":"Data Partially Updated"})
         else:
-            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self,request,email):
         """
@@ -187,7 +187,7 @@ class DoctorSpecialRegView(APIView):
             serializer.save()
             return Response(serializer.data)
         else:
-            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self,request,email):
         """
@@ -199,7 +199,7 @@ class DoctorSpecialRegView(APIView):
             serializer.save()
             return Response({"msg":"Data Partially Updated"})
         else:
-            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self,request,email):
         """
@@ -249,12 +249,12 @@ class UserLoginView(APIView):
         user=PatientRegistrationModel.objects.filter(email=email)
         serializer=PatientRegistrationSerializer(user,many=True)
         if len(serializer.data)==0:
-            return Response({"status": "error"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status": "user not registered"}, status=status.HTTP_400_BAD_REQUEST)
         else:
             if password==serializer.data[0]['password']:
                 return Response({"msg":"correct password"})
             if password!=serializer.data[0]['password']:
-                return Response({"status": "error"}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"status": "incorrect password"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 #---------------------------------------- MISC ENDPOINTS------------------------------------------
