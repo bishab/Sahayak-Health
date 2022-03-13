@@ -7,10 +7,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.sabkokura.sahayekhelath.Activities.LoginActivity;
 import com.sabkokura.sahayekhelath.Fragments.FragmentAppointment;
 import com.sabkokura.sahayekhelath.Fragments.FragmentFaq;
 import com.sabkokura.sahayekhelath.Fragments.FragmentHome;
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //defining views
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.inflateMenu(R.menu.toolbarmenu);
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawlayout);
@@ -54,6 +59,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbarmenu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.loginsignup:{
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                Toast.makeText(getApplicationContext(),"Login Clicked",Toast.LENGTH_SHORT).show();
+            }
+        }
+        return true;
     }
 
     @Override

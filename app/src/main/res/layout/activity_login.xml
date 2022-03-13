@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/AllActivity"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    tools:context=".Activities.LoginActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="57dp">
+
+        <RelativeLayout
+            android:id="@+id/loginlayout"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="25dp"
+            android:background="#E2E2E2"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <EditText
+                android:id="@+id/userEmail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="90dp"
+                android:background="@drawable/layout_bankspace"
+                android:drawableLeft="@drawable/icon_user"
+                android:drawablePadding="10dp"
+                android:hint="Email Address"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="15dp"
+                android:textColor="#000"
+                android:textColorHint="#3C4043"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/userPassword"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/userEmail"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/layout_bankspace"
+                android:drawableLeft="@drawable/icon_password"
+                android:drawablePadding="10dp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingLeft="15dp"
+                android:textColor="#000"
+                android:textColorHint="#3C4043"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/loginButton"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/userPassword"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="60dp"
+                android:background="@drawable/layout_login"
+                android:gravity="center_vertical|center_horizontal"
+                android:text=" Login "
+                android:textColor="#fff"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/donthave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/loginButton"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="18dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Don't have an account?"
+                android:textColor="#2477BC"
+                android:textSize="15sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/loginButton"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="170dp"
+                android:layout_marginTop="18dp"
+                android:layout_toEndOf="@+id/donthave"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Register"
+                android:textColor="#2477BC"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/view2"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#fff"
+        android:elevation="12dp"
+        android:innerRadius="0dp"
+        android:layout_marginTop="95dp"
+        android:shape="ring"
+        android:thicknessRatio="1.9"
+        app:cardCornerRadius="60dp">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:src="@drawable/icon_user" />
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
