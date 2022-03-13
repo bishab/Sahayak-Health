@@ -13,3 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+.vscode
+db_project/
+utils/
+logs/
+actions/
