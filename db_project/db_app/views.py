@@ -34,7 +34,7 @@ class PatientRegistrationView(APIView):
             user=serializer.save()
             return Response({"msg":"user successfully registered"})
         else:
-            return Response({"msg":"data format not valid"})
+            return Response({"msg":"user already exists"})
 #            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self,request,email):
@@ -47,7 +47,7 @@ class PatientRegistrationView(APIView):
             serializer.save()
             return Response({"msg":"Data Partially Updated"})
         else:
-            return Response({"msg":"data format not valid"})
+            return Response({"msg":"user does not exist"})
 #            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self,request,email):
