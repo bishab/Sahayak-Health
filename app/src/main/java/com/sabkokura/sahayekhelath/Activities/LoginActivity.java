@@ -3,6 +3,7 @@ package com.sabkokura.sahayekhelath.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -25,7 +26,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
     Toolbar toolbar;
     EditText email, password;
-    TextView loginButton;
+    TextView loginButton, registerButton;
 
     //
     WebApi webApi;
@@ -44,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.userEmail);
         password = (EditText) findViewById(R.id.userPassword);
         loginButton = (TextView) findViewById(R.id.loginButton);
+        registerButton = (TextView) findViewById(R.id.registerHere);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +68,14 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            }
+        });
+
 
 
     }
