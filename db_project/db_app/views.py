@@ -34,7 +34,8 @@ class PatientRegistrationView(APIView):
             serializer.save()
             return Response(serializer.data)
         else:
-            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"msg":"data format not valid"})
+#            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self,request,email):
         """
@@ -46,7 +47,8 @@ class PatientRegistrationView(APIView):
             serializer.save()
             return Response({"msg":"Data Partially Updated"})
         else:
-            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"msg":"data format not valid"})
+#            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self,request,email):
         """
@@ -80,7 +82,8 @@ class AppointmentView(APIView):
                 fail_silently=False)
             return Response(serializer.data)
         else:
-            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"msg":"data format not valid"})
+#            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self,request,email):
         data=AppointmentModel.objects.filter(patient_email=email)
@@ -103,7 +106,8 @@ class AppointmentView(APIView):
             serializer.save()
             return Response({"msg":"Data Partially Updated"})
         else:
-            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"msg":"data format not valid"})
+#            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self,request,email):
         """
@@ -139,7 +143,8 @@ class DoctorBasicRegView(APIView):
             serializer.save()
             return Response(serializer.data)
         else:
-            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"msg":"data format not valid"})
+#            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self,request,email):
         """
@@ -151,7 +156,8 @@ class DoctorBasicRegView(APIView):
             serializer.save()
             return Response({"msg":"Data Partially Updated"})
         else:
-            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"msg":"data format not valid"})
+#            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self,request,email):
         """
@@ -187,7 +193,8 @@ class DoctorSpecialRegView(APIView):
             serializer.save()
             return Response(serializer.data)
         else:
-            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"msg":"data format not valid"})
+#            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self,request,email):
         """
@@ -199,7 +206,8 @@ class DoctorSpecialRegView(APIView):
             serializer.save()
             return Response({"msg":"Data Partially Updated"})
         else:
-            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"msg":"data format not valid"})
+#            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self,request,email):
         """
