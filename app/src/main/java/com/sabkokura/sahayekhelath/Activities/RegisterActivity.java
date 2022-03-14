@@ -20,12 +20,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sabkokura.sahayekhelath.APIs.RetrofitInstance;
 import com.sabkokura.sahayekhelath.R;
+import com.sabkokura.sahayekhelath.Requests.RegisterRequest;
+import com.sabkokura.sahayekhelath.Responses.RegisterResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
     Spinner spinnerMaleFemale;
     Toolbar toolbar;
-    EditText firstName, lastName, gender, email, password, confirmPassword, conatacNumber;
+    EditText firstName, lastName, gender, email, password, confirmPassword, conatacNumber, adderss;
     TextView dateOfBirth, register, measuerPassword;
     View passwordLine;
     ImageView calenderIcon;
@@ -49,6 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.userPassword);
         confirmPassword = (EditText) findViewById(R.id.userConfirmPassword);
         conatacNumber = (EditText) findViewById(R.id.userContactNumber);
+        adderss = (EditText) findViewById(R.id.userAddress);
 
         dateOfBirth = (TextView) findViewById(R.id.userDateOfBirth);
         register = (TextView) findViewById(R.id.registerButton);
@@ -159,7 +167,7 @@ public class RegisterActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String fName, lName, gender, eMail, dOB, phNumber, pass, conPass;
+                String fName, lName, gender, eMail, dOB, phNumber, pass, conPass, add;
                 fName = firstName.getText().toString().trim();
                 lName = lastName.getText().toString().trim();
                 pass = password.getText().toString().trim();
@@ -168,6 +176,7 @@ public class RegisterActivity extends AppCompatActivity {
                 eMail = email.getText().toString().trim();
                 dOB = dateOfBirth.getText().toString().trim();
                 phNumber = conatacNumber.getText().toString().trim();
+                add = adderss.getText().toString().trim();
 
                 if(fName.length()>0 && lName.length()>0 && lName.length()>0 && pass.length()>0 && conPass.length()>0 && eMail.length()>0
                         && dOB.length()>0 && phNumber.length()>0){
@@ -175,6 +184,8 @@ public class RegisterActivity extends AppCompatActivity {
                         if(passwordMatch==true){
                             if (phNumber.length()==10){
                                 Toast.makeText(getApplicationContext(),"Ready to Proceed",Toast.LENGTH_LONG).show();
+                                RegisterRequest request = new RegisterRequest(fName, lName, gender, eMail, pass,add,dOB, phNumber);
+                                registerNewUser(request);
 
                             }
                             else {
@@ -208,5 +219,32 @@ public class RegisterActivity extends AppCompatActivity {
         builder.append(datePicker.getDayOfMonth()+"/");
         builder.append(datePicker.getYear());
         return builder.toString();
+    }
+
+    public void registerNewUser(RegisterRequest registerRequest){
+        Call <RegisterResponse> registerResponseCall = RetrofitInstance.getService().registerUser(registerRequest);
+
+        registerResponseCall.enqueue(new Callback<RegisterResponse>() {
+            @Override
+            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+                RegisterResponse getResponse = response.body();
+                String outputResponse = getResponse.getStatus();
+                if (outputResponse.equals("user already exists")){
+                    Toast.makeText(getApplicationContext(),"user already exists", Toast.LENGTH_LONG).show();
+
+                }
+                else if(outputResponse.equals("user successfully registered")){
+                    Toast.makeText(getApplicationContext(),"user successfully registered", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"Something went Wrong", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RegisterResponse> call, Throwable t) {
+
+            }
+        });
     }
 }

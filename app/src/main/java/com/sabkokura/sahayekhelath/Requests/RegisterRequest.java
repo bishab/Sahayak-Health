@@ -18,18 +18,22 @@ public class RegisterRequest {
     @SerializedName("password")
     String password;
 
+    @SerializedName("address")
+    String address;
+
     @SerializedName("date_of_birth")
     String date_of_birth;
 
     @SerializedName("contact_number")
     String contact_number;
 
-    public RegisterRequest(String first_name, String last_name, String gender, String email, String password, String date_of_birth, String contact_number) {
+    public RegisterRequest(String first_name, String last_name, String gender, String email, String password, String address, String date_of_birth, String contact_number) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.gender = gender;
         this.email = email;
         this.password = password;
+        this.address = address;
         this.date_of_birth = date_of_birth;
         this.contact_number = contact_number;
     }
@@ -72,6 +76,14 @@ public class RegisterRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getDate_of_birth() {

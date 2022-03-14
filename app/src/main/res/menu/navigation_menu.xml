@@ -21,6 +21,22 @@
             android:title="Hospital List"
             />
         <item
+            android:id="@+id/nav_news"
+            android:icon="@drawable/icon_news"
+            android:title="News"
+            />
+        <item
+            android:id="@+id/nav_data"
+            android:icon="@drawable/icon_data"
+            android:title="Data Visualization"
+            />
+        <item
+            android:id="@+id/nav_myth"
+            android:title="Myths"
+            android:icon="@drawable/icon_myth"
+            />
+
+        <item
             android:id="@+id/nav_menu_faq"
             android:icon="@drawable/icon_help"
             android:title="FAQ"

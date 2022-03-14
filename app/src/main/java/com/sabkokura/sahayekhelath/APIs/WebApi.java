@@ -1,7 +1,9 @@
 package com.sabkokura.sahayekhelath.APIs;
 
 import com.sabkokura.sahayekhelath.Requests.LoginRequest;
+import com.sabkokura.sahayekhelath.Requests.RegisterRequest;
 import com.sabkokura.sahayekhelath.Responses.LoginResponses;
+import com.sabkokura.sahayekhelath.Responses.RegisterResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -16,6 +18,9 @@ public interface WebApi {
 //    @FormUrlEncoded
 //    @POST("userlongin/")
 //    Call<LoginResponses> loginUser(@Field("email") String email, @Field("password") String pass);
+
+    @POST("patient/postreg/")
+    Call<RegisterResponse> registerUser(@Body RegisterRequest request);
 
 
 }
