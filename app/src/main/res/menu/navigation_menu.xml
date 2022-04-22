@@ -39,9 +39,22 @@
         <item
             android:id="@+id/nav_menu_faq"
             android:icon="@drawable/icon_help"
-            android:title="FAQ"
+            android:title="FAQs"
             />
     </group>
+    <item
+        android:title="Important Calulators"
+        >
+        <menu>
+            <item
+                android:id="@+id/nav_menu_bmi"
+                android:title="BMI"
+                android:icon="@drawable/icon_bmi"
+                />
+
+
+        </menu>
+    </item>
 
 
 </menu>

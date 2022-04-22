@@ -165,7 +165,7 @@
                     android:id="@+id/userDateOfBirth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2022/03/03"
+                    android:text="YY/MM/DD"
                     android:textColor="@color/black"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
@@ -194,6 +194,7 @@
                 android:textColor="#000"
                 android:textColorHint="#3C4043"
                 android:textSize="15sp" />
+
             <EditText
                 android:id="@+id/userAddress"
                 android:layout_width="match_parent"
@@ -203,7 +204,7 @@
                 android:background="@drawable/layout_edittext"
                 android:drawablePadding="10dp"
                 android:hint="Address"
-                android:inputType="number"
+                android:inputType="text"
                 android:paddingLeft="15dp"
                 android:textColor="#000"
                 android:textColorHint="#3C4043"

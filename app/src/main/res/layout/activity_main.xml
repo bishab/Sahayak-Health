@@ -30,6 +30,7 @@
         android:layout_gravity="start"
         android:layout_marginTop="85dp"
         app:itemIconTint="#2477BC"
+        app:subheaderColor="@color/black"
         app:itemTextColor="#2D9FFF"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/navigation_menu" />

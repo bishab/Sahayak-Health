@@ -8,7 +8,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitInstance {
     private static Retrofit retrofit;
     private static String BASEURL ="http://20.41.221.66:7000/";
-//    private static String BASEURL ="http://api.larntech.net/";
 
     public static Retrofit getRetrofit(){
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();

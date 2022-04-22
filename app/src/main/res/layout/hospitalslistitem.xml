@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/minDetailsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp"
+        >
+
+        <TextView
+            android:id="@+id/hospitalName"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Hospitals"
+            android:layout_marginLeft="5dp"
+            android:textColor="#000"
+            android:textSize="12sp"
+            />
+
+        <TextView
+            android:id="@+id/hospitalAddress"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:textSize="12sp"
+            android:layout_marginLeft="5dp"
+            android:textColor="#000"
+            />
+        <TextView
+            android:id="@+id/hospitalPhone"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Phone"
+            android:textSize="12sp"
+            android:layout_marginLeft="27dp"
+            android:textColor="#000"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/moreDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        android:layout_marginBottom="12dp"
+        >
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="25dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Beds: "
+                    android:textColor="@color/black"
+                    />
+                <TextView
+                    android:id="@+id/hospitalBeds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Ventilators: "
+                    android:textColor="@color/black"
+                    />
+                <TextView
+                    android:id="@+id/hospitalVentilators"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Beds: "
+                    android:textColor="@color/black"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/makeCall"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:rotation="240"
+            android:src="@drawable/icon_phone"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="40dp"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

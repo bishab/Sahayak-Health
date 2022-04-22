@@ -3,12 +3,31 @@ package com.sabkokura.sahayekhelath.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.sabkokura.sahayekhelath.Adapters.FAQsAdapter;
+import com.sabkokura.sahayekhelath.Adapters.HospitalAdapter;
+import com.sabkokura.sahayekhelath.ModelClasses.HospitalListModelsClass;
 import com.sabkokura.sahayekhelath.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +35,14 @@ import com.sabkokura.sahayekhelath.R;
  * create an instance of this fragment.
  */
 public class FragmentHospital extends Fragment {
+    ArrayList<HospitalListModelsClass> arrayList;
+    ProgressBar progressBar;
+    HospitalListModelsClass hospitalListModelsClass;
+    TextView loadingText;
+    RecyclerView recyclerView;
+    private final String BASE_URL = "https://corona.askbhunte.com/api/v1/hospitals";
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,6 +89,73 @@ public class FragmentHospital extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_hospital, container, false);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        loadingText = (TextView) view.findViewById(R.id.loadingText);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+
+
+
+        arrayList = new ArrayList<>();
+        progressBar.setVisibility(View.VISIBLE);
+        loadingText.setVisibility(View.VISIBLE);
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext().getApplicationContext());
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, BASE_URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response.toString());
+                    JSONArray jsonArray = jsonObject.getJSONArray("data");
+                    for (int i = 0; i<jsonArray.length(); i++){
+                        JSONObject innerArray = jsonArray.getJSONObject(i);
+                        String hosName = innerArray.get("name").toString();
+                        String hosAdd = innerArray.get("address").toString();
+                        String hosPhone = innerArray.get("phone").toString();
+                        JSONObject capacity = innerArray.getJSONObject("capacity");
+                        String hosBed = capacity.get("beds").toString();
+                        String hosVentilators = capacity.get("ventilators").toString();
+
+                        if (hosAdd.length()==0){
+                            hosAdd="Not Available";
+                        }
+                        if (hosPhone.length()==0){
+                            hosPhone="Not Available";
+                        }
+                        if (hosBed.length()==0){
+                            hosBed="Not Available";
+                        }
+                        if (hosVentilators.length()==0){
+                            hosVentilators="Not Available";
+                        }
+
+                        arrayList.add(new HospitalListModelsClass(hosName, hosAdd, hosPhone, hosBed, hosVentilators));
+
+
+
+                        progressBar.setVisibility(View.GONE);
+                        loadingText.setVisibility(View.GONE);
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                HospitalAdapter adapter = new HospitalAdapter(getContext().getApplicationContext(), arrayList);
+                recyclerView.setAdapter(adapter);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        requestQueue.add(jsonObjectRequest);
+
+
         return view;
     }
 }

@@ -2,13 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/loginsignup"
-        android:title="Login/Signup"
-        app:showAsAction="ifRoom"
-        />
-    <item
-        android:id="@+id/changeMyLanguage"
-        android:title="नेपा"
+        android:id="@+id/changeLanguage"
+        android:title="NP"
         app:showAsAction="ifRoom"/>
+
+
 
 </menu>

@@ -25,6 +25,8 @@ import com.sabkokura.sahayekhelath.R;
 import com.sabkokura.sahayekhelath.Requests.RegisterRequest;
 import com.sabkokura.sahayekhelath.Responses.RegisterResponse;
 
+import java.util.regex.Pattern;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,6 +40,13 @@ public class RegisterActivity extends AppCompatActivity {
     ImageView calenderIcon;
     DatePicker datePicker;
     Boolean passwordMatch = false;
+    final Pattern PasswordPattern = Pattern.compile("^"+
+            "(?=.*[@#$%^&+=])" + //at least one special character
+            "(?=\\S+$)"+ //no white spaces
+            ".{4,}"+ //at least 4 character
+            "$"
+    );
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,20 +93,20 @@ public class RegisterActivity extends AppCompatActivity {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.length()>0&& charSequence.length()<=6){
+                if(charSequence.length()>0&& charSequence.length()<=6 && PasswordPattern.matcher(charSequence).matches()){
                     measuerPassword.setVisibility(View.VISIBLE);
                     measuerPassword.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.smallPassword));
                     passwordLine.setVisibility(View.VISIBLE);
                     passwordLine.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.smallPassword));
                 }
-                else if (charSequence.length()>6&& charSequence.length()<=9){
+                else if (charSequence.length()>6&& charSequence.length()<=9 && PasswordPattern.matcher(charSequence).matches()){
                     measuerPassword.setVisibility(View.VISIBLE);
                     measuerPassword.setText("Medium");
                     measuerPassword.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.mediumPassword));
                     passwordLine.setVisibility(View.VISIBLE);
                     passwordLine.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.mediumPassword));
                 }
-                else if(charSequence.length()>6){
+                else if(charSequence.length()>9 && PasswordPattern.matcher(charSequence).matches()){
                     measuerPassword.setVisibility(View.VISIBLE);
                     measuerPassword.setText("Strong");
                     measuerPassword.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.strongPassword));
@@ -124,7 +133,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.toString().equals(password.getText().toString())){
+                if(charSequence.toString().equals(password.getText().toString()) &&charSequence.length()>6){
                     System.out.println("Password Equal:" + charSequence);
                     passwordMatch = true;
                     confirmPassword.setCompoundDrawablesWithIntrinsicBounds(null, null,
@@ -142,7 +151,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         Dialog openCalendar = new Dialog(this);
-        dateOfBirth.setText(getCurrentDate());
+//        dateOfBirth.setText(getCurrentDate());
 
         calenderIcon.setOnClickListener(new View.OnClickListener() {
             @Override

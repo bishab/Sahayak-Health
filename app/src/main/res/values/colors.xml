@@ -10,7 +10,31 @@
 
     <color name="AllActivity">#FFF</color>
     <color name="smallPassword">#e84a56</color>
-    <color name="mediumPassword">#969006</color>
+    <color name="mediumPassword">#FFA701</color>
     <color name="strongPassword">#12bf0f</color>
+
+    <array name="array_dot_active">
+        <item>#39d1ba</item>
+        <item>#14a895</item>
+        <item>#39d1ba</item>
+        <item>#14a895</item>
+        <item>#39d1ba</item>
+        <item>#14a895</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>#8de7f9</item>
+        <item>#8cf9eb</item>
+        <item>#8de7f9</item>
+        <item>#8cf9eb</item>
+        <item>#8de7f9</item>
+        <item>#8cf9eb</item>
+    </array>
+
+    <color name="normalBMI">#006400</color>
+    <color name="underBMI">#D22B2B</color>
+    <color name="overBMI">#FFBF00</color>
+    <color name="obseBMI">#581845 </color>
+
 
 </resources>
