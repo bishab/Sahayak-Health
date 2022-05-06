@@ -20,17 +20,23 @@ class PatientRegistrationModel(models.Model):
 
 #---------------------------------------- PATIENT APPOINTMENT------------------------------------------
 class AppointmentModel(models.Model):
-    patient_email=models.EmailField(max_length=50)
-    hospital=models.CharField(max_length=100)
-    department=models.CharField(max_length=100)
-    doctor=models.CharField(max_length=50)
-    date=models.CharField(max_length=50)
-    time=models.CharField(max_length=50)
+    gender_choices=(('Male','Male'),('Female','Female'),('Other','Other'))
+    firstname=models.CharField(max_length=20,default='')
+    lastname=models.CharField(max_length=20,default='')
+    age=models.CharField(max_length=10,default='')
+    patient_email=models.EmailField(max_length=50,default='')
+    patient_address=models.CharField(max_length=100,default='')
+    gender=models.CharField(max_length=15,choices=gender_choices,default='')
+    contact_number=models.CharField(max_length=13,default='')
+    hospital=models.CharField(max_length=100,default='')
+    department=models.CharField(max_length=100,default='')
+    date=models.CharField(max_length=50,default='')
+    time=models.CharField(max_length=50,default='')
     previous_reports=models.FileField(upload_to="src/patient_previous_reports/",default=None)
     def __str__(self):
         return self.hospital +" "+ self.patient_email+" "+self.date
     class Meta:
-        unique_together=('hospital','department','doctor','date','time')
+        unique_together=('hospital','department','date','time')
 
 #---------------------------------------- DOCTOR REGISTRATION------------------------------------------
 #Doctor's Basic Registration
