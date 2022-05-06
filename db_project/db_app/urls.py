@@ -12,18 +12,12 @@ urlpatterns = [
     path('patient/getapp/<str:email>/',AppointmentView.as_view(http_method_names=['get'])),
     path('patient/postapp/',AppointmentView.as_view(http_method_names=['post'])),
     path('patient/delapp/<str:email>',AppointmentView.as_view(http_method_names=['delete'])),
-#---------------------------------------- DOCTOR BASIC REGISTRATION------------------------------------------
-    path('bdoctor/getreg/',DoctorBasicRegView.as_view(http_method_names=['get'])),
-    path('bdoctor/getreg/<str:email>/',DoctorBasicRegView.as_view(http_method_names=['get'])),
-    path('bdoctor/postreg/',DoctorBasicRegView.as_view(http_method_names=['post'])),
-    path('bdoctor/patchreg/<str:email>/',DoctorBasicRegView.as_view(http_method_names=['patch'])),
-    path('bdoctor/delreg/<str:email>/',DoctorBasicRegView.as_view(http_method_names=['delete'])),
-#---------------------------------------- DOCTOR SPECIAL REGISTRATION------------------------------------------
-    path('sdoctor/getreg/',DoctorSpecialRegView.as_view(http_method_names=['get'])),
-    path('sdoctor/getreg/<str:email>/',DoctorSpecialRegView.as_view(http_method_names=['get'])),
-    path('sdoctor/postreg/',DoctorSpecialRegView.as_view(http_method_names=['post'])),
-    path('sdoctor/patchreg/<str:email>/',DoctorSpecialRegView.as_view(http_method_names=['patch'])),
-    path('sdoctor/delreg/<str:email>/',DoctorSpecialRegView.as_view(http_method_names=['delete'])),
+#---------------------------------------- DOCTOR REGISTRATION------------------------------------------
+    path('doctor/getreg/',DoctorRegView.as_view(http_method_names=['get'])),
+    path('doctor/getreg/<str:email>/',DoctorRegView.as_view(http_method_names=['get'])),
+    path('doctor/postreg/',DoctorRegView.as_view(http_method_names=['post'])),
+    path('doctor/patchreg/<str:email>/',DoctorRegView.as_view(http_method_names=['patch'])),
+    path('doctor/delreg/<str:email>/',DoctorRegView.as_view(http_method_names=['delete'])),
 #---------------------------------------- EMAIL AND TOKEN VERIFICATION------------------------------------------
     path('verifyemail/<str:email>',VerifyEmailView.as_view()),
     path('verifytoken/<str:email>/<str:token>',VerifyTokenView.as_view()),

@@ -117,8 +117,8 @@ class AppointmentView(APIView):
         singledata.delete()
         return Response({"msg":"Data Deleted"})
 
-#---------------------------------------- DOCTOR BASIC REGISTRATION------------------------------------------
-class DoctorBasicRegView(APIView):
+#---------------------------------------- DOCTOR REGISTRATION------------------------------------------
+class DoctorRegView(APIView):
     def get(self,request,email=None):
         """
         This function does two things.
@@ -126,19 +126,19 @@ class DoctorBasicRegView(APIView):
             2. If id is not given, it displays the total data we have stored.
         """
         if email is not None:
-            singledata=DoctorBasicRegistrationModel.objects.filter(email=email)
-            serializer=DoctorBasicRegSerializer(singledata,many=True)
+            singledata=DoctorRegistrationModel.objects.filter(email=email)
+            serializer=DoctorRegSerializer(singledata,many=True)
             return Response(serializer.data)
 
-        data=DoctorBasicRegistrationModel.objects.all()
-        serializer=DoctorBasicRegSerializer(data,many=True)
+        data=DoctorRegistrationModel.objects.all()
+        serializer=DoctorRegSerializer(data,many=True)
         return Response(serializer.data)
 
     def post(self,request):
         """
         This function stores new data into the database.
         """
-        serializer=DoctorBasicRegSerializer(data=request.data)
+        serializer=DoctorRegSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -150,8 +150,8 @@ class DoctorBasicRegView(APIView):
         """
         This function updates the data partially.
         """
-        singledata=DoctorBasicRegistrationModel.objects.filter(email=email).first()
-        serializer=DoctorBasicRegSerializer(singledata,data=request.data,partial=True)
+        singledata=DoctorRegistrationModel.objects.filter(email=email).first()
+        serializer=DoctorRegSerializer(singledata,data=request.data,partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response({"msg":"Data Partially Updated"})
@@ -163,57 +163,7 @@ class DoctorBasicRegView(APIView):
         """
         This function deletes the data based on email address.
         """
-        singledata=DoctorBasicRegistrationModel.objects.filter(email=email)
-        singledata.delete()
-        return Response({"msg":"Data Deleted"})
-
-#---------------------------------------- DOCTOR SPECIAL REGISTRATION------------------------------------------
-class DoctorSpecialRegView(APIView):
-    def get(self,request,email=None):
-        """
-        This function does two things.
-            1. If id is given, it displays the data as per that id.
-            2. If id is not given, it displays the total data we have stored.
-        """
-        if email is not None:
-            singledata=DoctorSpecialRegistrationModel.objects.filter(doctor_email=email)
-            serializer=DoctorSpecialRegSerializer(singledata,many=True)
-            return Response(serializer.data)
-
-        data=DoctorSpecialRegistrationModel.objects.all()
-        serializer=DoctorSpecialRegSerializer(data,many=True)
-        return Response(serializer.data)
-
-    def post(self,request):
-        """
-        This function stores new data into the database.
-        """
-        serializer=DoctorSpecialRegSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
-            return Response({"msg":"data format not valid"})
-#            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
-
-    def patch(self,request,email):
-        """
-        This function updates the data partially.
-        """
-        singledata=DoctorSpecialRegistrationModel.objects.filter(doctor_email=email).first()
-        serializer=DoctorSpecialRegSerializer(singledata,data=request.data,partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"msg":"Data Partially Updated"})
-        else:
-            return Response({"msg":"data format not valid"})
-#            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self,request,email):
-        """
-        This function deletes the data based on email address.
-        """
-        singledata=DoctorSpecialRegistrationModel.objects.filter(doctor_email=email)
+        singledata=DoctorRegistrationModel.objects.filter(email=email)
         singledata.delete()
         return Response({"msg":"Data Deleted"})
 

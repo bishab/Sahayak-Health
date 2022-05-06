@@ -13,16 +13,9 @@ class AppointmentSerializer(serializers.ModelSerializer):
         fields='__all__'
 
 #---------------------------------------- DOCTOR REGISTRATION------------------------------------------
-#Doctor's Basic Registration
-class DoctorBasicRegSerializer(serializers.ModelSerializer):
+class DoctorRegSerializer(serializers.ModelSerializer):
     class Meta:
-        model=DoctorBasicRegistrationModel
-        fields='__all__'
-
-#Doctor's Speciality Registration
-class DoctorSpecialRegSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=DoctorSpecialRegistrationModel
+        model=DoctorRegistrationModel
         fields='__all__'
 
 #---------------------------------------- EMAIL VERIFICATION------------------------------------------
