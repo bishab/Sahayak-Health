@@ -76,7 +76,7 @@ class AppointmentView(APIView):
             serializer.save()
             send_mail(
                 'Appointment Booked',
-                f'Your appointment on {data["hospital"]} is booked for {data["date"]}, {data["time"]}  with doctor {data["doctor"]}',
+                f'Your appointment on {data["hospital"]} is booked on {data["date"]}, {data["time"]}',
                 'constant',
                 [data["patient_email"]],
                 fail_silently=False)
