@@ -32,7 +32,7 @@ class AppointmentModel(models.Model):
     department=models.CharField(max_length=100,default='')
     date=models.CharField(max_length=50,default='')
     time=models.CharField(max_length=50,default='')
-    previous_reports=models.FileField(upload_to="src/patient_previous_reports/",default=None)
+    previous_reports=models.FileField(upload_to="src/patient_previous_reports/",default=None, blank=True)
     def __str__(self):
         return self.hospital +" "+ self.patient_email+" "+self.date
     class Meta:
@@ -61,7 +61,7 @@ class DoctorRegistrationModel(models.Model):
     marital_status=models.CharField(max_length=10,choices=marital_status_choices)
     working_days=models.CharField(100,max_length=50,default='')
     def __str__(self):
-        return self.first_name +" "+ self. last_name
+        return self.first_name +" "+ self.last_name
 
 
 #---------------------------------------- EMAIL VERIFICATION------------------------------------------
