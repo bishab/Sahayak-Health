@@ -74,12 +74,12 @@ class AppointmentView(APIView):
         serializer=AppointmentSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            send_mail(
-                'Appointment Booked',
-                f'Your appointment on {data["hospital"]} is booked on {data["date"]}, {data["time"]}',
-                'constant',
-                [data["patient_email"]],
-                fail_silently=False)
+#            send_mail(
+#                'Appointment Booked',
+#                f'Your appointment on {data["hospital"]} is booked on {data["date"]}, {data["time"]}',
+#                'constant',
+#                [data["patient_email"]],
+#                fail_silently=False)
             return Response(serializer.data)
         else:
 #            return Response({"msg":"data format not valid"})
