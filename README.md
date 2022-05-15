@@ -1,5 +1,5 @@
-# AI HEALTH BOT
-A sophisticated implementation of RASA Conversational AI on a HealthCare Bot written in Python and JavaScript. This conversational AI bot not only does help a customer in booking daily doctor appointments, searches for the nearest blood banks in emergency, but also provides the user a self-assessment to the recent Covid-19 based on user symptoms- all in a conversational pattern.
+# Sahayak: An Intelligent AI Health Assistant
+A sophisticated implementation of RASA Conversational AI on a HealthCare Bot integrated with a Web and Android Software written in Python, Java and JavaScript. This conversational AI provides the user a self-assessment to the recent Covid-19 based on user symptoms- all in a conversational pattern, while the webapp provides a complete Hospital Management System along with the essential health related informations.
 <br>
 <i> Initiated on Mon, 3 Jan, 2022</i>
 <br>
