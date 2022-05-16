@@ -80,7 +80,7 @@ class AppointmentView(APIView):
 #                'constant',
 #                [data["patient_email"]],
 #                fail_silently=False)
-            return Response(serializer.data)
+            return Response({"msg":"appointment successful"})
         else:
 #            return Response({"msg":"data format not valid"})
             return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
