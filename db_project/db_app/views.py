@@ -73,7 +73,7 @@ class AppointmentView(APIView):
         user=PatientRegistrationModel.objects.filter(email=email)
         serializer=PatientRegistrationSerializer(user,many=True)
         if len(serializer.data)==0:
-            return Response("registration not done")
+            return Response({"msg": "registration not done", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
         else:
             serializer=AppointmentSerializer(data=data)
             if serializer.is_valid():
