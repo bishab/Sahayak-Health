@@ -1,5 +1,3 @@
-from functools import partial
-from pydoc import doc
 from .models import *
 from .serializers import *
 from rest_framework.views import APIView
@@ -71,19 +69,26 @@ class AppointmentView(APIView):
 
     def post(self,request):
         data=request.data
-        serializer=AppointmentSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-#            send_mail(
-#                'Appointment Booked',
-#                f'Your appointment on {data["hospital"]} is booked on {data["date"]}, {data["time"]}',
-#                'constant',
-#                [data["patient_email"]],
-#                fail_silently=False)
-            return Response({"msg":"appointment successful"})
+        email=data.get("patient_email")
+        user=PatientRegistrationModel.objects.filter(email=email)
+        serializer=PatientRegistrationSerializer(user,many=True)
+        if len(serializer.data)==0:
+            return Response("registration not done")
         else:
-#            return Response({"msg":"data format not valid"})
-            return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            serializer=AppointmentSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+    #            send_mail(
+    #                'Appointment Booked',
+    #                f'Your appointment on {data["hospital"]} is booked on {data["date"]}, {data["time"]}',
+    #                'constant',
+    #                [data["patient_email"]],
+    #                fail_silently=False)
+
+                return Response({"msg":"appointment successful"})
+            else:
+    #            return Response({"msg":"data format not valid"})
+                return Response({"msg": "error: data format not valid", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self,request,email):
         data=AppointmentModel.objects.filter(patient_email=email)
