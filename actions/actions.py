@@ -81,7 +81,7 @@ class ActionAppointmentCheck(Action):
                     return [SlotSet("check_for_appointment",None)]
                 else:
                     dispatcher.utter_message(f"Below are your appointment details.")
-                    dispatcher.utter_message(f"Hospital: {data['hospital']}\nDepartment: {data['department']}\nDoctor: {data['doctor']}\nDate: {data['date']}\nTime: {data['time']}\n")
+                    dispatcher.utter_message(f"Hospital: {data['hospital']}\nDepartment: {data['department']}\nDate: {data['date']}\nTime: {data['time']}\n")
                     logger.info("Appointment data checked in the database")
                     dispatcher.utter_message("Taking you back to the menu...")
                     dispatcher.utter_message(f"{time_extract()}! what can I do for you?")
@@ -351,7 +351,7 @@ class ActionAskLoc(Action):
             if x in loc:
                 #here we fetch data from Json file and put that data or share link with them
                 logger.info("Details shown")
-                dispatcher.utter_message("Ganesh Blood Bank")
+                dispatcher.utter_message("Maitidevi Blood Bank")
                 dispatcher.utter_message("Bishab Blood Bank")
                 dispatcher.utter_message("Bigyan Blood Bank")
                 dispatcher.utter_message("Gigyan Blood Bank")
