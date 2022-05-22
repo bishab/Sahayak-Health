@@ -55,7 +55,7 @@ class DoctorRegistrationModel(models.Model):
     highest_qualification=models.CharField(max_length=100)
     working_hospital=models.CharField(max_length=100)
     experience_years=models.CharField(max_length=50)
-    home_visit_availability=models.BooleanField(default=False)
+    home_visit_availability=models.CharField(max_length=50)
     stay_location=models.CharField(max_length=100)
     marital_status=models.CharField(max_length=50,choices=marital_status_choices)
     working_days=models.CharField(100,max_length=50,default='')
