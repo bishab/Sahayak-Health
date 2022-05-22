@@ -54,7 +54,6 @@ class DoctorRegistrationModel(models.Model):
     nationality=models.CharField(max_length=50)
     highest_qualification=models.CharField(max_length=100)
     working_hospital=models.CharField(max_length=100)
-    license_proof=models.FileField(upload_to=f"src/doctor_license_proofs/")
     experience_years=models.CharField(max_length=50)
     home_visit_availability=models.BooleanField(default=False)
     stay_location=models.CharField(max_length=100)
