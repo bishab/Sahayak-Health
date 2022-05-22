@@ -58,7 +58,7 @@ class DoctorRegistrationModel(models.Model):
     home_visit_availability=models.CharField(max_length=50)
     stay_location=models.CharField(max_length=100)
     marital_status=models.CharField(max_length=50,choices=marital_status_choices)
-    working_days=models.CharField(100,max_length=50,default='')
+    working_days=models.CharField(max_length=50,default='')
     def __str__(self):
         return self.first_name +" "+ self.last_name
 
