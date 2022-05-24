@@ -278,10 +278,7 @@ public class FragmentAppointment extends Fragment {
         });
         requestQueue.add(request);
 
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-//           DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/mmm/YYY");
-//           LocalDate dob = LocalDate.parse(page, formatter);
-//            System.out.println("Date of Birth is : "+dob);
+
 //        }
         ArrayAdapter<String> hospitalAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.spinner_item_hospital, availableHospitals);
         hospitalNameSpinner.setAdapter(hospitalAdapter);
