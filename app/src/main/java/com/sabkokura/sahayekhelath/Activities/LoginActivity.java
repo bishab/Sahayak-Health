@@ -3,16 +3,24 @@ package com.sabkokura.sahayekhelath.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sabkokura.sahayekhelath.APIs.RetrofitInstance;
 import com.sabkokura.sahayekhelath.APIs.WebApi;
+import com.sabkokura.sahayekhelath.MainActivity;
 import com.sabkokura.sahayekhelath.R;
 import com.sabkokura.sahayekhelath.Requests.LoginRequest;
 import com.sabkokura.sahayekhelath.Responses.LoginResponses;
@@ -24,9 +32,24 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
+    public static final String LoggedInData = "UserData";
+    public static final String isLoggeedIn = "isLoggedIn";
+    public static final String Email = "UserEmail";
+    public static final String DisplayName = "FirstName";
+
     Toolbar toolbar;
     EditText email, password;
     TextView loginButton, registerButton;
+    SharedPreferences sharedPreferences;
+    String user;
+    String pass;
+
+    ImageView alertSign;
+    TextView alertTitle, alertDesc;
+    Button alertButton;
+
+    Dialog succesAlert;
+    View LayoutAlertView;
 
     //
     WebApi webApi;
@@ -47,11 +70,20 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = (TextView) findViewById(R.id.loginButton);
         registerButton = (TextView) findViewById(R.id.registerHere);
 
+        LayoutAlertView = getLayoutInflater().inflate(R.layout.alert_successfull,null);
+        alertSign = (ImageView) LayoutAlertView.findViewById(R.id.alertImage);
+        alertTitle = (TextView) LayoutAlertView.findViewById(R.id.alertResponse);
+        alertDesc = (TextView) LayoutAlertView.findViewById(R.id.alertDescription);
+        alertButton = (Button) LayoutAlertView.findViewById(R.id.alertButton);
+        succesAlert = new Dialog(this);
+
+        sharedPreferences = getSharedPreferences(LoggedInData, Context.MODE_PRIVATE);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user = email.getText().toString().trim();
-                String pass = password.getText().toString().trim();
+                user = email.getText().toString().trim();
+                pass = password.getText().toString().trim();
 
                 if (user.length()>=0 && pass.length()>=0){
                     if (Patterns.EMAIL_ADDRESS.matcher(user).matches()){
@@ -87,22 +119,87 @@ public class LoginActivity extends AppCompatActivity {
         loginResponsesCall.enqueue(new Callback<LoginResponses>() {
             @Override
             public void onResponse(Call<LoginResponses> call, Response<LoginResponses> response) {
-//                Toast.makeText(getApplicationContext(),"Logged is Succesfully", Toast.LENGTH_SHORT).show();
-//                String abc = response.body();
-                LoginResponses responses = response.body();
-                if(responses.getStatus().equals("user not registered")){
-                    Toast.makeText(getApplicationContext(),"User is not Registered", Toast.LENGTH_LONG).show();
+                if(response.code()==400){
+
+                    alertSign.setImageResource(R.drawable.icon_user_exist);
+                    alertTitle.setText("Invalid credentials!");
+                    alertDesc.setText("either email or password is incorrect!");
+
+                    succesAlert.setContentView(LayoutAlertView);
+                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                    lp.copyFrom(succesAlert.getWindow().getAttributes());
+                    lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                    lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                    lp.gravity = Gravity.CENTER;
+
+                    succesAlert.getWindow().setAttributes(lp);
+                    succesAlert.show();
+                    alertButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+//                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                            succesAlert.dismiss();
+                        }
+                    });
+
+
+
                 }
-                else if(responses.getStatus().equals("password incorrect")){
-                    Toast.makeText(getApplicationContext(),"Username or password incorrect", Toast.LENGTH_LONG).show();
+                else if(response.code()==200){
+
+
+
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(Email,user);
+                    editor.putBoolean(isLoggeedIn,true);
+                    editor.commit();
+
+                    alertTitle.setText("Successful Login! ");
+                    alertDesc.setText("You have successfully signed in");
+                    succesAlert.setContentView(LayoutAlertView);
+                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                    lp.copyFrom(succesAlert.getWindow().getAttributes());
+                    lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                    lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                    lp.gravity = Gravity.CENTER;
+
+                    succesAlert.getWindow().setAttributes(lp);
+                    succesAlert.show();
+                    alertButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        }
+                    });
+//                    Toast.makeText(getApplicationContext(),"Logged in Succesfully", Toast.LENGTH_LONG).show();
+
+
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"Logged in Succesfully", Toast.LENGTH_LONG).show();
+                    alertSign.setImageResource(R.drawable.icon_cancel);
+                    alertTitle.setText("Oops!");
+                    alertDesc.setText("Something went wrong!");
+
+                    succesAlert.setContentView(LayoutAlertView);
+                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                    lp.copyFrom(succesAlert.getWindow().getAttributes());
+                    lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                    lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                    lp.gravity = Gravity.CENTER;
+
+                    succesAlert.getWindow().setAttributes(lp);
+                    succesAlert.show();
+                    alertButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+//                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                            succesAlert.dismiss();
+                        }
+                    });
+
                 }
 
 
-                System.out.println("OUTPUT " +response.message());
-                System.out.println("OUTPUT " +responses.getStatus());
             }
 
             @Override
@@ -113,5 +210,11 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
     }
 }

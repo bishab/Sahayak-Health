@@ -3,12 +3,16 @@ package com.sabkokura.sahayekhelath.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.sabkokura.sahayekhelath.Adapters.ImageAdapter;
 import com.sabkokura.sahayekhelath.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +20,12 @@ import com.sabkokura.sahayekhelath.R;
  * create an instance of this fragment.
  */
 public class FragmentHome extends Fragment {
+    TextView mainQuote, quoteWriter;
+    ViewPager viewPager;
+    public ImageAdapter adapter;
+
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,6 +72,14 @@ public class FragmentHome extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        viewPager = view.findViewById(R.id.viewPager);
+        adapter = new ImageAdapter(getContext().getApplicationContext());
+        viewPager.setAdapter(adapter);
+
+
+
+
         return view;
     }
 }

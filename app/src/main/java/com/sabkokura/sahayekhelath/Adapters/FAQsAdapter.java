@@ -3,6 +3,8 @@ package com.sabkokura.sahayekhelath.Adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,11 +47,12 @@ public class FAQsAdapter extends RecyclerView.Adapter<FAQsAdapter.ViewHolder> {
         FAQsModelClass modelClass = arrayList.get(position);
 
         holder.faqQuestion.setText(modelClass.getQuestion());
-        holder.showAnswer.setText(modelClass.getAnswer());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            holder.showAnswer.setText(Html.fromHtml(modelClass.getAnswer(),Html.FROM_HTML_MODE_LEGACY));
+        }
 
         boolean isExpanded = arrayList.get(position).isExpanded();
 
-//        holder.showAnswer.setVisibility(isExpanded? View.VISIBLE:View.GONE);
         if (isExpanded){
             holder.showAnswer.setVisibility(View.VISIBLE);
             holder.icon.setColorFilter(ContextCompat.getColor(context,R.color.black));

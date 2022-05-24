@@ -4,18 +4,18 @@ public class HospitalListModelsClass {
     String hospitalName;
     String hospitalAddress;
     String hospitalPhone;
-    String hospitalBeds;
-    String hospitalVentilators;
+    String hospitalDescription;
+    String hospitalLink;
     boolean isExpanded;
 
 
 
-    public HospitalListModelsClass(String hospitalName, String hospitalAddress, String hospitalPhone, String hospitalBeds, String hospitalVentilators) {
+    public HospitalListModelsClass(String hospitalName, String hospitalAddress, String hospitalPhone, String hospitalDescription, String hospitalLink) {
         this.hospitalName = hospitalName;
         this.hospitalAddress = hospitalAddress;
         this.hospitalPhone = hospitalPhone;
-        this.hospitalBeds = hospitalBeds;
-        this.hospitalVentilators = hospitalVentilators;
+        this.hospitalDescription = hospitalDescription;
+        this.hospitalLink = hospitalLink;
         this.isExpanded=false;
     }
 
@@ -43,20 +43,20 @@ public class HospitalListModelsClass {
         this.hospitalPhone = hospitalPhone;
     }
 
-    public String getHospitalBeds() {
-        return hospitalBeds;
+    public String getHospitalDescription() {
+        return hospitalDescription;
     }
 
-    public void setHospitalBeds(String hospitalBeds) {
-        this.hospitalBeds = hospitalBeds;
+    public void setHospitalDescription(String hospitalDescription) {
+        this.hospitalDescription = hospitalDescription;
     }
 
-    public String getHospitalVentilators() {
-        return hospitalVentilators;
+    public String getHospitalLink() {
+        return hospitalLink;
     }
 
-    public void setHospitalVentilators(String hospitalVentilators) {
-        this.hospitalVentilators = hospitalVentilators;
+    public void setHospitalLink(String hospitalLink) {
+        this.hospitalLink = hospitalLink;
     }
 
     public boolean isExpanded() {

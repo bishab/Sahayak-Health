@@ -16,6 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonObject;
@@ -28,6 +29,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -44,7 +47,7 @@ public class FragmentFaq extends Fragment {
 
     RecyclerView recyclerView;
     ArrayList<FAQsModelClass> arrayList;
-    public final String BASE_URL = "https://corona.askbhunte.com/api/v1/faqs";
+    public final String BASE_URL = "https://nyc-cto.github.io/coronavirus-answers/answers.json";
     ProgressBar progressBar;
     TextView loading;
     String lan;
@@ -107,51 +110,52 @@ public class FragmentFaq extends Fragment {
         
 
         RequestQueue queue = Volley.newRequestQueue(getContext().getApplicationContext());
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, BASE_URL, null, new com.android.volley.Response.Listener<JSONObject>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, BASE_URL, null, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(JSONArray response) {
+//                System.out.println("Length is : "+response.length());
 
-                try {
-                    JSONObject object = new JSONObject(response.toString());
-                    JSONArray jsonArray = object.getJSONArray("data");
-                    for(int i =0; i<jsonArray.length(); i++){
-                        JSONObject in = jsonArray.getJSONObject(i);
-                        if (lan=="Nep"){
-                            question = in.get("question_np").toString();
-                            answer = in.get("answer_np").toString();
-                        }
-                        else {
-                            question = in.get("question").toString();
-                            answer = in.get("answer").toString();
-                        }
+                for(int i =0; i<response.length(); i++){
+                    try {
+                        JSONObject obj = response.getJSONObject(i);
+                        question =  obj.get("title").toString();
+                        answer =  obj.get("content").toString();
 
+//                        answer = java.net.URLDecoder.decode(answer,"UTF-8");
+                        answer = answer.replaceAll("%(?![0-9a-fA-F]{2})", "%25");
+                        answer = answer.replaceAll("\\+", "%2B");
+                        answer = URLDecoder.decode(answer,"utf-8");
                         arrayList.add(new FAQsModelClass(question,null,answer,null));
                         progressBar.setVisibility(View.GONE);
                         loading.setVisibility(View.GONE);
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        progressBar.setVisibility(View.GONE);
+                        loading.setVisibility(View.GONE);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    progressBar.setVisibility(View.GONE);
-                    loading.setVisibility(View.GONE);
 
                 }
                 recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
                 FAQsAdapter adapter = new FAQsAdapter(getContext().getApplicationContext(), arrayList);
                 recyclerView.setAdapter(adapter);
 
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("Error Occured");
-                progressBar.setVisibility(View.GONE);
-                loading.setVisibility(View.GONE);
+                System.out.println("Getting Error");
 
             }
-        }
-        );
-        queue.add(jsonObjectRequest);
-//        arrayList.add(new FAQsModelClass("Hello",null,"How are you",null));
+        });
+        queue.add(jsonArrayRequest);
+
+
 
 
 

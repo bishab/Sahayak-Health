@@ -31,14 +31,14 @@
             android:text="Address"
             android:letterSpacing="0.23"
             android:textColor="@color/black"
-            android:layout_marginLeft="7dp"
+            android:layout_marginLeft="17dp"
             android:textSize="18sp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Phone"
             android:letterSpacing="0.23"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="15dp"
             android:textColor="@color/black"
             android:textSize="18sp"/>
 
@@ -67,7 +67,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/topLayout"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 </RelativeLayout>

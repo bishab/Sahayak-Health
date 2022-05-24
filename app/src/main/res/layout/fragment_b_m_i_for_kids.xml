@@ -14,7 +14,6 @@
         android:layout_height="95dp"
         app:cardCornerRadius="8dp"
         android:layout_gravity="center_horizontal|center_vertical"
-
         android:backgroundTint="#FAFAF2"
         >
     <com.google.android.material.textfield.TextInputLayout

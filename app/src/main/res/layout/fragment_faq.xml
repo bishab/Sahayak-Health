@@ -16,12 +16,12 @@
         android:id="@+id/freqText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:gravity="center_horizontal"
+        android:letterSpacing="0.15"
         android:text="Frequently Asked Questions About Covid-19"
         android:textColor="#000"
         android:textSize="23dp"
-        android:layout_marginTop="5dp"
-        android:letterSpacing="0.15"
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView

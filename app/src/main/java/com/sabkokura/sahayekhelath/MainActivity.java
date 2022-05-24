@@ -7,21 +7,35 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.sabkokura.sahayekhelath.Activities.LoginActivity;
+import com.sabkokura.sahayekhelath.Activities.RegisterActivity;
+import com.sabkokura.sahayekhelath.Activities.UserProfileActivity;
 import com.sabkokura.sahayekhelath.Classes.IntroSlider;
 import com.sabkokura.sahayekhelath.Fragments.BMIFragment;
+import com.sabkokura.sahayekhelath.Fragments.FragmentAmbulance;
 import com.sabkokura.sahayekhelath.Fragments.FragmentAppointment;
 import com.sabkokura.sahayekhelath.Fragments.FragmentFaq;
 import com.sabkokura.sahayekhelath.Fragments.FragmentHome;
 import com.sabkokura.sahayekhelath.Fragments.FragmentHospital;
+import com.sabkokura.sahayekhelath.Fragments.FragmentViewAppointment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
@@ -32,6 +46,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Menu mymenu;
     String lan;
     boolean showChangeLangue=false;
+    TextView showUserProfile;
+    TextView showUserName;
+
+    public static final String LoggedInData = "UserData";
+    public static final String isLoggedIn = "isLoggedIn";
+    public static final String Email = "UserEmail";
+    public static final String DisplayName = "FirstName";
+
+    String savedEmail;
+    Boolean isUserLoggedIn;
+    String userFirstName;
+    SharedPreferences sharedPreferences;
+
+
+    ImageView alertSign;
+    TextView alertTitle, alertDesc;
+    Button alertButton;
+
+    Dialog succesAlert;
+    View LayoutAlertView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +81,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        sharedPreferences = getSharedPreferences(LoggedInData,Context.MODE_PRIVATE);
+        isUserLoggedIn = sharedPreferences.getBoolean(isLoggedIn,false);
+        savedEmail = sharedPreferences.getString(Email,"");
+        userFirstName = sharedPreferences.getString(DisplayName,"User");
+
+
+        LayoutAlertView = getLayoutInflater().inflate(R.layout.alert_successfull,null);
+        alertSign = (ImageView) LayoutAlertView.findViewById(R.id.alertImage);
+        alertTitle = (TextView) LayoutAlertView.findViewById(R.id.alertResponse);
+        alertDesc = (TextView) LayoutAlertView.findViewById(R.id.alertDescription);
+        alertButton = (Button) LayoutAlertView.findViewById(R.id.alertButton);
+        succesAlert = new Dialog(this);
+
+        System.out.println("Email: " + savedEmail + " IsLogged In :" + isUserLoggedIn + "Display Name: " + userFirstName);
+
+
         //App Intro Parts
         IntroSlider prefManager = new IntroSlider(getApplicationContext());
         if(prefManager.isFirstTimeLaunch()){
@@ -54,6 +104,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(MainActivity.this, IntroSlider.class));
             finish();
         }
+
+        //View for providing function to userProfile
+
+        LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = navigationView.getHeaderView(0);
+        showUserProfile = (TextView) view.findViewById(R.id.viewProfile);
+        showUserName = (TextView) view.findViewById(R.id.ProfileuserName);
+        showUserName.setText(userFirstName);
+
+
+        showUserProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                NavigationView navigationView = (NavigationView)FindViewById(Resource.Id.navigationView1);
+//                View headerView = navigationView.GetHeaderView(0);
+//                TextView navUsername = (TextView)headerView.FindViewById(Resource.Id.edituser);
+//                navUsername.Text=("Your Text Here");
+                if(isUserLoggedIn) startActivity(new Intent(MainActivity.this, UserProfileActivity.class));
+                else Toast.makeText(getApplicationContext(),"User is not Logged In",Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -83,6 +154,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbarmenu, menu);
         mymenu = menu;
+        MenuItem loggedIn = menu.findItem(R.id.loginsignup);
+        if(isUserLoggedIn){
+            loggedIn.setTitle("Log Out");
+        }
         MenuItem item = menu.findItem(R.id.changeMyLanguage);
         if(item!=null && showChangeLangue==false){
             item.setVisible(false);
@@ -115,7 +190,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()){
 
             case R.id.loginsignup:{
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                if(isUserLoggedIn){
+
+
+                    alertSign.setImageResource(R.drawable.icon_sign_out);
+                    alertTitle.setText("Logout");
+                    alertDesc.setText("Are you sure you want to Logout?");
+
+                    succesAlert.setContentView(LayoutAlertView);
+                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                    lp.copyFrom(succesAlert.getWindow().getAttributes());
+                    lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                    lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                    lp.gravity = Gravity.CENTER;
+
+                    succesAlert.getWindow().setAttributes(lp);
+                    succesAlert.show();
+                    alertButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString(Email,"");
+                            editor.putBoolean(isLoggedIn,false);
+                            editor.commit();
+                            Toast.makeText(getApplicationContext(),"Logged Out Successfully",Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        }
+                    });
+
+
+
+
+
+
+                }
+                else {
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                }
                 break;
 //                Toast.makeText(getApplicationContext(),"Login Clicked",Toast.LENGTH_SHORT).show();
             }
@@ -144,37 +255,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             case R.id.nav_menu_faq:{
 
-                    selPanel = 1;
-                    if(mymenu!=null){
-                        mymenu.findItem(R.id.changeMyLanguage).setVisible(true);
                         toolbar.setTitle("FAQs");
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentFaq()).commit();
-                    }
-                    lan = "En";
-                    mymenu.findItem(R.id.changeMyLanguage).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem menuItem) {
-                            if(menuItem.getTitle().equals("En")){
-                                menuItem.setTitle("नेपा");
-                                lan = "Nep";
-                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentFaq()).commit();
-                            }
-                            else {
-                                menuItem.setTitle("En");
-                                lan = "En";
-                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentFaq("Nep")).commit();
-                            }
-                            return true;
-                        }
-                    });
-                    System.out.println("Default Language is: "+ lan);
-//                    if(lan=="En"){
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentFaq()).commit();
-//                    }
-//                    else {
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentFaq("Nep")).commit();
-//                    }
-                    break;
+                        break;
             }
             case R.id.nav_menu_hospitalList:{
                 toolbar.setTitle("Hospitals");
@@ -183,12 +266,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
             case R.id.nav_menu_appointment:{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentAppointment()).commit();
+                toolbar.setTitle("Schedule an Appointment");
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentAppointment(this)).commit();
+                break;
+            }
+            case R.id.nav_view_appointment:{
+                toolbar.setTitle("View Appointment");
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentViewAppointment(this)).commit();
                 break;
             }
             case R.id.nav_menu_bmi:{
                 toolbar.setTitle("BMI Calculator");
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new BMIFragment()).commit();
+                break;
+            }
+            case R.id.nav_ambulance:{
+                toolbar.setTitle("Ambulance List");
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new FragmentAmbulance()).commit();
+
                 break;
             }
         }

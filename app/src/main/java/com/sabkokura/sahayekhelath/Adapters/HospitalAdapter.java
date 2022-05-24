@@ -9,17 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sabkokura.sahayekhelath.ModelClasses.FAQsModelClass;
+import com.sabkokura.sahayekhelath.Activities.HopitalWebsite;
 import com.sabkokura.sahayekhelath.ModelClasses.HospitalListModelsClass;
 import com.sabkokura.sahayekhelath.R;
 
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 
 public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHolder> {
     Context context;
@@ -48,11 +46,11 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
         holder.hosName.setText(modelClass.getHospitalName());
         holder.hosPhone.setText(modelClass.getHospitalPhone());
         holder.hosadd.setText(modelClass.getHospitalAddress());
-        holder.hosBeds.setText(modelClass.getHospitalBeds());
-        holder.hosVentilator.setText(modelClass.getHospitalVentilators());
+//        holder.hosBeds.setText(modelClass.getHospitalBeds());
+//        holder.hosVentilator.setText(modelClass.getHospitalVentilators());
 
         boolean isExpanded = arrayList.get(position).isExpanded();
-        System.out.println("Display Expand: " + isExpanded);
+//        System.out.println("Display Expand: " + isExpanded);
         if(isExpanded){
             holder.moreDetails.setVisibility(View.VISIBLE);
         }
@@ -71,18 +69,17 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView hosName, hosadd, hosPhone, hosBeds, hosVentilator;
         LinearLayout touchToExpand, moreDetails;
-        ImageView makeCall;
+        ImageView makeCall, webView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             hosName = itemView.findViewById(R.id.hospitalName);
             hosadd = itemView.findViewById(R.id.hospitalAddress);
             hosPhone = itemView.findViewById(R.id.hospitalPhone);
-            hosBeds = itemView.findViewById(R.id.hospitalBeds);
-            hosVentilator = itemView.findViewById(R.id.hospitalVentilators);
             touchToExpand = itemView.findViewById(R.id.minDetailsLayout);
             moreDetails = itemView.findViewById(R.id.moreDetails);
             makeCall = itemView.findViewById(R.id.makeCall);
+            webView = itemView.findViewById(R.id.openSite);
 
             touchToExpand.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -98,13 +95,27 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
                 public void onClick(View view) {
                     HospitalListModelsClass modelsClass = arrayList.get(getAdapterPosition());
                     String phNumber = "tel:"+modelsClass.getHospitalPhone();
-                    phNumber = phNumber.substring(0,14);
+//                    phNumber = phNumber.substring(0,14);
                     Intent intent = new Intent(Intent.ACTION_DIAL);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.setData(Uri.parse(phNumber));
                     context.getApplicationContext().startActivity(intent);
 
 //                    Toast.makeText(context.getApplicationContext(),phNumber,Toast.LENGTH_SHORT).show();
+                }
+            });
+            webView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    HospitalListModelsClass modelsClass = arrayList.get(getAdapterPosition());
+                    String webLink = modelsClass.getHospitalLink();
+
+                    Intent openLink = new Intent(context.getApplicationContext(), HopitalWebsite.class);
+                    openLink.putExtra("link", webLink);
+                    openLink.putExtra("name",modelsClass.getHospitalName());
+                    openLink.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.getApplicationContext().startActivity(openLink);
+
                 }
             });
 

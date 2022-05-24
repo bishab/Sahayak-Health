@@ -6,13 +6,17 @@ import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Patterns;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -40,6 +44,14 @@ public class RegisterActivity extends AppCompatActivity {
     ImageView calenderIcon;
     DatePicker datePicker;
     Boolean passwordMatch = false;
+    ImageView alertSign;
+    TextView alertTitle, alertDesc;
+    Button alertButton;
+
+    Dialog succesAlert;
+    View LayoutAlertView;
+
+
     final Pattern PasswordPattern = Pattern.compile("^"+
             "(?=.*[@#$%^&+=])" + //at least one special character
             "(?=\\S+$)"+ //no white spaces
@@ -75,6 +87,14 @@ public class RegisterActivity extends AppCompatActivity {
         calenderIcon = (ImageView) findViewById(R.id.calendarIcon);
         View LayoutCalenderView = getLayoutInflater().inflate(R.layout.datepicker, null);
         datePicker = (DatePicker) LayoutCalenderView.findViewById(R.id.datepicker);
+
+        LayoutAlertView = getLayoutInflater().inflate(R.layout.alert_successfull,null);
+        alertSign = (ImageView) LayoutAlertView.findViewById(R.id.alertImage);
+        alertTitle = (TextView) LayoutAlertView.findViewById(R.id.alertResponse);
+        alertDesc = (TextView) LayoutAlertView.findViewById(R.id.alertDescription);
+        alertButton = (Button) LayoutAlertView.findViewById(R.id.alertButton);
+        succesAlert = new Dialog(this);
+
 
         //Data for Spinner
         String[] sex = {"Male","Female","Other"};
@@ -192,7 +212,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if(Patterns.EMAIL_ADDRESS.matcher(eMail).matches()){
                         if(passwordMatch==true){
                             if (phNumber.length()==10){
-                                Toast.makeText(getApplicationContext(),"Ready to Proceed",Toast.LENGTH_LONG).show();
+//                                Toast.makeText(getApplicationContext(),"Ready to Proceed",Toast.LENGTH_LONG).show();
                                 RegisterRequest request = new RegisterRequest(fName, lName, gender, eMail, pass,add,dOB, phNumber);
                                 registerNewUser(request);
 
@@ -236,17 +256,75 @@ public class RegisterActivity extends AppCompatActivity {
         registerResponseCall.enqueue(new Callback<RegisterResponse>() {
             @Override
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
-                RegisterResponse getResponse = response.body();
-                String outputResponse = getResponse.getStatus();
-                if (outputResponse.equals("user already exists")){
-                    Toast.makeText(getApplicationContext(),"user already exists", Toast.LENGTH_LONG).show();
+                if (response.code()==400){
+                    alertSign.setImageResource(R.drawable.icon_user_exist);
+                    alertTitle.setText("User already exist");
+                    alertDesc.setText("User with the specific email already exists.");
+
+                    succesAlert.setContentView(LayoutAlertView);
+                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                    lp.copyFrom(succesAlert.getWindow().getAttributes());
+                    lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                    lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                    lp.gravity = Gravity.CENTER;
+
+                    succesAlert.getWindow().setAttributes(lp);
+                    succesAlert.show();
+                    alertButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+//                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                            succesAlert.dismiss();
+                        }
+                    });
+
+
+
+
 
                 }
-                else if(outputResponse.equals("user successfully registered")){
-                    Toast.makeText(getApplicationContext(),"user successfully registered", Toast.LENGTH_LONG).show();
+                else if(response.code()==200){
+
+                    succesAlert.setContentView(LayoutAlertView);
+                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                    lp.copyFrom(succesAlert.getWindow().getAttributes());
+                    lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                    lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                    lp.gravity = Gravity.CENTER;
+
+                    succesAlert.getWindow().setAttributes(lp);
+                    succesAlert.show();
+                    alertButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                        }
+                    });
+
+
+//                    Toast.makeText(getApplicationContext(),"user successfully registered", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"Something went Wrong", Toast.LENGTH_LONG).show();
+                    alertSign.setImageResource(R.drawable.icon_cancel);
+                    alertTitle.setText("Oops!");
+                    alertDesc.setText("Something went wrong!");
+
+                    succesAlert.setContentView(LayoutAlertView);
+                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                    lp.copyFrom(succesAlert.getWindow().getAttributes());
+                    lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                    lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                    lp.gravity = Gravity.CENTER;
+
+                    succesAlert.getWindow().setAttributes(lp);
+                    succesAlert.show();
+                    alertButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+//                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                            succesAlert.dismiss();
+                        }
+                    });
                 }
             }
 

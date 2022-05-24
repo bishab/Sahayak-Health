@@ -15,6 +15,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.sabkokura.sahayekhelath.Adapters.FAQsAdapter;
@@ -40,7 +41,7 @@ public class FragmentHospital extends Fragment {
     HospitalListModelsClass hospitalListModelsClass;
     TextView loadingText;
     RecyclerView recyclerView;
-    private final String BASE_URL = "https://corona.askbhunte.com/api/v1/hospitals";
+    private final String BASE_URL = "https://bigyanic.github.io/assets/Hospitals2.json";
 
 
 
@@ -100,21 +101,19 @@ public class FragmentHospital extends Fragment {
         loadingText.setVisibility(View.VISIBLE);
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext().getApplicationContext());
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, BASE_URL, null, new Response.Listener<JSONObject>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, BASE_URL, null, new Response.Listener<JSONArray>()  {
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(JSONArray response) {
 
                 try {
-                    JSONObject jsonObject = new JSONObject(response.toString());
-                    JSONArray jsonArray = jsonObject.getJSONArray("data");
-                    for (int i = 0; i<jsonArray.length(); i++){
-                        JSONObject innerArray = jsonArray.getJSONObject(i);
+                    for (int i = 0; i<response.length(); i++){
+                        JSONObject innerArray = response.getJSONObject(i);
                         String hosName = innerArray.get("name").toString();
-                        String hosAdd = innerArray.get("address").toString();
+                        String hosAdd = innerArray.get("location").toString();
                         String hosPhone = innerArray.get("phone").toString();
-                        JSONObject capacity = innerArray.getJSONObject("capacity");
-                        String hosBed = capacity.get("beds").toString();
-                        String hosVentilators = capacity.get("ventilators").toString();
+                        String hosDecs = innerArray.get("description").toString();
+                        String hosWeb = innerArray.get("website").toString();
+
 
                         if (hosAdd.length()==0){
                             hosAdd="Not Available";
@@ -122,14 +121,8 @@ public class FragmentHospital extends Fragment {
                         if (hosPhone.length()==0){
                             hosPhone="Not Available";
                         }
-                        if (hosBed.length()==0){
-                            hosBed="Not Available";
-                        }
-                        if (hosVentilators.length()==0){
-                            hosVentilators="Not Available";
-                        }
 
-                        arrayList.add(new HospitalListModelsClass(hosName, hosAdd, hosPhone, hosBed, hosVentilators));
+                        arrayList.add(new HospitalListModelsClass(hosName, hosAdd, hosPhone, hosDecs, hosWeb));
 
 
 
@@ -153,7 +146,7 @@ public class FragmentHospital extends Fragment {
             }
         });
 
-        requestQueue.add(jsonObjectRequest);
+        requestQueue.add(jsonArrayRequest);
 
 
         return view;

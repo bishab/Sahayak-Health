@@ -10,30 +10,27 @@
             android:icon="@drawable/icon_home"
             android:title="Home"
             />
-        <item
-            android:id="@+id/nav_menu_appointment"
-            android:icon="@drawable/icon_calendar"
-            android:title="Appointment"
-            />
+
         <item
             android:id="@+id/nav_menu_hospitalList"
             android:icon="@drawable/icon_hospital"
             android:title="Hospital List"
             />
         <item
-            android:id="@+id/nav_news"
-            android:icon="@drawable/icon_news"
-            android:title="News"
+            android:id="@+id/nav_menu_appointment"
+            android:icon="@drawable/icon_calendar"
+            android:title="Appointment"
             />
         <item
-            android:id="@+id/nav_data"
-            android:icon="@drawable/icon_data"
-            android:title="Data Visualization"
+            android:id="@+id/nav_view_appointment"
+            android:icon="@drawable/icon_appointment"
+            android:title="View Appointment"
             />
+
         <item
-            android:id="@+id/nav_myth"
-            android:title="Myths"
-            android:icon="@drawable/icon_myth"
+            android:id="@+id/nav_ambulance"
+            android:title="Ambulance"
+            android:icon="@drawable/icon_ambulance"
             />
 
         <item
@@ -43,7 +40,7 @@
             />
     </group>
     <item
-        android:title="Important Calulators"
+        android:title="Important Calculators"
         >
         <menu>
             <item

@@ -1,9 +1,12 @@
 package com.sabkokura.sahayekhelath.APIs;
 
 import com.google.gson.JsonObject;
+import com.sabkokura.sahayekhelath.Fragments.FragmentAppointment;
 import com.sabkokura.sahayekhelath.ModelClasses.FAQsModelClass;
+import com.sabkokura.sahayekhelath.Requests.AppointmentRequest;
 import com.sabkokura.sahayekhelath.Requests.LoginRequest;
 import com.sabkokura.sahayekhelath.Requests.RegisterRequest;
+import com.sabkokura.sahayekhelath.Responses.AppointmentRespoinse;
 import com.sabkokura.sahayekhelath.Responses.LoginResponses;
 import com.sabkokura.sahayekhelath.Responses.RegisterResponse;
 
@@ -25,8 +28,15 @@ public interface WebApi {
 //    @POST("userlongin/")
 //    Call<LoginResponses> loginUser(@Field("email") String email, @Field("password") String pass);
 
+
     @POST("patient/postreg/")
     Call<RegisterResponse> registerUser(@Body RegisterRequest request);
+
+    FragmentAppointment app = new FragmentAppointment();
+    public  static final String postData = app.getUserEmail;
+//
+//    @POST(postData)
+//    Call<AppointmentRespoinse> appointUser(@Body AppointmentRequest request);
 
 
 
