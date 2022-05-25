@@ -25,6 +25,8 @@
         <entry key="app/src/main/res/layout/activity_registration.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_web_view.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/alert_close_app.xml" value="0.18072916666666666" />
+        <entry key="app/src/main/res/layout/alert_login_first.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/alert_successfull.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/ambulancelistitem.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/appointment_details.xml" value="0.35625" />
@@ -41,6 +43,7 @@
         <entry key="app/src/main/res/layout/fragment_f_a_t.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_faq.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/fragment_homes.xml" value="0.18177083333333333" />
         <entry key="app/src/main/res/layout/fragment_hospital.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_ideal_weight.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_view_appointment.xml" value="0.3373676248108926" />

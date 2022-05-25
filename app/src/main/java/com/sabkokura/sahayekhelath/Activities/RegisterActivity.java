@@ -29,6 +29,7 @@ import com.sabkokura.sahayekhelath.R;
 import com.sabkokura.sahayekhelath.Requests.RegisterRequest;
 import com.sabkokura.sahayekhelath.Responses.RegisterResponse;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import retrofit2.Call;
@@ -43,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
     View passwordLine;
     ImageView calenderIcon;
     DatePicker datePicker;
-    Boolean passwordMatch = false;
+    Boolean passwordMatch = false, patternMatch=false;
     ImageView alertSign;
     TextView alertTitle, alertDesc;
     Button alertButton;
@@ -55,7 +56,8 @@ public class RegisterActivity extends AppCompatActivity {
     final Pattern PasswordPattern = Pattern.compile("^"+
             "(?=.*[@#$%^&+=])" + //at least one special character
             "(?=\\S+$)"+ //no white spaces
-            ".{4,}"+ //at least 4 character
+            ".{8,}"+ //at least 8 character
+            "([A-Z-]{0,1})"+
             "$"
     );
 
@@ -81,8 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         dateOfBirth = (TextView) findViewById(R.id.userDateOfBirth);
         register = (TextView) findViewById(R.id.registerButton);
-        measuerPassword = (TextView) findViewById(R.id.displayMeasuredPassword);
-        passwordLine = (View) findViewById(R.id.measurePassword);
+
 
         calenderIcon = (ImageView) findViewById(R.id.calendarIcon);
         View LayoutCalenderView = getLayoutInflater().inflate(R.layout.datepicker, null);
@@ -97,10 +98,11 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         //Data for Spinner
-        String[] sex = {"Male","Female","Other"};
+        String[] sex = {"Select One","Male","Female","Other"};
         // Declaring an Adapter and initializing it to the data pump
         ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, sex);
         spinnerMaleFemale.setAdapter(arrayAdapter);
+        spinnerMaleFemale.setSelection(0);
         spinnerMaleFemale = (Spinner) findViewById(R.id.malefemaleSpinner);
 
         //Checking Password Strength
@@ -113,31 +115,31 @@ public class RegisterActivity extends AppCompatActivity {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.length()>0&& charSequence.length()<=6 && PasswordPattern.matcher(charSequence).matches()){
-                    measuerPassword.setVisibility(View.VISIBLE);
-                    measuerPassword.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.smallPassword));
-                    passwordLine.setVisibility(View.VISIBLE);
-                    passwordLine.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.smallPassword));
-                }
-                else if (charSequence.length()>6&& charSequence.length()<=9 && PasswordPattern.matcher(charSequence).matches()){
-                    measuerPassword.setVisibility(View.VISIBLE);
-                    measuerPassword.setText("Medium");
-                    measuerPassword.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.mediumPassword));
-                    passwordLine.setVisibility(View.VISIBLE);
-                    passwordLine.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.mediumPassword));
-                }
-                else if(charSequence.length()>9 && PasswordPattern.matcher(charSequence).matches()){
-                    measuerPassword.setVisibility(View.VISIBLE);
-                    measuerPassword.setText("Strong");
-                    measuerPassword.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.strongPassword));
-                    passwordLine.setVisibility(View.VISIBLE);
-                    passwordLine.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.strongPassword));
-
-                }
-                else{
-                    measuerPassword.setVisibility(View.INVISIBLE);
-                    passwordLine.setVisibility(View.INVISIBLE);
-                }
+//                if(charSequence.length()>0&& charSequence.length()<=6 && PasswordPattern.matcher(charSequence).matches()){
+//                    measuerPassword.setVisibility(View.VISIBLE);
+//                    measuerPassword.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.smallPassword));
+//                    passwordLine.setVisibility(View.VISIBLE);
+//                    passwordLine.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.smallPassword));
+//                }
+//                else if (charSequence.length()>6&& charSequence.length()<=9 && PasswordPattern.matcher(charSequence).matches()){
+//                    measuerPassword.setVisibility(View.VISIBLE);
+//                    measuerPassword.setText("Medium");
+//                    measuerPassword.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.mediumPassword));
+//                    passwordLine.setVisibility(View.VISIBLE);
+//                    passwordLine.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.mediumPassword));
+//                }
+//                else if(charSequence.length()>9 && PasswordPattern.matcher(charSequence).matches()){
+//                    measuerPassword.setVisibility(View.VISIBLE);
+//                    measuerPassword.setText("Strong");
+//                    measuerPassword.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.strongPassword));
+//                    passwordLine.setVisibility(View.VISIBLE);
+//                    passwordLine.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.strongPassword));
+//
+//                }
+//                else{
+//                    measuerPassword.setVisibility(View.INVISIBLE);
+//                    passwordLine.setVisibility(View.INVISIBLE);
+//                }
 
             }
 
@@ -153,11 +155,15 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
                 if(charSequence.toString().equals(password.getText().toString()) &&charSequence.length()>6){
                     System.out.println("Password Equal:" + charSequence);
+                    Matcher matcher = PasswordPattern.matcher(charSequence.toString());
                     passwordMatch = true;
-                    confirmPassword.setCompoundDrawablesWithIntrinsicBounds(null, null,
-                            getResources().getDrawable(R.drawable.verify, null), null);
+                    if(matcher.find()) {
+                        confirmPassword.setCompoundDrawablesWithIntrinsicBounds(null, null,
+                                getResources().getDrawable(R.drawable.verify, null), null);
+                    }
                 }
                 else {
                     confirmPassword.setCompoundDrawablesWithIntrinsicBounds(null, null,
@@ -208,18 +214,22 @@ public class RegisterActivity extends AppCompatActivity {
                 add = adderss.getText().toString().trim();
 
                 if(fName.length()>0 && lName.length()>0 && lName.length()>0 && pass.length()>0 && conPass.length()>0 && eMail.length()>0
-                        && dOB.length()>0 && phNumber.length()>0){
+                        && dOB.length()>0 && phNumber.length()>0 &&(gender.length()>0 && !gender.equals("Select One"))){
                     if(Patterns.EMAIL_ADDRESS.matcher(eMail).matches()){
-                        if(passwordMatch==true){
-                            if (phNumber.length()==10){
+                        if(passwordMatch==true) {
+                            if (patternMatch == true){
+                                if (phNumber.length() == 10) {
 //                                Toast.makeText(getApplicationContext(),"Ready to Proceed",Toast.LENGTH_LONG).show();
-                                RegisterRequest request = new RegisterRequest(fName, lName, gender, eMail, pass,add,dOB, phNumber);
-                                registerNewUser(request);
+                                    RegisterRequest request = new RegisterRequest(fName, lName, gender, eMail, pass, add, dOB, phNumber);
+                                    registerNewUser(request);
 
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Invalid Phone Number", Toast.LENGTH_LONG).show();
+
+                                }
                             }
                             else {
-                                Toast.makeText(getApplicationContext(),"Invalid Phone Number",Toast.LENGTH_LONG).show();
-
+                                Toast.makeText(getApplicationContext(),"Password must contains minimum 8 character with atleast one special character with no white space",Toast.LENGTH_SHORT).show();
                             }
                         }
                         else {

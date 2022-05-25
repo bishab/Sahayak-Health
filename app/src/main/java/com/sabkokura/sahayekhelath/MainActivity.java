@@ -7,8 +7,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -68,6 +70,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Dialog succesAlert;
     View LayoutAlertView;
 
+    Dialog closeAlert;
+    TextView closeYes, closeNo;
+    View LayoutCloseView;
+
+    Dialog loginAlert;
+    TextView loginYes, loginNo;
+    View LayoutloginView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +104,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         alertDesc = (TextView) LayoutAlertView.findViewById(R.id.alertDescription);
         alertButton = (Button) LayoutAlertView.findViewById(R.id.alertButton);
         succesAlert = new Dialog(this);
+
+        closeAlert = new Dialog(this);
+        loginAlert = new Dialog(this);
+
 
         System.out.println("Email: " + savedEmail + " IsLogged In :" + isUserLoggedIn + "Display Name: " + userFirstName);
 
@@ -138,6 +152,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.nav_menu_home);
         }
 
+
+        LayoutCloseView = getLayoutInflater().inflate(R.layout.alert_close_app, null);
+        closeYes = LayoutCloseView.findViewById(R.id.closeApp_YES);
+        closeNo = LayoutCloseView.findViewById(R.id.closeApp_NO);
+
+        LayoutloginView = getLayoutInflater().inflate(R.layout.alert_login_first, null);
+        loginYes = LayoutloginView.findViewById(R.id.login_YES);
+        loginNo = LayoutloginView.findViewById(R.id.login_NO);
+
     }
 
     @Override
@@ -146,7 +169,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawerLayout.closeDrawer(GravityCompat.START);
         }
         else {
-            super.onBackPressed();
+            closeAlert.setContentView(LayoutCloseView);
+            WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+            lp.copyFrom(closeAlert.getWindow().getAttributes());
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            lp.gravity = Gravity.CENTER;
+
+            closeAlert.getWindow().setAttributes(lp);
+            closeAlert.show();
+
+            closeYes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    finish();
+                }
+            });
+            closeNo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    closeAlert.cancel();
+                }
+            });
+
+
         }
     }
 
@@ -267,13 +313,67 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
             case R.id.nav_menu_appointment:{
-                toolbar.setTitle("Schedule an Appointment");
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentAppointment(this)).commit();
+                if(isUserLoggedIn) {
+                    toolbar.setTitle("Schedule an Appointment");
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentAppointment(this)).commit();
+                }
+                else {
+                    loginAlert.setContentView(LayoutloginView);
+                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                    lp.copyFrom(loginAlert.getWindow().getAttributes());
+                    lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                    lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                    lp.gravity = Gravity.CENTER;
+
+                    loginAlert.getWindow().setAttributes(lp);
+                    loginAlert.show();
+
+                    loginYes.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        }
+                    });
+                    loginNo.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            loginAlert.dismiss();
+                        }
+                    });
+
+                }
                 break;
             }
             case R.id.nav_view_appointment:{
-                toolbar.setTitle("View Appointment");
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentViewAppointment(this)).commit();
+                if(isUserLoggedIn) {
+                    toolbar.setTitle("View Appointment");
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentViewAppointment(this)).commit();
+                }
+                else {
+                    loginAlert.setContentView(LayoutloginView);
+                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                    lp.copyFrom(loginAlert.getWindow().getAttributes());
+                    lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                    lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                    lp.gravity = Gravity.CENTER;
+
+                    loginAlert.getWindow().setAttributes(lp);
+                    loginAlert.show();
+
+                    loginYes.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        }
+                    });
+                    loginNo.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            loginAlert.dismiss();
+                        }
+                    });
+
+                }
                 break;
             }
             case R.id.nav_menu_bmi:{

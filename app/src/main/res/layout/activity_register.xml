@@ -73,6 +73,8 @@
                     android:id="@+id/malefemaleSpinner"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:backgroundTint="#221E1F"
+                    android:popupBackground="#E4E6EB"
                     android:layout_marginLeft="5dp" />
             </LinearLayout>
 
@@ -106,30 +108,7 @@
                 android:textColorHint="#3C4043"
                 android:textSize="15sp" />
 
-            <View
-                android:id="@+id/measurePassword"
-                android:layout_width="250dp"
-                android:layout_height="2dp"
-                android:visibility="invisible"
-                android:layout_below="@+id/userPassword"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="-7dp"
-                android:background="#FF0000" />
 
-            <TextView
-                android:id="@+id/displayMeasuredPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/userPassword"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="-17dp"
-                android:layout_marginRight="20dp"
-                android:layout_toEndOf="@+id/measurePassword"
-                android:text="Too Small"
-                android:textColor="#FF0000"
-                android:textSize="11dp"
-                android:textStyle="italic"
-                android:visibility="invisible" />
 
             <EditText
                 android:id="@+id/userConfirmPassword"
