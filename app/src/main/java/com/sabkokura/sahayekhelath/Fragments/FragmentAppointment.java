@@ -177,7 +177,6 @@ public class FragmentAppointment extends Fragment {
         sharedPreferences = getActivity().getSharedPreferences(LoggedInData, Context.MODE_PRIVATE);
         getUserEmail = sharedPreferences.getString(Email, "");
         BASE_URL_Details = BASE_URL_Details + getUserEmail;
-//        BASE_URL_Appointment = BASE_URL_Appointment + getUserEmail;
 
         //Selecting default date and time
         eventDate.setText("" + getCurrentDate());
