@@ -33,7 +33,8 @@ import com.sabkokura.sahayekhelath.Fragments.BMIFragment;
 import com.sabkokura.sahayekhelath.Fragments.FragmentAmbulance;
 import com.sabkokura.sahayekhelath.Fragments.FragmentAppointment;
 import com.sabkokura.sahayekhelath.Fragments.FragmentFaq;
-import com.sabkokura.sahayekhelath.Fragments.FragmentHome;
+//import com.sabkokura.sahayekhelath.Fragments.FragmentHome;
+import com.sabkokura.sahayekhelath.Fragments.FragmentHomes;
 import com.sabkokura.sahayekhelath.Fragments.FragmentHospital;
 import com.sabkokura.sahayekhelath.Fragments.FragmentViewAppointment;
 
@@ -133,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         if (savedInstanceState ==null) {
             showChangeLangue=false;
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHomes()).commit();
             navigationView.setCheckedItem(R.id.nav_menu_home);
         }
 
@@ -250,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 showChangeLangue=false;
                 invalidateOptionsMenu();
                 toolbar.setTitle("Home");
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHomes()).commit();
                 break;
             }
             case R.id.nav_menu_faq:{
@@ -291,5 +292,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         return true;
+
+
     }
+
 }
