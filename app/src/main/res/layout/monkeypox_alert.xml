@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="#E4E6EB"
+    android:layout_marginRight="20dp"
+    android:layout_marginLeft="20dp"
+    android:layout_gravity="center_horizontal"
+    app:cardCornerRadius="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            >
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_attention"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Important Information!"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:layout_gravity="center_vertical"
+
+                />
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\tA new contagious virus of Monkeypox has been spreading over 15 countries now. We urge you all to inform via this notice some of the crucial informations regarding this virus.
+Its symptoms include:"
+            android:justificationMode="inter_word"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="- Fever\n
+- Headache\n
+- Muscle ache\n
+- Back ache\n
+- Swollen lymph nodes\n
+- Chill and Exhaustion."
+            android:layout_marginLeft="10dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="In order to stay away from the virus, here are the preventive measures:"
+            android:justificationMode="inter_word"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:justificationMode="inter_word"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginTop="3dp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Isolate infected patients from others who could be at risk for infection."
+                android:justificationMode="inter_word"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginBottom="3dp"
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="3dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:justificationMode="inter_word"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="3dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Practice good hand hygiene after contact with infected animals or humans."
+                android:justificationMode="inter_word"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginBottom="3dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:layout_marginTop="3dp"
+                android:justificationMode="inter_word"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Avoid contact with animals that could harbor the virus (including animals that are sick or that have been found dead in areas where monkeypox occurs)."
+                android:justificationMode="inter_word"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="6dp"
+                />
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:id="@+id/mainAlert_Read"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="20dp"
+                android:text="  Got it  "
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

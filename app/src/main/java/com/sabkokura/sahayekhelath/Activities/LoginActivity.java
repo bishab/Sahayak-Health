@@ -154,6 +154,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putBoolean(isLoggeedIn,true);
                     editor.commit();
 
+                    alertSign.setImageResource(R.drawable.icon_correct);
                     alertTitle.setText("Successful Login! ");
                     alertDesc.setText("You have successfully signed in");
                     succesAlert.setContentView(LayoutAlertView);

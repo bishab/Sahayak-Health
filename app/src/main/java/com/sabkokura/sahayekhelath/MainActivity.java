@@ -3,6 +3,7 @@ package com.sabkokura.sahayekhelath;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.DialogTitle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -78,6 +79,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView loginYes, loginNo;
     View LayoutloginView;
 
+    Dialog AppNotice;
+    TextView noticeRead;
+    View LayoutNoticeiew;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +112,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         closeAlert = new Dialog(this);
         loginAlert = new Dialog(this);
+        AppNotice = new Dialog(this);
+
+        LayoutNoticeiew = getLayoutInflater().inflate(R.layout.monkeypox_alert,null);
+        TextView gotIt = LayoutNoticeiew.findViewById(R.id.mainAlert_Read);
+
+        AppNotice.setContentView(LayoutNoticeiew);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(AppNotice.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.gravity = Gravity.CENTER;
+
+        AppNotice.getWindow().setAttributes(lp);
+
+        gotIt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppNotice.dismiss();
+            }
+        });
+        AppNotice.show();
+
 
 
         System.out.println("Email: " + savedEmail + " IsLogged In :" + isUserLoggedIn + "Display Name: " + userFirstName);
@@ -259,6 +286,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString(Email,"");
                             editor.putBoolean(isLoggedIn,false);
+                            editor.putString(DisplayName,"");
                             editor.commit();
                             Toast.makeText(getApplicationContext(),"Logged Out Successfully",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));

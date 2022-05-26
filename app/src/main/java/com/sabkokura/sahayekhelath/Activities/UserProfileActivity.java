@@ -5,12 +5,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,6 +24,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.sabkokura.sahayekhelath.Fragments.FragmentHomes;
+import com.sabkokura.sahayekhelath.Fragments.FragmentViewAppointment;
 import com.sabkokura.sahayekhelath.R;
 
 import org.json.JSONArray;
@@ -35,6 +40,7 @@ public class UserProfileActivity extends AppCompatActivity {
     ProgressBar progressBar;
     TextView showFetching;
     ImageView profilePic;
+    Button viewApp;
 
     public static final String LoggedInData = "UserData";
     public static final String isLoggeedIn = "isLoggedIn";
@@ -67,6 +73,8 @@ public class UserProfileActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.Userprogressbar);
         showFetching = (TextView) findViewById(R.id.userShowFetchingText);
         profilePic = (ImageView) findViewById(R.id.userShowImage);
+
+        viewApp = (Button) findViewById(R.id.viewApp);
 
         sharedPreferences = getSharedPreferences(LoggedInData, Context.MODE_PRIVATE);
         getUserEmail = sharedPreferences.getString(Email,"");
@@ -117,6 +125,16 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
         requestQueue.add(request);
+
+        viewApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"You can check your Appointment in Appointment Section",Toast.LENGTH_SHORT).show();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentViewAppointment()).commit();
+
+//                startActivity(new Intent(UserProfileActivity.this, FragmentViewAppointment.class));
+            }
+        });
 
 
 

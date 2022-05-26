@@ -91,10 +91,10 @@
                 android:orientation="horizontal"
                 >
                 <TextView
-                    android:layout_width="100dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="Email: "
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="#000"
                     />
@@ -103,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:text="gaensh.timilsina777@gamil.com"
                     />
             </LinearLayout>
@@ -114,10 +114,11 @@
                 android:layout_marginTop="8dp"
                 >
                 <TextView
-                    android:layout_width="100dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="Address: "
-                    android:textSize="14sp"
+                    android:textSize="16sp"
+
                     android:textStyle="bold"
                     android:textColor="#000"
                     />
@@ -126,7 +127,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
+
                     android:text="Vyas-2, Damauli"
                     />
             </LinearLayout>
@@ -137,10 +139,11 @@
                 android:layout_marginTop="8dp"
                 >
                 <TextView
-                    android:layout_width="100dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="Phone No: "
-                    android:textSize="14sp"
+                    android:textSize="16sp"
+
                     android:textStyle="bold"
                     android:textColor="#000"
                     />
@@ -149,7 +152,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
+
                     android:text="9816653748"
                     />
             </LinearLayout>
@@ -160,10 +164,11 @@
                 android:layout_marginTop="8dp"
                 >
                 <TextView
-                    android:layout_width="100dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="Date of Birth: "
-                    android:textSize="14sp"
+                    android:textSize="16sp"
+
                     android:textStyle="bold"
                     android:textColor="#000"
                     />
@@ -172,7 +177,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
+
                     android:text="1998/11/26"
                     />
             </LinearLayout>
@@ -183,10 +189,11 @@
                 android:layout_marginTop="8dp"
                 >
                 <TextView
-                    android:layout_width="100dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="Gender: "
-                    android:textSize="14sp"
+                    android:textSize="16sp"
+
                     android:textStyle="bold"
                     android:textColor="#000"
                     />
@@ -195,10 +202,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
+
                     android:text="Male"
                     />
+
+
             </LinearLayout>
+            <Button
+                android:id="@+id/viewApp"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="   View Appointment   "
+                android:background="@drawable/layout_login"
+                android:layout_gravity="end"
+                android:layout_marginRight="20dp"
+                android:backgroundTint="#008CBA"
+                />
 
 
 

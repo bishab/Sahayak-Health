@@ -100,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
         //Data for Spinner
         String[] sex = {"Select One","Male","Female","Other"};
         // Declaring an Adapter and initializing it to the data pump
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, sex);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item_hospital, sex);
         spinnerMaleFemale.setAdapter(arrayAdapter);
         spinnerMaleFemale.setSelection(0);
         spinnerMaleFemale = (Spinner) findViewById(R.id.malefemaleSpinner);
@@ -161,6 +161,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Matcher matcher = PasswordPattern.matcher(charSequence.toString());
                     passwordMatch = true;
                     if(matcher.find()) {
+                        patternMatch = true;
                         confirmPassword.setCompoundDrawablesWithIntrinsicBounds(null, null,
                                 getResources().getDrawable(R.drawable.verify, null), null);
                     }
