@@ -351,10 +351,10 @@ class ActionAskLoc(Action):
             if x in loc:
                 #here we fetch data from Json file and put that data or share link with them
                 logger.info("Details shown")
-                dispatcher.utter_message("Maitidevi Blood Bank")
-                dispatcher.utter_message("Bishab Blood Bank")
-                dispatcher.utter_message("Bigyan Blood Bank")
-                dispatcher.utter_message("Gigyan Blood Bank")
+                dispatcher.utter_message("Maitidevi Blood Bank +01-5602650")
+                dispatcher.utter_message("Manipal Blood Bank +061-56060026")
+                dispatcher.utter_message("Charak Blood Bank 063-564300")
+                dispatcher.utter_message("Teaching Blood Bank 076-456910")
                 dispatcher.utter_message("Taking you back to the beginning of the chat...")
                 dispatcher.utter_message("Hello there! What can I do for you?")
                 return [SlotSet("blood_location",None),
