@@ -4,3 +4,4 @@ actions/
 db_project/
 logs/
 utils/
+.rasa
