@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="342" viewBox="0 0 1920 342">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="1802" height="308" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-Web_1920_1">
+      <rect width="1920" height="342"/>
+    </clipPath>
+  </defs>
+  <g id="Web_1920_1" data-name="Web 1920 – 1" clip-path="url(#clip-Web_1920_1)">
+    <rect width="1920" height="342" fill="#fff"/>
+    <g id="Scroll_Group_1" data-name="Scroll Group 1" transform="translate(40 16)" clip-path="url(#clip-path)" style="isolation: isolate">
+      <text id="Sahayak_Health" data-name="Sahayak Health" transform="translate(901 231)" fill="#339af0" font-size="220" font-family="Poppins-Bold, Poppins" font-weight="700"><tspan x="-900.79" y="0" fill="#000">Sahayak</tspan><tspan y="0" fill="#fff"> </tspan><tspan y="0" fill="#339af0">Health</tspan></text>
+    </g>
+  </g>
+</svg>
